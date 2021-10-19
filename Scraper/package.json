@@ -6,7 +6,7 @@
   "scripts": {
      "guardian": "node -e \"require('./index').theGuardian()\"",
      "cb": "node -e \"require('./index').cb()\"",
-    "scrape" :  "nodemon index.js"  
+    "scrape" :  "nodemon scraper.js"  
 },
   "repository": {
     "type": "git",

@@ -371,6 +371,51 @@
     height:150;
   }
 </style>
+/*Sample #81 - Odoo*/
+
+<div class="l1"></div>
+<div class="l2"></div>
+<div class="l3"></div>
+<div class="l4"></div>
+<div class="s1"></div>
+<style>
+  body{
+    background:#191919;
+  }
+  .l1,.l2,.l3,.l4{
+    position:absolute;
+    height:40;
+    width:40;
+    top:122;
+    border-radius: 50%;
+  }
+  .l1{
+ 	left:37;
+    border: 20px solid #714B67;
+  }
+  .l2{
+ 	left:119;
+    border: 20px solid #8F8F8F;
+  }
+  .l3{
+ 	left:201;
+    border: 20px solid #8F8F8F;
+  }
+  .l4{
+ 	left:283;
+    border: 20px solid #8F8F8F;
+  }
+  .s1{
+    position:absolute;
+    width:20;
+    height:60;
+    top:102;
+    left:179;
+    background:#8F8F8F;
+    border-radius:20px 20px 0 0;
+  }
+</style>
+
 /*Sample #82 - Diamond Cut */
 
 <div class="b1"></div>

@@ -1,0 +1,66 @@
+ /******************** Target #29 - Suffocate ********************/
+
+<div class="b"></div>
+<div class="c1"></div>
+<div class="c2"></div>
+<div class="c3"></div>
+<div class="c4"></div>
+<style>
+  body{
+    background:#F3AC3C;
+  }
+  div{
+    position:absolute;
+    background:#F3AC3C;
+    top:-50;
+    left:0;
+    width:200;
+    height:200;
+    border-radius:50%;
+  }
+  .c2{
+    left:200; 
+  }
+  .c3{
+    top:150;
+  }
+  .c4{
+    top:150;
+    left:200;
+  }
+  .b{
+    background:#1A4341;
+    top:50;
+    left:100;
+  }
+</style>
+
+ /******************** Target #30 - Horizon *********************/
+
+ <div class="o"></div>
+<div class="r"></div>
+<div class="p"></div>
+<style>
+  body{
+    background:#F7EC7D;
+  }
+  div{
+    position:absolute;
+    left:0;
+    height:300;
+    width:100%;
+    background: #dd6b4d;
+  }
+  .o{
+   	top:50;
+   	background: #E38F66;
+  }
+  .r{ 
+    top:100;
+	background: #AA445F;
+  }
+  .p{
+	top:200;
+    background: #62306D;
+  }
+</style>

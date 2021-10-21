@@ -1,0 +1,225 @@
+ /******************** Target #13 - Totally Triangle  *********************/
+
+ <div></div>
+<style>
+  body{
+  background:#0B2429
+  }
+  div {
+    position:absolute;
+    top:0;
+    left:0;
+    height:0;
+    width:0;
+    border-left:141px solid #F3AC3C;
+	border-bottom:141px solid #0B2429;
+  }
+</style>
+
+ /******************** Target #14 - Web Maker Logo *********************/
+
+ <div class="t2"></div>
+<div class="t1"></div>
+<div class="t4"></div>
+<div class="t3"></div>
+<style>
+  body
+  {
+    background:#F2F2B6;
+  }
+  div {
+    position:absolute;
+    top:85;
+    left:170;
+	height:0;
+    width:0;
+    border-right:75px solid transparent;
+    border-left:75px solid transparent;
+	border-bottom:130px solid #FD4602;
+  }
+  .t2{
+    border-bottom:130px solid #FF6D00;
+    left:190
+  }
+  .t3{
+    border-bottom:130px solid #FF6D00;
+    transform:rotate(180deg);
+    left:60; 
+  }
+  .t4{
+    transform:rotate(180deg);
+    left:80;
+  }
+  
+</style>
+
+ /******************** Target #15 - Overlap *********************/
+
+ <div class="c1"></div>
+<div class="c2">
+	<div class="m"></div>
+</div>
+ 
+<style>
+  body{
+    background:#09042A;
+  }
+  div{
+    width: 150px;
+    height: 150px;
+    border-radius:50%;
+    background: #7B3F61;
+    position:absolute;
+    top:75;
+    left:75;
+    overflow:hidden;
+  }
+  .c2{
+    background: #E78481;
+    left:175;
+  }
+  .m{
+    background:#09042A;
+    top:0;
+    left:-100;
+  }
+</style>
+
+ /******************** Target #16 - Eye of the Tiger *********************/
+
+ <div class="b"></div>
+<div class="c2"></div>
+<div class="c1"></div>
+
+<style>
+  body{
+    background:#0B2429;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    
+  }
+  div {
+    position:absolute;
+	border-radius:50%;
+    background:#0B2429;
+    height:50;
+    width:50;
+  }
+  .c2{
+   background: #F3AC3C;
+	width:140;
+    height:140;
+    border:20px solid #0B2429;
+  }
+  .b{
+    background:#998235;
+    transform:rotate(45deg);
+    width:200;
+    height:200;
+    border-radius: 100px 0 100px 0
+  }
+  
+</style>
+
+ /******************** Target #17 - Fidget Spinner *********************/
+
+ <div class="b1"></div>
+<div class="t c"></div>
+<div class="r c"></div>
+<div class="b c"></div>
+<div class="l c"></div>
+<style>
+  div{
+    position:absolute;
+  }
+  body{
+    background:#09042A;
+    position:absolute;
+  }
+  .c{
+    border-radius:50%;
+    height:60;
+    width:60;
+  }
+  .t,.b{
+   	background:#F5BB9C;
+    border:10px solid #09042A;
+    top:49;
+    left:152;
+  }
+  .b{
+    top:155;
+  }
+  .r,.l{
+   	border:10px solid #E78481;
+    top:102;
+    left:92;
+  }
+  .l{
+    left:212;
+  }
+  
+  .b1{
+    background:#E78481;
+    width:60;
+    height:60;
+    top:118;
+    left:162;
+  }
+</style>
+
+ /******************** Target #18 - Matrix *********************/
+
+ <div class="d c1 r1"></div>
+<div class="l c2 r1"></div>
+<div class="d c3 r1"></div>
+<div class="l c4 r1"></div>
+<div class="l c1 r2"></div>
+<div class="d c2 r2"></div>
+<div class="l c3 r2"></div>
+<div class="d c4 r2"></div>
+<div class="d c1 r3"></div>
+<div class="l c2 r3"></div>
+<div class="d c3 r3"></div>
+<div class="l c4 r3"></div>
+
+<style>
+  body{
+    background:#5C434C;
+  }
+  div {
+    position:absolute;
+    width: 80px;
+    height: 80px;
+    border-top-left-radius:150q
+  }
+  .d
+  {
+    background:#F09462;
+  }
+  .l{   
+    background:#F5D6B4;
+  }
+  .c1{
+	left:10;
+  }
+  .c2{
+    left:110;
+  }
+  .c3{
+    left:210;
+  }
+  .c4{
+    left:310;
+  }
+  .r1{
+    top:10;
+  }
+  .r2{
+    top:110;
+  }
+  .r3{
+    top:210;
+  }
+</style>

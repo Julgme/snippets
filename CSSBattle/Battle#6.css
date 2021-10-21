@@ -1,0 +1,50 @@
+/*Sample #31 - Equals */
+<div class="c1"></div>
+<div class="c2"></div>
+<style>
+  body{
+    background:#AA445F;
+  }
+div{
+	position:absolute;
+	border-radius:150q 0% 0 150q;
+	width:100;
+  	height:200;
+  	top:50;
+}
+  .c1{
+     background:#F7EC7D;
+     left:75;
+  }
+  .c2{
+    background:#E38F66;
+    transform:rotate(180deg);
+    right:75;
+  }
+
+</style>
+
+/*Sample #32 - Band Aid */
+<div></div>
+<div class="b2"></div>
+<div class="b3"></div>
+<style>
+  div{
+    position:absolute;
+    transform:rotate(45deg);
+    height:200;
+    width:50;
+    top:50;
+    left:175;
+    background:#A3A368
+  }
+  .b2{
+    background:#F3AC3C;
+    transform:rotate(-45deg);
+  }
+  .b3{
+    height:50;
+    top:125;
+    background:#FBE18C;
+  }
+  </style>

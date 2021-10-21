@@ -1,0 +1,529 @@
+ /******************** Target #1 - Simply Square *********************/
+<div></div>
+<style>
+  body{
+    background: #5d3a3a
+  }
+  div {
+    position:absolute;
+    top:0px;
+    left:0px;
+    width: 200;
+    height: 200;
+    background: #b5e0ba;
+  }
+</style>
+
+/********************* Target #2 - Carrom  *********************/
+
+<div class="b1"></div>
+<div class="b2"></div>
+<div class="b3"></div>
+<div class="b4"></div>
+
+<style>
+  body{
+    background:#62374e
+  }
+  div{
+    background:#fdc57b;
+    width:50;
+    height:50;
+    position:absolute;
+  }
+  .b1
+  {
+    top:50;
+    left:50;
+  }
+  .b2
+  {
+    top:50;
+    right:50;
+  }
+    .b3
+  {
+    bottom:50;
+    left:50;
+  }
+    .b4
+  {
+    bottom:50;
+    right:50;
+  }
+</style>
+
+/********************* Target #3 - Push Button  *********************/
+<div class="rec"></div>
+<div class="lblue"></div>
+<div class="blue"></div>
+<div class="yellow"></div>
+<style>
+  body{
+    background:#6592CF;
+  }
+  div {
+    margin:auto;
+    top:50%;    
+    transform: translateY(-50%);
+    position:relative;
+  }
+  .blue{
+    height:150;
+    width:150;
+    background:#243D83;
+    border-radius:50%;
+  }
+  .yellow{
+	height:50;
+    width:50;
+    transform: translateY(-350%);
+    background:#EEB850;
+    border-radius:50%;
+  }
+    .lblue{
+    height:250;
+    width:250;
+    position:absolute;
+    left:75;
+    background:#6592CF;
+    border-radius:50%;
+  }
+  .rec
+  {
+    height:150;
+    width:300;
+    position:absolute;
+    background:#243D83;
+    left:50
+  }
+</style>
+/********************* Target #4 - Ups and Downs *********************/
+<div class="c1"></div>
+<div class="c2"></div>
+<div class="c3"></div>
+<style>
+  body{
+    background:#62306D;
+  }
+  .c1,.c2,.c3{
+    background:#F7EC7D;
+    position:absolute;
+    height:100;
+    width:100;
+  }
+  .c1{
+    top:150;
+    left:50;
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;  
+      
+  }
+  .c2{
+    bottom:150;
+    left:150;
+    border-top-left-radius:50%;
+    border-top-right-radius:50%
+  }
+  .c3{
+    top:150;
+    right:50;
+    border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+  }
+</style>
+/********************* Target #5 - Acid Rain *********************/
+<div class="c1">
+	<div class="c2"></div>
+	<div class="c3"></div>
+</div>
+<style>
+  body{
+    background:#0B2429
+  }
+  .c1,.c2,.c3{
+	height:120;
+    width:120;
+	border-bottom-left-radius:50%;
+    border-bottom-right-radius:50%;
+    border-top-left-radius:50%;
+  }
+  .c1{
+    background:#F3AC3C;
+    position:absolute;
+    top:30;
+    border-radius:50%;
+    left:200;
+  }
+  .c2{
+    position:relative;
+    background:#998235;
+    top:60;
+    left:-60
+  }
+  .c3{
+    position:relative;
+    background:#F3AC3C;
+    top:0;
+    left:-120
+  }
+</style>
+
+/********************* Target #6 - Missing Slice  *********************/
+
+<div class="b1"></div>
+<div class="b2"></div>
+<div class="b3"></div>
+<div class="c1"></div>
+<style>
+  body{
+        background:#E3516E;
+  }
+  .b1 {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 200px;
+    height: 150px;
+    background: #51B5A9;
+  }
+    .b2 {
+    position:absolute;
+    top:0;
+    right:0;
+    width: 200px;
+    height: 150px;
+    background: #FADE8B;
+  }
+    .b3 {
+    position:absolute;
+    bottom:0;
+    left:0;
+    width: 200px;
+    height: 150px;
+    background: #F7F3D7;
+  }
+  .c1{
+    position:absolute;
+    height:200;
+    width:200;
+    border-radius:50%;
+	border:1000px solid #E3516E;
+    top:-950;
+    left:-900;
+  }
+</style>
+
+/********************* Sample #7 - Leafy Trail  *********************/
+<div class="right"></div>
+<div class="mid"></div>
+<div class="left"></div>
+
+<style>
+  body{
+    background:#0B2429;
+  }
+  div{
+    height:150;
+    width:150;
+    border-top-left-radius:67%;
+    border-bottom-right-radius:67%;
+  }
+  .left{
+    position:absolute;
+    background:#F3AC3C;
+    top:75;
+    left:175;
+  }
+  .mid{
+    position:absolute;
+    background:#998235;
+    top:75;
+    left:125;
+  }
+  .right{
+    position:absolute;
+    background:#1A4341;
+    left:75;
+    top:75;
+  }
+</style>
+
+/********************* Sample #8 - Forking Crazy  *********************/
+<div class="d1"></div>
+<div class="d2"></div>
+<div class="d3"></div>
+<div class="d4"></div>
+<div class="d5"></div>
+<div class="c1"></div>
+<div class="L1"></div>
+<div class="L2"></div>
+<div class="L3"></div>
+<style>
+  .c1{
+    position:absolute;
+    background:#060F55;
+    border-radius:50%;
+    height:140;
+    width:140;
+    top:110;
+    left:130;
+  }
+  .d1,.d2,.d3,.d4,.d5{
+    background:#060F55;
+    position:absolute;
+    border-radius: 150px 150px 0 0;
+    height:150;
+    width:20;
+    top:50;
+
+  }
+  .d1{
+    left:130;
+	border-bottom-left-radius:190px
+  }
+  .d2{
+    left:170
+  }
+  .d3{
+    left:210
+  }
+  .d4{
+    left:250;
+   	border-bottom-right-radius:190px
+  }
+  .d5{
+    top:200;
+    left:190;
+  }
+    .l1,.l2,.l3{
+    background:#6592CF;
+    position:absolute;
+    border-radius: 0 0 150px 150px;
+    height:110;
+    width:20;
+    top:50;
+  }
+  .l1{
+    left:150;
+  }
+  .l2{
+    left:190;
+  }
+  .l3{
+    left:230;
+  }
+  body{
+    background:#6592CF;
+  }
+</style>
+
+
+/********************* Sample #9 - Tesseract  *********************/
+
+<div class="r1"></div>
+<div class="s2"></div>
+<div class="s1"></div>
+<div class="c1"></div>
+<style>
+  div{
+    margin:auto;
+  }
+  body{
+    background:#222730
+  }
+  .s1{
+    margin:center;
+    position:absolute;
+    background:#4CAAB3;
+    transform:rotate(45deg);
+    width:150;
+    height:150;
+    top:75;
+    left:125
+  }
+    .s2{
+    margin:auto;
+    position:absolute;
+    background:#222730;
+    transform:rotate(45deg);
+    width:250;
+    height:250;
+    top:25;
+    left:75
+  }
+  .c1{
+    position:absolute;
+    background:#393E46;
+    width:50;
+    height:50;
+    border-radius:50%;
+    top:125;
+    left:175;
+  }
+  .r1{
+    position:absolute;
+    background:#4CAAB3;
+    top:75;
+    left:0;
+    width:400;
+    height:150;
+  }
+</style>
+
+ /********************* Sample #10 - Cloaked Spirits *********************/
+
+ <div class="b1"></div>
+<div class="b2"></div>
+<div class="cb1"></div>
+<div class="cb2"></div>
+<div class="cb3"></div>
+<div class="cs1"></div>
+<div class="cs2"></div>
+<div class="cs3"></div>
+
+<style>
+  div{
+   position:absolute;
+  }
+  body{
+    background:#62306D;
+  }
+  .b1,.b2{
+    background:#F7EC7D;
+    bottom:0;
+    height:100;
+    width:300;
+    left:50;
+  }
+  .b2{
+    transform:rotate(90deg);
+	left:50;
+  }
+  .cb1,.cb2,.cb3{
+    height:100;
+    width:100;
+    border-radius:50%;
+    }
+  .cb1,.cb3{
+    background:#AA445F;
+	top:150;
+    left:50;
+  }
+  .cb2{
+    margin:auto;
+    background:#E38F66;
+    top:50;
+    left:150;
+  }
+  .cb3{
+    left:250;
+  }  
+    .cs1,.cs2,.cs3{
+    height:60;
+    width:60;
+    border-radius:50%;
+    }
+  .cs1,.cs3{
+    background:#E38F66;
+	top:170;
+    left:70;
+  }
+  .cs2{
+    margin:auto;
+    background:#AA445F;
+    top:70;
+    left:170;
+  }
+  .cs3{
+    left:270;
+  }  
+</style>
+
+ /********************* Sample #11 - Eye of Sauron *********************/
+
+ <div class="c"></div>
+<div class="cm"></div>
+<div class="cl"></div>
+<div class="cr"></div>
+<style>
+  body{
+   background:#191210
+  }
+  div {
+    position:absolute;
+	border-radius:50%
+      }
+  .cl,.cr{
+    height:30;
+    width:60;
+    border: 20px solid #ECA03D;
+    border-radius:150q 150q 0 0;
+    border-bottom:0;
+    top:100;
+    left:250
+  }
+  .cl{
+    transform:rotate(180deg);
+    top:150;
+    left:50
+  }
+  .cm{
+   	height:100;
+   	width:100;
+   	border: 20px solid #ECA03D;
+	top:80;
+    left:130
+  }
+  .c{
+    background:#84271C;
+    height:50;
+   	width:50;
+	top:125;
+    left:175
+  }
+</style>
+
+
+ /********************* Sample #12 - Wiggly Moustache *********************/
+
+ <div class="c1"></div>
+<div class="c2"></div>
+<div class="c3"></div>
+<div class="t1"></div>
+<div class="t2"></div>
+<style>
+  body{
+    background:#F5D6B4;
+  }
+  div{
+        position:absolute;
+  }
+  .c1,.c2,.c3 {
+    height:30;
+    width:60;
+    border: 20px solid #D86F45;
+    border-radius:0 0 150q 150q;
+    border-top:0;
+    top:150;
+    left:230
+  }
+  .c2{
+    transform:rotate(180deg);
+    top:100;
+    left:150
+  }
+  .c3{
+   left:70 
+  }
+  .t1,.t2{
+    background:#D86F45;
+    border-radius:50%;
+    width:20;
+    height:20;
+    top:140;
+    left:70  
+  }
+  .t2{
+    left:310
+  }

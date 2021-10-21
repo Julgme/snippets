@@ -1,0 +1,101 @@
+/********************* Sample #19 - Cube  *********************/
+
+<div class="b"></div>
+<div class="br"></div>
+<div class="bl"></div>
+<style>
+  body{
+    background:#0B2429;
+  }
+  div {
+    position:absolute;
+    width: 100px;
+    height: 100px;
+    background: #dd6b4d;
+  }
+  .b{
+    transform:rotate(45deg);
+    background:#F3AC3C;
+    top:135;
+    left:150;
+  }
+  .bl,.br{
+    height:70;
+    width:70;
+    top:80;
+  }
+  .bl{
+    background:#998235;
+    left:130;
+    transform: skewY(-45deg);
+  }
+  .br{
+   	background:#1A4341;  
+    transform: skewY(45deg);
+    right:130;
+  }
+</style>
+
+/********************* Sample #20 - Ticket  *********************/
+<div class="b2"></div>
+<div class="b1"></div>
+<div class="c1"></div>
+<div class="c2"></div>
+<div class="c3"></div>
+<div class="c4"></div>
+<div class="c5"></div>
+<div class="c6"></div>
+<style>
+  body{
+    background:#62306D;
+  }
+  div{
+    position:absolute;
+    height:100;
+    top:100;
+    left:100
+  }
+  .b1{
+    background:#F7EC7D;
+    width:140
+  }
+  .b2{
+    background:#E38F66;
+    width:200;
+  }
+  .c1,.c2,.c5,.c6{
+    border-radius:50%;
+    height:40;
+    width:40;
+    background:#62306D;
+  }
+  .c3,.c4{
+    border-radius:50%;
+    height:20;
+    width:20;
+    left:230;
+    background:#62306D;
+  }
+  .c1{
+    top:80;
+    left:80;
+  }
+  .c2{
+    top:180;
+    left:80;
+  }
+  .c3{
+    top:90;
+  }
+  .c4{
+    top:190;
+  }
+  .c5{
+    top:180;
+    left:280;
+  }
+  .c6{
+    top:80;
+    left:280;
+  }
+</style>

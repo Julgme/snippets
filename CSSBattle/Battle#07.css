@@ -2,9 +2,79 @@
 
 /*********** Target #34 - Christmas Tree ***********/
 
+<div class=t3></div>
+<div class=t2></div>
+<div></div>
+<style>
+  body{
+    background:#007065;
+  }
+  div {
+    position:absolute;
+    width: 0;
+    height: 0;
+    border-bottom:100px solid #FFEECF;
+    border-left:125px solid transparent;
+    border-right:125px solid transparent;
+    left:75;
+    top:50;
+   }
+  .t2{
+    border-bottom:100px solid #F5C181;
+	top:100;
+  }
+  .t3{
+    border-bottom:100px solid #00A79D;
+ 	top:150;
+  }
+</style>
+
 /*********** Target #35 - Ice Cream ***********/
 
 /*********** Target #36 - Interleaved ***********/
+
+<div class="t1 t"></div>
+<div class="t2 t"></div>
+<div class="t3 b"></div>
+<div class="t4 b"></div>
+<div class="t5 b"></div>
+
+<style>
+  body{
+    background:#1A4341;
+  }
+  div {
+    position:absolute;
+    width: 50px;
+    height: 200px;
+    border-radius: 50px 50px 0 0;
+    background: #dd6b4d;
+  }
+  .t{
+    background:#998235;
+    transform:rotate(180deg);
+    top:0;
+  }
+  .b{
+    background:#F3AC3C;
+    bottom:0;
+  }
+  .t1{
+    left:100;
+  }
+  .t2{
+    left:250;
+  }
+  .t3{
+    left:25;
+  }
+  .t4{
+    left:175;
+  }
+  .t5{
+    left:325;
+  }
+</style>
 
 /*********** Target #37 - Tunnel ***********/
 

@@ -6,9 +6,46 @@
 
 /*********** Target #24 - Switches ***********/
 
+<div class= b1></div>
+<div class= b2></div>
+<div class= "c1 c"></div>
+<div class= "c2 c"></div>
+<style>
+  body{
+    background:#62306D;
+  }
+  div {
+	position:absolute;
+    height:100;
+    width:100;
+  }
+  .c{
+    border-radius:50%;
+    background:#F7EC7D;
+    top:100;
+    left:80;
+  }
+  .c2{
+    left:220
+  }
+  .b2{
+  	border-radius: 0 0 150px 150px;
+  	background:#E38F66;
+    left:220;
+    top:150;
+  }
+  .b1{
+   	border-radius: 150px 150px 0 0;
+  	background:#AA445F; 
+    left:80;
+    top:50;
+  }
+  
+</style>
+
 /*********** Target #25 - Blossom ***********/
 
-/*********** Target #26 -  Smiley ***********/
+/*********** Target #26 - Smiley ***********/
 
 /*********** Target #27 - Lock Up ***********/
 

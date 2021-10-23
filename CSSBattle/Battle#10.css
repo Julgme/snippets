@@ -1,0 +1,44 @@
+/******************** Target #47 - Corona Virus ********************/
+
+/******************** Target #48 - Wash Your Hands ********************/
+
+<div class="b1"></div>
+<div class="b2"></div>
+<div class="bm"></div>
+<style>
+  body{
+    background:#293462;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  div {
+    transform:translateY(-10px);
+    position:absolute;
+    width: 200px;
+    border-radius:20px;
+    height: 100px;
+    background: #A64942;
+  }
+    .b1{
+    background:#FE5F55;
+    z-index:1;
+  }
+  .b2{
+     transform:translateY(10px);
+  }
+  .bm{
+    height:40;
+    width:138;
+    z-index:2;
+  }
+</style>
+
+
+/******************** Target #49 - Stay at Home ********************/
+
+/******************** Target #50 - Use Hand Sanitizer ********************/
+
+/******************** Target #51 -WEar a Mask ********************/
+
+/******************** Target #52 - Break the Chain ********************/

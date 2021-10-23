@@ -1,6 +1,46 @@
 /******************** Target #46 - Magical Tree ********************/
 
+<div class="h"></div>
+<div class="b1"></div>
+<div class="b2"></div>
+<div class="v"></div>
 
+<style>
+  body{
+    background:#1A4341;
+  }
+  div {
+    position:absolute;
+    top:0;
+  }
+  .v{
+    background:#F3AC3C;
+    height:300;
+    left:185;
+    width:30;
+  }
+   .h{
+    background:#998235;
+    height:30;
+    top:240;
+    left:65;
+    width:270;
+  }
+  .b1{
+    left:125;
+    top:-30;
+    width:90;
+    height:120;
+    border: 30px solid #998235;
+  }
+   .b2{
+    left:65;
+    top:-30;
+    width:210;
+    height:180;
+    border: 30px solid #F3AC3C;
+  }
+</style>
 
 /******************** Target #46 - Mountains ********************/
 

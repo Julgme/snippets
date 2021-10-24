@@ -1,5 +1,39 @@
 /*********** Target #33 - Birdie ***********/
 
+<div class=c1></div>
+<div class=c2></div>
+<div class=c3></div>
+<body bgcolor=1A4341>
+<style>
+  div {
+	position:absolute;
+    border-radius:50%;
+  }
+  .c1{
+    width:75;
+    height:150;
+    top:75;
+    left:125;
+    border-radius:99px 0 0 99px;
+    background:#998235;
+  }
+  .c2{
+    background:#0B2429;
+    width:30;
+    height:30;
+    top:105;
+    left:155;
+  }
+  .c3{
+    background:#F3AC3C;
+    height:100;
+    width:100;
+    top:50;
+    border-radius:0 99px 0 0;
+    left:200;
+  }
+</style>
+
 /*********** Target #34 - Christmas Tree ***********/
 
 <div class=t3></div>
@@ -30,6 +64,37 @@
 </style>
 
 /*********** Target #35 - Ice Cream ***********/
+
+<div class=d></div>
+<div class=s></div>
+<div></div>
+<body bgcolor=293462>
+<style>
+  div {
+    position:absolute;
+    left:150;
+    top:50;
+    width: 100;
+    border-radius:99px 99px 40px 40px;
+    height: 150;
+    background: #FFF1C1;
+  }
+  .s{
+    border-radius:0 0 10px 10px;
+    left:185;
+    top:210;
+    width: 30;
+    height: 40;
+    background:#FE5F55;
+  }
+  .d{
+    left:185;
+    top:160;
+    width: 30;
+    height: 70;
+    background:#A64942;
+  }
+</style>
 
 /*********** Target #36 - Interleaved ***********/
 
@@ -78,10 +143,211 @@
 
 /*********** Target #37 - Tunnel ***********/
 
+<div></div>
+<div class=m></div>
+<div class=s></div>
+<body bgcolor=6592CF>
+<style>
+  div {
+    position:absolute;
+    width: 250;
+    height: 250;
+    background: #243D83;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+  .m{
+    background:#6592CF;
+    width:150;
+    height:150;
+    transform:translate(-50%,-50%) rotate(15deg);
+  }
+   .s{
+    width:75;
+    height:75;
+    transform:translate(-50%,-50%) rotate(30deg);
+  }
+</style>
+
 /*********** Target #38 - Not Simply Square ***********/
+
+<div class=o></div>
+<div class=d></div>
+<div class=p></div>
+<div class=y></div>
+<body bgcolor=293462>
+<style>
+  div {
+    position:absolute; 
+    top:0;
+    left:0;
+  }
+  .o{
+    background:#FE5F55;
+    width:300;
+    height:300;
+  }
+  .y{
+    background:#FFF1C1;
+    width:200;
+    height:200;
+  }
+  .p{
+    top:200;
+    left:200;
+    background:#293462;
+    width:100;
+    height:100;
+  }
+  .d{
+    top:150;
+    left:150;
+    background:#A64942;
+    width:150;
+    height:200;
+  }
+</style>
 
 /*********** Target #39 - Sunset ***********/
 
+<div class=c1></div>
+<div class=b>
+	<div class=c2></div>
+  </div>
+<div class=r1></div>
+<div class=r2></div>
+<div class=r3></div>
+<div class=r4></div>
+
+<body bgcolor=#1A4341>
+<style>
+  div {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width: 100px;
+    height: 100px;
+  }
+  .c1,.c2{
+    border-radius:50%;
+    background:#998235;
+    width:200;
+    height:200;
+  }
+  .b{
+    width:250;
+    height:100;
+    overflow:hidden;
+  }
+  .c2{
+    background:#F3AC3C;
+    height:250;
+    width:250;
+  }
+  .r1,.r2,.r3,.r4{
+    width:250;
+    height:20;
+    background:#1A4341;
+  }
+  .r1{
+    top:90;
+  }
+  .r2{
+    top:130;
+  }
+  .r3{
+    top:170;
+  }
+  .r4{
+    top:210;
+  }
+</style>
+
 /*********** Target #40 - Letter B ***********/
 
+<div class=c></div>
+<div class=b></div>
+<div class=r></div>
+<body bgcolor=6592CF>
+<style>
+  div {
+	position:absolute;
+  }
+  .c{
+    height:100;
+    width:100;
+    border-radius:50%;
+    border:50px solid #243D83;
+    top:50;
+    left:100;
+  }
+  .b{
+    background:#6592CF;
+    top:0;
+    left:0;
+    width:200;
+    height:150;
+  }
+  .r{
+	background:#243D83;
+    top:50;
+    left:100;
+    width:50;
+    height:100;
+  }
+</style>
+
+
 /*********** Target #41 - Fox Head ***********/
+
+<div class=b></div>
+<div class=c1></div>
+<div class=c2></div>
+<div class="e1 d"></div>
+<div class="e2 d"></div>
+<div class="c3 d"></div>
+<div class="c4 d"></div>
+
+<body bgcolor=293462>
+<style>
+  div {
+    position:absolute;
+    top:80;
+    width: 50px;
+    height: 100px;
+    left:150;
+    border-radius:50%;
+    background: #FE5F55;
+  }
+  .c1,.c3{
+	border-radius:0 40px 40px 0;
+  }
+  .d{
+	background:#293462;
+  }
+  .c3{
+    top:180;
+  }
+  .c2,.c4{
+    left:200;
+    border-radius:40px 0 0 40px;
+  }
+  .c4{
+   top:180;
+  }
+  .e1,.e2{
+    height:30;
+    width:30;
+    top:140;
+    left:165;
+  }
+  .e1{
+    left:205;
+  }
+  .b{
+    width:100;
+    top:125;
+  }
+</style>

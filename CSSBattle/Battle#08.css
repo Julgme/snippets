@@ -1,5 +1,160 @@
 /*********** Target #42 - Baby ***********/
 
+<div>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<body bgcolor=293462>
+<style>
+  div {
+    position:absolute;
+    top:50;
+    left:100;
+    width: 200px;
+    height: 200px;
+    background: #FE5F55;
+    overflow:hidden;
+    border-radius:99px 99px 50px 50px
+  }
+  span{
+    position:absolute;
+    border-radius:50%;
+    background:#FFF1C1;
+    width:60;
+    height:60;
+    top:-50;
+    left:0;
+  }
+  span:nth-child(1){
+	width:100;
+    height:100;
+  }
+  span:nth-child(2){
+	width:100;
+    height:100;
+    left:100; 
+  }
+    span:nth-child(3){
+    top:90;
+    left:120; 
+  }
+    span:nth-child(4){
+    top:90;
+    left:20; 
+  }
+  span:nth-child(5){
+    top:170;
+    width:40;
+    height:10;
+    left:80;
+    border-radius: 10px 10px 10px 10px;
+  }
+</style>
+
 /*********** Target #43 - Wrench ***********/
 
+<div class=b1></div>
+<div class=b2></div>
+
+<body bgcolor=6592CF>
+<style>
+  div {
+    position:absolute;
+    top:30;
+    left:145;
+    width: 39;
+    height: 180;
+    border:31px solid #243D83;
+  }
+  .b1{
+	border-radius:0 70px 70px 0;
+    border-left:0;
+  }
+  .b2{
+	border-radius:70px 0 0 70px;
+    border-right:0;
+	left:185;
+  }
+</style>
+
 /*********** Target #44 - Stripes ***********/
+
+<div class=y></div>
+<div class="l2 y"></div>
+<div class="l3 y"></div>
+<div class="l4 y"></div>
+<div class="l5 y"></div>
+<div class=c1></div>
+<div class=c2></div>
+<body bgcolor=1A4341>
+<style>
+  div {
+    position:absolute;
+
+  }
+  .y{
+    top:60;
+    left:120;
+    background: #F3AC3C;
+	width: 160;
+    height: 20;
+  }
+  .l2{
+    top:100
+  }
+  .l3{
+    top:140
+  }
+  .l4{
+    top:180
+  }
+  .l5{
+    top:220
+  }
+  .c1,.c2{
+    border-radius:50%;
+    background:#1A4341;
+    top:0;
+    left:-150;
+    height:300;
+    width:300;
+  }
+  .c2{
+    left:250
+  }
+</style>
+
+/* Version 2 */
+
+<div class="r"></div>
+<div class="c1"></div>
+<div class="c1 c2"></div>
+<style>
+  body{
+    margin:0;
+    background:#1A4341;
+    display:flex;
+    justify-content:center;
+  }
+  .r {
+    height:200px;
+    width:160px;
+    background:repeating-linear-gradient(#F3AC3C,#F3AC3C 20px,#1A4341 20px, #1A4341 40px);
+    position:absolute;
+    top:60
+  }
+  .c1{
+    width: 300px;
+    height: 300px;
+    background:#1A4341;
+    border-radius:50%;
+    position:absolute;
+    left:-150;
+  }
+  .c2{
+    left:250
+  }
+</style>

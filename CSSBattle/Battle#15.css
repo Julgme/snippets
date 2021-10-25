@@ -46,46 +46,38 @@
 
  /********************* Sample #82 - Diamond Cut  *********************/
 
-<div class="b1"></div>
-<div class="b2"></div>
-<div class="b3"></div>
-<div class="b4"></div>
-<style>
-  body
-  {
-    background:#F3AC3C;
-  }
-  .b1,.b2,.b3,.b4{
-    position:absolute;
-    height:30;
-    width:30;
-    transform:rotate(45deg);
-  }
-  .b1{
-    background:#1A4341;
-    top:135.1;
-    left:183.6;
-  }
-  .b2{
-    border:30px solid #998235;
-    height:100;
-    width:100;
-    top:70;
-    left:118;
-  }
-  .b3{
-    background:#F3AC3C;
-    top:89;
-    width:31;
-    left:137;  
-  }
-  .b4{
-  background:#F3AC3C;
-  top:89;
-  height:31;
-  right:141;  
-  }
-</style>
+ <p g><p r><p l><p m>
+ <body bgcolor=F3AC3C>
+ <style>
+   p{
+     background:#F3AC3C;
+     position:absolute;
+     height:30;
+     width:30;
+     transform:rotate(45deg);
+   }
+   p[m]{
+     background:#1A4341;
+     top:119;
+     left:183;
+     height:10%;
+     width:7.5%;
+   }
+   p[g]{
+     height:100;
+     width:100;
+     border:30px solid #998235;
+     top:54;
+     left:118;
+   }
+   p[l]{
+     top:74;
+     left:137;  
+   }
+   p[r]{
+   top:73;
+   right:140;  
+   }
 
  /********************* Sample #83 - Supernova  *********************/
 <div class="c1"></div>

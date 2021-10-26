@@ -1,7 +1,283 @@
 /******************** Target #77 - Notes ********************/
 
+<div class=o></div>
+<div class="o2 o"></div>
+<div class="o3 o"></div>
+<div class="o4 o"></div>
+<div class=b></div>
+<div class="b2 b"></div>
+<div class="b3 b"></div>
+<div class="l b3 b"></div>
+<body bgcolor=191919>
+<style>
+  div {
+    position:absolute;
+    left:55;
+    width:50;
+    height:40;
+  }
+  .o{   
+    background:#FE5F55;
+    top:170;
+    border-radius:50%;
+  }
+  .o2{
+    left:125;
+  }
+  .o3{
+    background:#A64942;
+    left:195;
+  }
+  .o4{
+    left:265;
+  }
+  .b{
+    border:10px solid #FE5F55;
+    border-bottom:0;
+    top:90;
+    left:95;
+    height:90;
+    width:60;
+  }
+  .b2{
+    border-color:#A64942;
+    border-right:0;
+    left:235;
+    width:30;
+  }
+  .b3{
+    border-right:0;
+    left:305;
+    width:30;
+  }
+  .l{
+    top:110;
+    height:50;
+  }
+
 /******************** Target #78 - Ukelele ********************/
+
+<div class="c1 c g">
+  	<div class="l1 l d"></div>
+	<div class="c2 c g"></div>
+  	<div class="c3 c d"></div>
+	<div class="l2 l d"></div>
+	<div class="l3 l g"></div>
+	<div class="l4 l d"></div>
+	<div class="l5 l d"></div>
+  </div>
+<body bgcolor=F3AC3C>
+<style>
+  div {
+    position:absolute;
+    height:4;
+    width:20;
+	top:43;
+    left:210
+  }
+  .c{
+	border-radius:50%;
+  }
+  .g{
+    background:#998235;
+  }
+  .d{
+   background:#1A4341
+  }
+  .c1{
+    position:relative;
+    width:100;
+    height:100;
+    left:107;
+    top:92;
+  }
+  .c2{
+    width:120;
+    height:120;
+    left:-70;
+    top:-10;
+  }
+  .c3{
+    border:5px solid #F3AC3C;
+    left:25;
+    top:25;
+    width:40;
+    height:40;
+  }
+  .l{
+    border-radius: 10px 10px 10px 10px;
+  }
+  .l1{
+    height:40;
+    width:10;
+    left:-30;
+    top:30;
+    z-index:1;
+  }
+  .l2{
+    width:200;
+    height:20;
+    left:30;
+    top:40;
+    z-index:-1;
+  }
+  .l3{
+    width:40;
+    height:30;
+    top:35;
+    left:200
+  }
+  .l5{
+  	top:53;
+  }	
 
 /******************** Target #79 - Tambourine ********************/
 
+<div class=c1>
+	<div class=c2></div>
+</div>
+<div class="c3"></div>
+<div class="s1">
+  <p>
+</div>
+<div class="s2 l u">
+<p></div>
+<div class="s3 r u">
+<p></div>
+<div class="s4 l d">
+<p></div>
+<div class="s5 r d">
+<p></div>
+<body bgcolor=6592CF>
+<style>
+  div {
+    position:absolute;
+    border-radius:50%;
+    border:10px solid #243D83;
+	top:75;
+    left:115;
+    height:30;
+    width:30;
+  }
+  .s1{
+    top:55;
+    left:175;
+  }
+  .l{
+    left:105;
+  }
+  .r{
+   left:245;
+  }
+  .u{
+    top:95
+  }
+  .d{
+   top:165;
+  }
+  .c1{
+    width: 150px;
+    height: 150px;
+    overflow:hidden;
+  }
+  .c3{
+    width: 100px;
+    height: 100px;
+    border:0;
+    background:#6592CF;
+    top:210;
+    left:150;
+  }
+  .c2{
+    top:115;
+    left:15;
+    width:100;
+    height:100;
+    background:#6592CF;
+  }
+  p{
+    border:10px solid #6592CF;
+    background:#243D83;
+    position:absolute;
+    border-radius:50%;
+    height:10;
+    width:10;
+    top:-16;
+    left:0;
+  }
+
 /******************** Target #80 - Piano ********************/
+
+<div>
+  <div class="k1 k"></div>
+  <div class="k2 k"></div>
+  <div class="k3 k"></div>
+  <div class="k4 k"></div>
+  <div class="k5 k"></div>
+  <div class="k6 k"></div>
+  <div class="k7 k"></div>	
+  <div class="b1 b"></div>
+  <div class="b2 b"></div>
+  <div class="b3 b"></div>
+  <div class="b4 b"></div>
+  <div class="b5 b"></div>
+</div>
+<body bgcolor=998235>
+<style>
+  div {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width: 180px;
+    height: 100px;
+    border-radius:10px;
+    background: #191919;
+  }
+  .k{
+    height:70;
+    top:60;
+ 	width:20;
+    border-radius:5px;
+    background:white;
+  }
+  .k1{
+    left:15;
+  }
+  .k2{
+    left:40;
+  }
+  .k3{
+    left:65;
+  }
+  .k5{
+    left:115;
+  }
+  .k6{
+    left:140;
+  }
+  .k7{
+    left:165;
+  }
+  .b{
+    height:40;
+    top:40;
+ 	width:15;
+    border-radius:0;
+    background:#191919;
+  }
+  .b1{
+    left:27;
+  }
+  .b2{
+    left:52;
+  }
+  .b3{
+    left:102;
+  }
+  .b4{
+    left:127;
+  }
+  .b5{
+    left:152;
+  }

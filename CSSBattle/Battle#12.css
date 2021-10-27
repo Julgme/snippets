@@ -1,5 +1,67 @@
 /******************** Target #61 - ImprovMX ********************/
 
+<p a><p b><p c><p d><p e><p f><p g>
+<body bgcolor=191919>
+<style>
+  p{
+    position:absolute;
+    border:10px solid #5DBCF9;
+    border-bottom:0;
+    top:130;
+  }
+  p[a]{
+    top:50;
+    left:175;
+    height:20;
+    width:30;
+  }
+  p[b]{
+    top:80;
+    left:150;
+    height:50;
+    width:80;   
+  }
+   p[c]{
+    transform:rotate(-30deg);
+    border-right:0;
+    left:126;
+    height:30;
+    width:80;   
+  }
+   p[d]{
+    transform:rotate(30deg);
+    border-left:0;
+    right:126;
+    height:30;
+    width:80;   
+  }
+  p[e]{
+    width:0;
+    border-left:0;
+    height:50;
+    top:120;
+    left:195;
+  }
+  p[f]{
+    background:#5DBCF9;
+    border-top:10px solid #191919;
+    width:200;
+    border-left:0;
+    border-right:0;
+    height:10;
+    top:178;
+    left:100;
+  }
+  p[g]{
+    border-left:0;
+    border-right:0;
+    width:110;
+    height:50;
+    top:208;
+    left:145;
+  }
+</style>
+
 /******************** Target #62 - Sunset ********************/
 
 <div>
@@ -270,6 +332,29 @@
 </style>
 
 /******************** Target #67 - Video Reel ********************/
+
+<p a><p b><p c><p d>
+<body bgcolor=5DBCF9>
+<style>
+  p {
+    position:absolute;
+    width: 140px;
+    height: 710px;
+    background:repeating-linear-gradient(#191919,#191919 110px,#5DBCF9 40px,#5DBCF9 150px);
+    top:-46;
+    left:-95
+  }
+  p[b]{
+    top:-96;
+    left:55;
+  }
+  p[c]{
+    left:205;
+  }
+  p[d]{
+    top:-96;
+    left:355;
+  }
 
 /******************** Target #68 - Bell ********************/
 

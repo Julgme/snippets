@@ -1,5 +1,45 @@
 /******************** Target #89 - Summit ********************/
 
+<div class="f t"></div>
+<div class=t></div>
+<div class=c>
+	<div class="t m"></div>
+</div>
+<body bgcolor=191919>
+<style>
+  div {
+    position:absolute;
+  }
+  .c{
+    top:50;
+    left:100;
+    background:#F9E492;
+    border-radius:50%;
+    width: 200;
+    height: 200;
+    overflow:hidden;
+  }
+  .t{
+    left:60;
+    border-bottom:140px solid #4F77FF;
+    border-right:140px solid transparent;
+    border-left:140px solid transparent;
+	bottom:1;
+    width:;
+    height:0;
+  }
+  .f{
+    bottom:0;
+    left:59;
+    width:2;
+  }
+    .m{
+	border-bottom:140px solid #191919;
+    bottom:-49;
+    left:-40
+  }
+</style>
+
 /******************** Target #90 - Eclipse ********************/
 
 <p s1><p c><p s>

@@ -1,15 +1,544 @@
 /******************** Target #69 - PushOwl ********************/
 
+<div b></div>
+<div class=l>
+<div e></div>
+</div>
+<div class=r>
+  <div e></div>
+</div>
+<body bgcolor=191919>
+ <style>
+   div{
+     position:absolute;
+     background:#E08027;
+   }  
+   [b]{
+     transform:rotate(45deg);
+     height:50;
+     width:50;
+     top:162;
+     left:175
+   }
+   .l,.r{
+     border-radius:0 50% 50% 50%;
+     background:radial-gradient(#191919 45px,#E08027 1px);
+     width:114;
+     height:114;
+     top:77;
+     left:89
+   }
+   .r{
+	border-radius:50% 0 50% 50%;
+	left:197;
+	box-shadow:0 0 0 10px #191919;  
+   }
+   [e]{
+     border-radius:99px 99px 0 0;
+     height:6;
+     width:12;
+     background:#191919;
+     border:9px solid #E08027;
+     border-bottom:0;
+   	 top:48;
+     left:42
+   }
+ </style>
+
 /******************** Target #70 - Froggy ********************/
+
+<div b>
+	<div m></div>
+	<div class=n1></div>
+	<div class=n2></div>
+</div>
+<div class=e1></div>
+<div class=e2></div>
+
+<body bgcolor=293462>
+<style>
+  div {
+    position:absolute;
+   background: #A64942;
+	border-radius:50%;
+  }
+  [b]{
+    top:110;
+    left:125;
+    height:100;
+    width:150;
+    border-radius:99px;
+    overflow:hidden;
+  }
+  [m]{
+    height:400;
+    width:400;
+    top:-330.5px;
+    left:-125;
+    background:#FE5F55;
+  }
+  .n1,.n2{
+    background:#293462;
+    top:50;
+    left:60;
+    height:10;
+    width:10;
+  }
+  .n2{
+    left:80;
+  }
+  .e1,.e2{
+	width:50;
+    height:50;
+    top:85;
+    left:140;
+    background:radial-gradient(#293462 5px,#FFF1C1 5px,#FFF1C1 15px,#FE5F55 3px)
+  }
+  .e2{
+    left:210;
+  }
 
 /******************** Target #71 - Elephant ********************/
 
+<div o>
+	<div e></div>
+</div>
+<div f>
+	<div y></div>
+</div>
+<div m></div>
+<div t></div>
+<body bgcolor=998235>
+<style>
+  div {
+    position:absolute;
+	border-radius:50%;
+    background: #1A4341;
+  }
+  [f]{
+    width: 180;
+    height: 180;
+    top:60;
+    left:110;    
+  }
+  [t],[e],[y]{
+  background:#0B2429;  
+  }
+  [t]{
+    top:180;
+    left:180;
+    border-radius:99px 99px 0 0;
+    height:200;
+    width:40; 
+  }
+  [o]{
+    width:80;
+    height:180;
+    top:60;
+    left:50;
+    overflow:hidden;
+    -webkit-box-reflect:right 140px
+  }
+  [e]{
+    width:80;
+    height:180;
+    left:16;
+  }
+  [m]{
+    background:0;
+	width:80;
+	height:40;
+	top:190;
+	left:140;
+    border-radius:99px 99px 0 0 ;
+    border:20px solid #FFF;
+    border-bottom:none;
+  }
+  [y]{
+	width:20;
+	height:10;
+	top:90;
+	left:40;
+    border-radius:0 0 99px 99px;
+    border:10px solid #998235;
+    border-top:none;
+    -webkit-box-reflect:right 20px
+  }
+
 /******************** Target #72 - Sheep ********************/
+
+<div e></div>
+<div a></div>
+<div b></div>
+<div c></div>
+<p f>
+<div d></div>
+
+<body bgcolor=243D83>
+<style>
+  [e]{
+    width:10;
+    height:10;
+    top:130;
+    left:185;
+    -webkit-box-reflect:right 10px;
+  }
+  div{
+    border-radius:50%;
+    position:absolute;
+    width: 60;
+    height: 50;
+    background: #6592CF;
+    top:65;
+    left:170;
+    -webkit-box-reflect:below 70px;
+  }
+  [b]{
+    top:85;
+    left:130;
+    transform:rotate(-45deg);
+    -webkit-box-reflect:below 62.5px;
+
+  }
+  [c]{
+    top:85;
+    left:210;
+    transform:rotate(45deg);
+	-webkit-box-reflect:below 62.5px;
+  }
+  [d]{
+    top:125;
+    left:230;
+    transform:rotate(90deg)
+  }
+  p[f]{
+    border:20px solid #6592CF;
+    border-top:0;
+    top:118;
+    left:150;
+    border-radius:0 0 50px 50px;
+    position:absolute;
+    width:60;
+    height:40;
+  }
 
 /******************** Target #73 - Happy Tiger ********************/
 
+<div class=w></div>
+<div f>
+	<div h></div>
+  	<div m></div>
+  	<div n></div>
+  	<div c></div>
+	<div class=e></div>
+</div>
+<body bgcolor=F3AC3C>
+<style>
+  div {
+    position:absolute;
+    background: #1A4341;
+  }
+  [f]{
+    height:150;
+    width:150;
+    top:75;
+    left:125;
+    background:#998235;
+    border-radius:50% 50% 60px 60px;
+    overflow:hidden;
+  }
+  .e{
+    border-radius:50%;
+	width:20;
+	height:20;
+	top:60;
+	left:25;
+    -webkit-box-reflect:right 59.5px;
+  }
+  [h]{
+    transform:rotate(45deg);
+    width:40;
+    height:40;
+    top:-23;
+    left:55; 
+  }
+  [m]{
+    background:#FFF;
+    width:100;
+    height:40;
+    top:95;
+    left:25;
+    border-radius:10px 10px 28.5px 28.5px
+  }
+  .w{
+    width:60;
+    height:60;
+    top:65;
+    left:115;
+    box-shadow:inset 0 0 0 10px #998235;
+	border-radius:50%;
+	-webkit-box-reflect:right 50px;
+  }
+  [n]{
+    width:9;
+    height:30;
+    top:85;
+    left:70;
+  }
+  [c]{
+    width:20;
+    height:10;
+    top:105;
+    left:39;
+    background:#FFF;
+    border-radius:0 0 99px 99px;
+    border:10px solid #1A4341;
+    border-top:0;
+	-webkit-box-reflect:right -10px;
+  }
+
 /******************** Target #74 - Danger Noodle ********************/
 
-/******************** Target #75 - Tiger ********************/
+<div class="o u">
+	<div class="i u"></div>
+</div>
+<div class="o2 o u">
+	<div class="i2 i u"></div>
+</div>
+<div class="o3 o r">
+	<div class="i3 i r"></div>
+</div>
+<div class="o4 o r">
+	<div class="i4 i r"></div>
+</div>
+<div class="o5 o r">
+	<div class="i5 i r"></div>
+</div>
+<div class=b></div>
+<div class=b2></div>
+<div class=h>
+	<div class=e></div>
+  	<div class=e2></div>
+</div>
+<body bgcolor=191919>
+<style>
+  .r{
+      border-top:0;
+      border-radius:0 0 50px 50px;
+  }
+  div{
+    position:absolute;
+    border: 5px solid #E08027;
+    box-sizing:border-box;
+  }
+  .u{
+    border-radius:35px 35px 0 0;
+    border-bottom:0;
+  }
+  .o,.i{
+    height:80;
+    width:70;
+    top:40;
+    left:15;
+  }
+  .i{
+    top:10;
+    left:10;
+    width:40;
+    height:65;
+  }
+  .o2{
+    left:115.5;
+    width:69.5;
+    height:150
+  }
+  .i2{
+    height:150;
+    width:39.5;
+  }
+  .o3{
+    height:139;
+    left:66;
+    top:120;
+    width:69;
+  }
+  .i3{
+    top:0;
+    width:39;
+    height:124
+  }
+  .o4{
+    top:179.5;
+    height:80;
+    left:165
+  }
+  .i4{
+    top:0;
+    width:39.5;
+    height:65;
+  }
+ .o5{
+    top:80;
+    height:80;
+    left:-35;
+  }
+  .i5{
+    top:5;
+    left:10.5;
+    width:39;
+    height:60
+  }
+  .h{
+    background:#E08027;
+    top:135;
+    left:265;
+    width:50;
+    height:29;
+    border-radius:20px 30px 30px 20px;
+  }
+  .e,.e2{
+    border:none;
+    border-radius:50%;
+    top:13;
+    left:25;
+    height:10;
+    width:10;
+    background:#191919;
+  }
+  .e2{
+    top:-3;
+  }
+  .b,.b2{
+    height:50;
+    top:140;
+    left:215;
+    width:60;
+    border-right:0;
+    border-bottom:0;
+    border-top-left-radius:34px
+  }
+  .b2{
+    top:155;
+    left:230;
+    border-top-left-radius:20px
+  }
+</style>
+
+/******************** Target #75 - Hippo ********************/
+
+<div e1></div>
+<div e2></div>
+<div f>
+	<div y1></div>
+	<div y2></div>
+</div>
+<div m>
+	<div n1></div>
+	<div n2></div>
+</div>
+
+<body bgcolor=191919>
+<style>
+  div {
+	position:absolute;
+  }
+  [f]{
+    background:#FE5F55;
+    top:75;
+    left:135;
+    height:150;
+    width:130;
+    border-radius:60px 60px 0 0 ;
+  }
+  [e1],[e2],[y1],[y2],[n1],[n2]{
+    background:#000;
+    border-radius:50%
+  }
+  [e1],[e2]{
+    transform:rotate(-45deg);
+    height:20;
+    width:9.5;
+    top:70;
+    left:150;
+    border:5px solid #FE5F55;
+  }
+  
+  [e2]{
+   transform:rotate(45deg);
+   left:230
+  }
+  [y1],[y2]{
+    height:10;
+    width:10;
+    top:50;
+    left:25;
+    -webkit-box-reflect:right 60px;
+  }
+  [m]{
+    height:99;
+    width:150;
+    background:#A64942;
+    border-radius: 70px 70px 55px 55px;
+    top:145;
+    left:125
+  }
+  [n1],[n2]{
+    width:20;
+    height:30;
+    transform:rotate(45deg);
+    top:20;
+    left:25;
+  }
+  [n2]{
+    transform:rotate(-45deg);
+    left:105;
+  }
+</style>
 
 /******************** Target #76 - Beeee ********************/
+
+<div class=l></div>
+<div class=r></div>
+<div b>
+<div s></div>
+<div e></div>
+</div>
+<body bgcolor=998235>
+<style>
+  div {
+	position:absolute;
+    left:125
+  }
+  .l,.r{
+    width: 75;
+    height: 75;
+    background:#FFF;
+    border-radius:50% 50% 0 50%;
+    top:75;
+  }
+  .r{
+    border-radius:50% 50% 50% 0;
+    left:200;
+  }
+  [b]{
+    background:#EFF33C;
+    width:150;
+    height:75;
+    top:150;
+    border-radius: 99px;
+    overflow:hidden;
+  }
+  [e]{
+    border-radius:50%;
+    height:15;
+    width:15;
+    top:20;
+    left:115;
+    background:#191919;
+  }
+  [s]{
+    width:101;
+    left:-1;
+    height:75;
+    background:repeating-linear-gradient(90deg,#191919,#191919 25px,#EFF33C 10px,#EFF33C 35px);
+  }

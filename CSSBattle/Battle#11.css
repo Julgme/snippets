@@ -1,15 +1,303 @@
 /******************** Target #53 - Pastel Logo ********************/
 
+<div c></div>
+<div r>
+	<div q></div>
+</div>
+<body bgcolor=19191A>
+<style>
+  div {
+    position:absolute;
+  }
+  [r]{
+    background:#F9E492;
+    top:125;
+    left:125;
+    width:75;
+    height:125;
+    overflow:hidden;
+  }
+  [c],[q]{
+    background:#4F77FF;
+    width:150;
+    border-radius:50%;
+    height:150;
+    top:50;
+    left:125;
+  }
+  [q]{
+    background:#9AD5FF;
+    top:-75;
+    left:0;
+  } 
+
 /******************** Target #54 - Black Lives Matter ********************/
 
 /******************** Target #55 - Windmill ********************/
+
+<div l></div>
+<div t></div>
+<div r></div>
+<div b></div>
+<body bgcolor=191919>
+<style>
+  div {
+    position:absolute;
+    background:#F9E492;
+	width:100;
+	height:50;
+	top:100;
+	left:100;
+    border-radius:99px 99px 0 0;
+}
+  [t],[b]{
+    background:#4F77FF;
+  }
+  [r]{
+    transform:rotate(180deg);
+    left:200;
+    top:150;
+  }
+  [t]{
+	transform:rotate(90deg);
+	top:75;
+    left:175;
+  }
+  [b]{
+	transform:rotate(-90deg);
+	top:175;
+    left:125;
+  }
 
 /******************** Target #56 - Skull ********************/
 
 /******************** Target #57 - Pillars ********************/
 
+<div m></div>
+<div b>
+  <div d1>
+  	<div y1>
+    	<div b1></div>
+    </div>
+  </div>
+  <div d2>
+ 	<div y2>
+		<div b2></div>
+	</div>
+</div>
+</div>
+<body bgcolor=191919>
+<style>
+  
+  div {
+    border-radius:50%;
+    top:50%;
+    position:absolute;
+    left:50%;
+    transform:translate(-50%,-50%);
+  }
+  [m]{
+    border-radius:0;
+	background: #4F77FF;
+    width: 110;
+    height: 110; 
+  }
+  [b]{    
+    border-radius:0;
+    width: 150;
+    height: 150; 
+  }
+  [d1]{
+    height:60;
+    width:60;
+    background:#191919;
+    top:30;
+    left:30;
+    -webkit-box-reflect:below 29px
+  }
+   [y1]{
+    height:45;
+    width:45;
+    background:#F9E492;
+    top:22;
+    left:22.5;
+  }
+  [b1]{
+    height:30;
+    width:30;
+    background:#4F77FF;
+    top:15;
+    left:15;
+  }
+  [d2]{
+    height:60;
+    width:60;
+    background:#191919;
+    top:30;
+    left:120;
+    -webkit-box-reflect:below 29px
+  }
+   [y2]{
+    height:45;
+    width:45;
+    background:#F9E492;
+    top:22;
+    left:37;
+  }
+  [b2]{
+    height:30;
+    width:30;
+    background:#4F77FF;
+    top:15;
+    left:30;
+  }
+
 /******************** Target #58 - Rose ********************/
+
+<div b></div>
+<div a></div>
+<div c></div>
+<div e></div>
+<div d></div>
+<div f></div>
+
+<body bgcolor=191919>
+<style>
+  div {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background: #4F77FF;
+  }
+  [a],[b]{
+    background:#F9E492;
+    height:100;
+    width:20;
+    border-radius:0 0 50px 50px;
+    top:205;
+  } 
+  [b]{
+    border-radius:50%;
+    top:165;
+    height:40;
+    width:40;
+  }
+  [c]{
+    border-radius:50%;
+    top:115;
+    height:100;
+    width:100;
+  }
+  [d]{
+    border-radius:6px 6px 30px 30px;
+    box-shadow:0 0 0 10px #191919;
+    border-top:0;
+    top:80;
+    height:30;
+    width:100;
+  }
+  [e]{
+    border-radius:6px 6px 30px 30px;
+    box-shadow:0 0 0 10px #191919;
+    top:100;
+    height:30;
+    width:140;
+  }
+  [f]{
+	border-radius:50%;
+    top:60;
+    height:30;
+    width:30;
+    border:10px solid #191919;
+  }
 
 /******************** Target #59 - Earth ********************/
 
+<div g></div>
+<div h1></div>
+<div h2></div>
+<div h3></div>
+<div l></div>
+<div c></div>
+<div c1></div>
+<body bgcolor=191919>
+<style>
+  div {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+	background:#191919;
+	}
+  [g]{
+    border-radius:50%;
+    width:150;
+    height:150;
+    background:#4F77FF;
+  }
+  [l]{
+    width:10;
+    height:200;
+  }
+  [h1],[h2],[h3]{
+	width:200;
+    height:10;
+  }
+  [h2]{
+    top:110;
+  }
+  [h3]{
+    top:190;
+  }
+  [c],[c1]{
+    height:190;
+    width:190;
+    background:0;
+    border-radius:50%;
+    border:10px solid #191919;
+    top:150;
+    left:260;
+  }
+  [c1]{
+    left:140;
+  }
+</style>
+
 /******************** Target #60 - Evil Triangles ********************/
+
+<div b>
+	<div x></div>
+	<div y></div>
+	<div z></div>
+</div>
+<body bgcolor=191919>
+<style>
+  div{
+    position:absolute;
+  }
+  [b]{
+    overflow:hidden;
+    -webkit-box-reflect:right -1px;
+    height:150;
+    width:100;
+    top:75;
+    left:100;
+  }
+  [x],[y],[z]{
+    width:0;
+    height:0;
+    top:50;
+    left:-50;
+    border-top:100px solid #4F77FF;
+	border-left:100px solid transparent;
+	border-right:100px solid transparent;
+  }
+  [y]{
+	border-top:100px solid #191919;
+	top:0;
+  }
+  [z]{
+	top:-50;
+	}
+</style>

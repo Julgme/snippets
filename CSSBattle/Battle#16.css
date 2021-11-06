@@ -66,9 +66,82 @@
     left:75
   }
 
-/******************** Target #91 -  ********************/
+/******************** Target #91 - Reflection ********************/
+<p b>
+<p c><p><p x><p y><p z>
+<body bgcolor=D25B70>
+<style>
+  p{
+    position:absolute;
+	height:15;
+    width:400;
+   	left:0;
+	top:133;
+    background:#6CB3A9;
+  }
+  p[c]{
+    top:34;
+    left:100;
+    border-radius:50%;
+    background:#F6DF96;
+    height:200;
+    width:200;
+  }
+  p[b]{
+	height:161;
+	top:133;
+  }
+  p[x]{
+    top:158;
+  }
+  p[y]{
+    top:183;
+  }
+  p[z]{
+    top:208;
+  }
+/******************** Target #92 - Squeeze ********************/
 
-/******************** Target #92 -  ********************/
+<div></div>
+<div l></div>
+<div r></div>
+<div b></div>
+<div c1></div>
+<div c2></div>
+<body bgcolor=6592CF>
+<style>
+  div{
+    border-radius:50%;
+    width:200;
+    height:200;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#243D83
+  }
+  [l]{
+    left:-26
+  }
+  [r]{
+    left:426
+  }
+  [b]{
+    height:50;
+    width:400
+  }
+  [c1],[c2]{
+    height:30;
+    width:32;
+    top:125;
+    left:87;
+    background:#6592CF;
+    -webkit-box-reflect:right 194px
+  }
+  [c2]{
+    top:175
+  }
+  </style>
 
 /******************** Target #93 -  ********************/
 

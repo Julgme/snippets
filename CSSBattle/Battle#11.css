@@ -33,6 +33,60 @@
 
 /******************** Target #54 - Black Lives Matter ********************/
 
+<div f1></div>
+<div f2></div>
+<div f3></div>
+<div p></div>
+<div h></div>
+<div t></div>
+<body bgcolor=F9E492>
+<style>
+  div {
+    width:20;
+    position:absolute;
+    height:45;
+    border-radius:20px 20px 20px 20px;
+    background:#191919;
+	left:180;
+    top:78;
+  }
+  [f1]{
+    left:155;
+    top:88;
+	-webkit-box-reflect:right 30px;
+  }
+  [f2]{
+    height:50
+  }
+  [f3]{
+    left:230;
+    top:98;
+    height:35;
+  }
+  [h]{
+    left:150;
+    top:138;
+    height:40;
+    width:100
+  }
+  [h],[p]{
+	border-radius:0 0 10px 10px;
+  }
+  [p]{
+    left:175;
+    top:143;
+    height:80;
+    width:50
+  }
+  [t]{
+    left:153;
+    top:105;
+    height:65;
+    width:20;
+    border:4.5px solid #F9E492;
+    transform:rotate(60deg);
+  }
+
 /******************** Target #55 - Windmill ********************/
 
 <div l></div>

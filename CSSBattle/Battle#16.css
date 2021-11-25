@@ -144,7 +144,75 @@
   </style>
 
 /******************** Target #93 - Great Wall ********************/
-
+<div c2>
+  <div c1></div>
+          <div m></div>
+          <div m1></div> 
+		  <div m2></div>
+          <div l></div>
+          <div l1></div>
+          <div l2></div>
+          <div r></div>
+          <div r1></div>
+          <div r2></div>
+</div>
+<body bgcolor=4F77FF>
+<style>
+  div {
+    position:absolute;
+    width:100;
+    height:16;
+    background:#F9E492;
+  }
+  [c1]{
+    border-radius:50%;
+    height:40;
+    width:40;
+    top:40;
+    left:40;
+  }
+  [c2]{
+    background:#191919;
+    top:50;
+    left:99.5;
+    height:200;
+    width:200;
+    overflow:hidden;
+    border-radius:50%;
+  }
+  [l]{
+    top:121.5;
+  }
+  [l1]{
+    top:73.5%;
+  }  
+  [l2]{
+    top:173.55;
+  }
+  [r],[r1],[r2]{
+    top:108.5;
+    left:120;
+  }
+  [r1]{
+    top:134.5;
+  }  
+  [r2]{
+    top:160.55;
+  }
+  [m],[m1],[m2]{
+    width:34;
+    height:13;
+    background:#D6B73F;
+    transform:rotate(-33deg);
+    left:93.5;
+    top:116;
+  }
+  [m1]{
+    top:142;
+  }  
+  [m2]{
+    top:167.5;
+  }
 /******************** Target #94 - Ripples ********************/
 
 <div a></div>

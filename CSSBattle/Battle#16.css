@@ -186,3 +186,37 @@
 /******************** Target #95 - Pokeball ********************/
 
 /******************** Target #96 - Madala ********************/
+
+<p m><p l><p r><p u><p d>
+<body bgcolor=243D83>
+<style>
+  p {
+    position:absolute;
+    border-radius:50%;
+    top:34;
+    left:100;
+    width: 200;
+    height: 200;
+  }
+  p[m]{
+    background:#6592CF;
+  }
+  p[l],p[u],p[d],p[r]
+  {
+    height:130;
+    width:130;
+    top:49;
+    left:40;
+    border:20px solid #243D83;
+  }
+  p[u]{
+    top:-27;
+    left:115;
+  }
+    p[r]{
+    left:190;
+  }
+    p[d]{
+    top:124;
+    left:115;
+  }

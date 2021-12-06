@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs</title>
+</head>
+<style>
+    .hide{
+        display:none;
+    }
+    img{
+        height:400px;
+    }
+</style>
+<body>
+    <h2>Click tab to view image</h2>
+    <button onclick="showPanel('panelA')" href="#A">Tab A</button>
+    <button onclick="showPanel('panelB')" href="#B">Tab B</button>
+    <button onclick="showPanel('panelC')" href="#C">Tab C</button> <br>
+    <a href="extra"><br></a>
+    <div id="panelA" class="panel hide">This is <b>Panel A</b> <br> <img src="https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY4OTA4MzI0ODc4NjkwMDAw/christmas-tree-gettyimages-1072744106.jpg" height="400" alt="Christmas Tree"></div>
+    <div id="panelB" class="panel hide">This is <b>Panel B</b> <br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg" alt="Banana"></div>
+    <div id="panelC" class="panel hide">This is <b>Panel C</b> <br> <img src="https://www.awesomeinventions.com/wp-content/uploads/2014/12/too-much-christmas-cheer.jpg" alt="Lights"></div>
+
+</body>
+<script>
+    function showPanel(panel){
+        const allPanels = document.querySelectorAll(".panel")
+        console.log(allPanels)
+        for (i=0;i<allPanels.length;i++){
+            allPanels[i].classList.add("hide")
+        }
+        document.getElementById(panel).classList.remove("hide");
+    }
+</script>
+</html>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Points</title>
+    <title>Counter</title>
 </head>
 
 <body>
@@ -22,16 +22,33 @@
             let val = path.textContent
             val++
             path.innerText = val
+            col()
         }
 
         function subtraction() {
             let val = path.textContent
             val--
             path.innerText = val
+            col()
         }
 
         function reset() {
             path.innerText = 0
+            col()
+        }
+
+        function col() {
+            let val = path.textContent
+            if (val > 0) {
+                colour = "green"
+            }
+            else if (val < 0) {
+                colour = "red"
+            }
+            else{
+                colour="black"
+            }
+            path.style.color = colour
         }
     </script>
 </body>

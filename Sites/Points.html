@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Points</title>
+</head>
+
+<body>
+    <button onclick="addition()">Add</button>
+    <button onclick="subtraction()">Subtract</button>
+    <button onclick="reset()">Reset</button>
+    <br>
+    <span id="value" style="font-size: 1500%">0</span>
+
+    <script>
+        let path = document.getElementById("value")
+
+        function addition() {
+            let val = path.textContent
+            val++
+            path.innerText = val
+        }
+
+        function subtraction() {
+            let val = path.textContent
+            val--
+            path.innerText = val
+        }
+
+        function reset() {
+            path.innerText = 0
+        }
+    </script>
+</body>
+
+</html>

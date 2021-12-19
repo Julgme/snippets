@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Password Generator</title>
+</head>
+
+<body>
+    <h1>Password Generator</h1><br>
+    <div class="copyDiv">
+        <input id="password" placeholder="Generated Password" size=30 disabled></input>
+        <button onclick="copy()" id="copyText" #animation: true data-toggle="popover" data-placement="right"
+            data-original-title="" data-content="Copied" aria-describedby="tooltip">
+            <span class="glyphicon glyphicon-copy"></span>
+        </button>
+    </div>
+    <br><br>
+
+    <div>
+        <label for="passSlider">Length:</label>
+        <input id="passSlider" type="range" min="1" max="25" value="8"
+            oninput="this.nextElementSibling.value = this.value"><output>8</output><br>
+        <p><b>Include following?</b></p>
+    </div>
+    <input type="checkbox" id="numCheck" checked>
+    <label for="numCheck">Numbers</label><br>
+    <input type="checkbox" id="upperCheck" checked>
+    <label for="upperCheck">Uppercase</label><br>
+    <input type="checkbox" id="symbolCheck" checked>
+    <label for="symbolCheck">Symbols</label><br><br><br>
+    <button onclick="generatePassword()" id="generateButton">Generate</button>
+
+    <script>
+        //Available Characters
+        const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+        const symbols = ["$", "€", "£", "!", "?", "#", ".", "[", "@", "(", ")", "&", "^", "%", "="]
+        const upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        const lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+
+        const passField = document.getElementById("password")
+        function generatePassword(length, hasNumbers, hasSymbols, hasUpper) {
+            length = document.getElementById("passSlider").value
+            hasNumbers = document.getElementById("numCheck").checked
+            hasSymbols = document.getElementById("symbolCheck").checked
+            hasUpper = document.getElementById("upperCheck").checked
+            
+            const availableCharacters = [
+                ...lowerCase,
+                ...(hasNumbers ? numbers : []),
+                ...(hasSymbols ? symbols : []),
+                ...(hasUpper ? upperCase : [])
+            ]
+
+            let pass =""
+
+            for (i = 0; i < length; i++) {
+                let randomIndex = Math.floor(Math.random() * availableCharacters.length)
+                pass += availableCharacters[randomIndex]
+            }
+            console.log(pass)
+            passField.value=pass
+        }
+
+        function copy() {
+            let text = passField.value;
+            navigator.clipboard.writeText(text)
+        }
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover({ trigger: 'focus' });
+        });
+    </script>
+    <style>
+        body {
+            margin-left: 10px;
+        }
+
+        input[type=checkbox] {
+            transform: scale(1.5);
+            margin-left: 10px !important;
+            vertical-align: middle;
+            white-space: nowrap
+        }
+
+        input[type=range] {
+            width: 150px;
+        }
+
+        #password {
+            transform: scale(1.5);
+            margin-left: 62px !important;
+        }
+
+        #copyText {
+            transform: scale(1.5);
+            margin-left: 51px !important;
+        }
+
+        #generateButton {
+            transform: scale(1.5) !important;
+            margin-left: 20px !important;
+        }
+    </style>
+</body>
+</html>

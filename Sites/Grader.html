@@ -20,12 +20,17 @@
             let result,colour
             let gradeNum = document.getElementById("grader").value
 
-            if (gradeNum =="" || gradeNum >100 || gradeNum <0){
+            if (gradeNum =="" || gradeNum >100 || gradeNum <0 || isNaN(gradeNum)==true){
             result = "Please enter values between 0 and 100"
+            colour="black"
             }
             else if (gradeNum >=100){
             result = "PERFECT SCORE"
             colour="gold"
+            }
+            else if (gradeNum >=95){
+            result = "A+"
+            colour="darkgreen"
             }
             else if (gradeNum >=90){
             result = "A"

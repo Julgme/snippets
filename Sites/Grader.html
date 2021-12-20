@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,62 +10,65 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Grader</title>
 </head>
+
 <body>
-    <button id="close" onclick="location.href='/snippets/Index.html';" style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
-        <h1><u>Grading System</u></h1><br>
-        <input id="grader" maxlength="3" placeholder="Enter grade" type="text" size="8">
-        <button onclick="conversion()" id="calculate">Calculate</button>
-        <h3 id="result"></h3>
-    
+    <button id="close" onclick="location.href='/snippets/Index.html';"
+        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <h1>Grading System</h1><br>
+    <input id="grader" maxlength="3" placeholder="Enter grade" type="text" size="8">
+    <button onclick="conversion()" id="calculate">Calculate</button>
+    <h3 id="result"></h3>
+
     <script>
         let gradeConv = "A"
 
-        function conversion () {
-            let result,colour
+        function conversion() {
+            let result, colour
             let gradeNum = document.getElementById("grader").value
 
-            if (gradeNum =="" || gradeNum >100 || gradeNum <0 || isNaN(gradeNum)==true){
-            result = "Please enter values between 0 and 100"
-            colour="black"
+            if (gradeNum == "" || gradeNum > 100 || gradeNum < 0 || isNaN(gradeNum) == true) {
+                result = "Please enter values between 0 and 100"
+                colour = "black"
             }
-            else if (gradeNum >=100){
-            result = "PERFECT SCORE"
-            colour="gold"
+            else if (gradeNum >= 100) {
+                result = "PERFECT SCORE"
+                colour = "gold"
             }
-            else if (gradeNum >=95){
-            result = "A+"
-            colour="darkgreen"
+            else if (gradeNum >= 95) {
+                result = "A+"
+                colour = "darkgreen"
             }
-            else if (gradeNum >=90){
-            result = "A"
-            colour="green"
+            else if (gradeNum >= 90) {
+                result = "A"
+                colour = "green"
             }
-            else if (gradeNum >=80){
-            result = "B"
-            colour="lightgreen"
+            else if (gradeNum >= 80) {
+                result = "B"
+                colour = "lightgreen"
             }
-            else if (gradeNum >=70){
-            result = "C"
-            colour="orange"
+            else if (gradeNum >= 70) {
+                result = "C"
+                colour = "orange"
             }
-            else if (gradeNum >=60){
-            result = "D"
-            colour="red"
+            else if (gradeNum >= 60) {
+                result = "D"
+                colour = "red"
             }
-            else if (gradeNum <=50){
-            result = "FAIL"
-            colour="red"
+            else if (gradeNum <= 50) {
+                result = "FAIL"
+                colour = "red"
             }
             let path = document.getElementById("result")
-            path.innerText=result
-            path.style.color=colour
+            path.innerText = result
+            path.style.color = colour
         }
     </script>
     <style>
-            body {
+        body {
             margin-left: 10px;
-            margin-top:10px;
+            margin-top: 10px;
         }
     </style>
 </body>
+
 </html>

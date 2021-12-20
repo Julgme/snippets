@@ -12,7 +12,9 @@
 </head>
 
 <body>
-    <button id="close" onclick="location.href='/snippets/Index.html';" style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <button id="close" onclick="location.href='/snippets/Index.html';"
+        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <h1>Counter</h1>
     <button onclick="addition()">Add</button>
     <button onclick="subtraction()">Subtract</button>
     <button onclick="reset()">Reset</button>
@@ -49,16 +51,16 @@
             else if (val < 0) {
                 colour = "red"
             }
-            else{
-                colour="black"
+            else {
+                colour = "black"
             }
             path.style.color = colour
         }
     </script>
     <style>
-            body {
+        body {
             margin-left: 10px;
-            margin-top:10px;
+            margin-top: 10px;
         }
     </style>
 </body>

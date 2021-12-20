@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +12,8 @@
 </head>
 
 <body>
-    <button id="close" onclick="location.href='/snippets/Index.html';" style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <button id="close" onclick="location.href='/snippets/Index.html';"
+        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
     <h1>Password Generator</h1><br>
     <div class="copyDiv">
         <input id="password" placeholder="Generated Password" size=30 disabled></input>
@@ -42,14 +44,14 @@
         const symbols = ["$", "€", "£", "!", "?", "#", ".", "[", "@", "(", ")", "&", "^", "%", "="]
         const upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
         const lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-
         const passField = document.getElementById("password")
+
         function generatePassword(length, hasNumbers, hasSymbols, hasUpper) {
             length = document.getElementById("passSlider").value
             hasNumbers = document.getElementById("numCheck").checked
             hasSymbols = document.getElementById("symbolCheck").checked
             hasUpper = document.getElementById("upperCheck").checked
-            
+
             const availableCharacters = [
                 ...lowerCase,
                 ...(hasNumbers ? numbers : []),
@@ -57,14 +59,14 @@
                 ...(hasUpper ? upperCase : [])
             ]
 
-            let pass =""
+            let pass = ""
 
             for (i = 0; i < length; i++) {
                 let randomIndex = Math.floor(Math.random() * availableCharacters.length)
                 pass += availableCharacters[randomIndex]
             }
             console.log(pass)
-            passField.value=pass
+            passField.value = pass
         }
 
         function copy() {
@@ -107,4 +109,5 @@
         }
     </style>
 </body>
+
 </html>

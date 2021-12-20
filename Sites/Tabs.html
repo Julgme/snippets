@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Tabs</title>
 </head>
 <style>
@@ -15,16 +18,19 @@
     }
 </style>
 <body>
-    <h2>Click tab to view image</h2>
+    <button id="close" onclick="location.href='/snippets/Index.html';" style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <h2>Click a tab to view image</h2>
+    <button onclick="showPanel('Home')" href="Home"><span class="glyphicon glyphicon-home"></span></button>
     <button onclick="showPanel('panelA')" href="#A">Tab A</button>
     <button onclick="showPanel('panelB')" href="#B">Tab B</button>
     <button onclick="showPanel('panelC')" href="#C">Tab C</button> <br>
     <a href="extra"><br></a>
-    <div id="panelA" class="panel hide">This is <b>Panel A</b> <br> <img src="https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY4OTA4MzI0ODc4NjkwMDAw/christmas-tree-gettyimages-1072744106.jpg" height="400" alt="Christmas Tree"></div>
-    <div id="panelB" class="panel hide">This is <b>Panel B</b> <br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg" alt="Banana"></div>
-    <div id="panelC" class="panel hide">This is <b>Panel C</b> <br> <img src="https://www.awesomeinventions.com/wp-content/uploads/2014/12/too-much-christmas-cheer.jpg" alt="Lights"></div>
+    <div id="Home" class="panel"><br> <img class="img-rounded" src="https://media.istockphoto.com/photos/question-mark-picture-id1060573244?k=20&m=1060573244&s=612x612&w=0&h=Xk_DdOodJj3VDAZfouo2364s5SFZXUW02v3sOyXlNVE=" height="400" alt="Home"></div>
+    <div id="panelA" class="panel hide"><b>Christmas Tree</b> <br> <img class="img-rounded" src="https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY4OTA4MzI0ODc4NjkwMDAw/christmas-tree-gettyimages-1072744106.jpg" height="400" alt="Christmas Tree"></div>
+    <div id="panelB" class="panel hide"><b>SURPRISE</b> <br><img class="img-rounded" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Banana-Single.jpg/2324px-Banana-Single.jpg" alt="Banana"></div>
+    <div id="panelC" class="panel hide"><b>Decorated House</b> <br> <img class="img-rounded" src="https://www.awesomeinventions.com/wp-content/uploads/2014/12/too-much-christmas-cheer.jpg" alt="Decorated House"></div>
 
-</body>
+
 <script>
     function showPanel(panel){
         const allPanels = document.querySelectorAll(".panel")
@@ -35,4 +41,11 @@
         document.getElementById(panel).classList.remove("hide");
     }
 </script>
+<style>
+       body {
+            margin-left: 10px;
+            margin-top:10px;
+        }
+</style>
+</body>
 </html>

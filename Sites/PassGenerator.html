@@ -29,37 +29,46 @@
         <label for="passSlider">Length:</label>
         <input id="passSlider" type="range" min="1" max="25" value="8"
             oninput="this.nextElementSibling.value = this.value"><output>8</output><br>
-        <p><b>Include following?</b></p>
+        <p><b>Password properties</b></p>
     </div>
     <input type="checkbox" id="numCheck" checked>
     <label for="numCheck">Numbers</label><br>
     <input type="checkbox" id="upperCheck" checked>
     <label for="upperCheck">Uppercase</label><br>
     <input type="checkbox" id="symbolCheck" checked>
-    <label for="symbolCheck">Symbols</label><br><br><br>
+    <label for="symbolCheck">Symbols</label><br>
+    <input type="checkbox" id="excludeChars" checked>
+    <label for="excludeChars">Exclude similar characters</label><br><br><br>
     <button onclick="generatePassword()" id="generateButton">Generate</button>
 
     <script>
         //Available Characters
         const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-        const symbols = ["$", "€", "£", "!", "?", "#", ".", "[", "@", "(", ")", "&", "^", "%", "="]
+        const symbols = ["$", "€", "£", "!", "?", "#", ".", "[","]","{","}", "@", "(", ")", "&", "^", "%", "="]
         const upperCase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
         const lowerCase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+        const simCharacters = ["i","l","L",1,"o","O",0]
         const passField = document.getElementById("password")
 
-        function generatePassword(length, hasNumbers, hasSymbols, hasUpper) {
+        function generatePassword(length, hasNumbers, hasSymbols, hasUpper, excludeChars) {
             length = document.getElementById("passSlider").value
             hasNumbers = document.getElementById("numCheck").checked
             hasSymbols = document.getElementById("symbolCheck").checked
             hasUpper = document.getElementById("upperCheck").checked
+            excludeChars = document.getElementById("excludeChars").checked
 
-            const availableCharacters = [
+            let availableCharacters = [
                 ...lowerCase,
                 ...(hasNumbers ? numbers : []),
                 ...(hasSymbols ? symbols : []),
                 ...(hasUpper ? upperCase : [])
             ]
-
+            let avail
+            if(excludeChars ==true){
+                availableCharacters = availableCharacters.filter(function(value, index, arr){ 
+                 return value != 0 && value != 1 && value != "l" && value != "i" && value != "L" && value != "o" && value != "O";
+    });
+        }
             let pass = ""
 
             for (i = 0; i < length; i++) {
@@ -77,6 +86,7 @@
         $(document).ready(function () {
             $('[data-toggle="popover"]').popover({ trigger: 'focus' });
         });
+
     </script>
     <style>
         body {

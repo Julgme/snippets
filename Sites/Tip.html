@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/Snippets/Sites/Tools/favicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Tip Calculator</title>
+</head>
+
+<body>
+    <button id="close" onclick="location.href='/snippets/index.html';"style="position:absolute;right:0.2%;top:0.5%;">X</button>
+    <div class="wrapper">
+
+        <div class="tip-amount">
+            <div class="label">Tip Amount</div>
+            <div class="euro">€<span id="tip-amount"></span></div>
+        </div>
+        <div class="total-per-person">
+            <div class="label">Total Per Person</div>
+            <div class="euro">€<span id="total-per-person"></span></div>
+        </div>
+
+        <div class="input-fields">
+            <div class="bill-amount">
+                <div class="field">
+                    <input type="text" id="bill-amount" name="bill-amount" placeholder="?" />
+                </div>
+                <p id="billError" class="error"></p>
+                <div class="label">Bill Amount</div>
+            </div>
+            <div class="number-of-people">
+                <div class="field">
+                    <input type="text" id="number-of-people" name="number-of-people" placeholder=? />
+                </div>
+                <p id="peopleError" class="error"></p>
+                <div class="label">Number of People</div>
+            </div>
+        </div>
+
+        <div class="tip-percentages">
+            <div>
+                <input type="radio" name="tip" checked value="0" id="zero-percent" />
+                <label for="zero-percent">
+                    0%
+                </label>
+            </div>
+            <div>
+                <input type="radio" name="tip" value="10" id="ten-percent" />
+                <label for="ten-percent">
+                    10%
+                </label>
+            </div>
+            <div>
+                <input type="radio" name="tip" value="15" id="fifteen-percent" />
+                <label for="fifteen-percent">
+                    15%
+                </label>
+            </div>
+            <div>
+                <input type="radio" name="tip" value="20" id="twenty-percent" />
+                <label for="twenty-percent">
+                    20%
+                </label>
+            </div>
+        </div>
+        <div class="button-wrapper">
+            <button onclick="Reset()" id="reset">Reset</button>
+            <button onclick="Calculate()" id="calculate">Calculate</button>
+        </div>
+    </div>
+    <script>
+
+        function Calculate(){
+            let billAmount = document.getElementById("bill-amount").value
+            let noOfPeople = document.getElementById("number-of-people").value
+            let billError = document.getElementById("billError")
+            let peopleError = document.getElementById("peopleError")
+            let validState = true
+            let rates = document.getElementsByName('tip');
+            let rate_value;
+            document.getElementById("reset").style.backgroundColor="#ED7861"
+            
+            for(var i = 0; i < rates.length; i++){
+                if(rates[i].checked){
+                    rate_value = rates[i].value;
+                }
+            }
+            if (billAmount <=0 || billAmount =="" || isNaN(billAmount))
+            {
+                billError.innerText="Enter number more than 0"
+                document.getElementById("bill-amount").style.borderColor="#ff3860"
+                validState=false
+            }
+                else{
+                    billError.innerText=""
+                    document.getElementById("bill-amount").style.borderColor="#B3B3B3"
+                }
+            
+            if (noOfPeople <1 || noOfPeople=="" || isNaN(noOfPeople))
+            {
+                peopleError.innerText="Enter number more than 0"
+                document.getElementById("number-of-people").style.borderColor="#ff3860"
+                validState=false
+            }
+                else{
+                    peopleError.innerText=""
+                    document.getElementById("number-of-people").style.borderColor="#B3B3B3"
+                }
+
+            if (validState==true){
+                let tip = ((billAmount*rate_value)/100).toFixed(2)
+                let tipAmount = document.getElementById("tip-amount").innerText=tip
+                let personCalc = ((billAmount - - tipAmount)/noOfPeople).toFixed(2)
+                let perPerson = document.getElementById("total-per-person").innerText=personCalc
+            }
+        }
+        function Reset(){
+            document.location.reload()            
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Roboto+Mono:wght@700&display=swap');
+
+        body {
+            background: #F6F6F3;
+            padding: 0;
+            margin: 0;
+            min-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto Mono', monospace;
+            color: #333;
+            transform: scale(0.65);
+            transform-origin: 50% 10px;
+      }
+
+        .wrapper {
+            background: #FFFFFF;
+            box-shadow: 0px 0px 44px rgba(148, 146, 120, 0.23);
+            border-radius: 20px;
+            width: 765px;
+            padding-top: 55px;
+        }
+
+        .tip-amount {
+            padding-bottom: 35px;
+            border-bottom: 1px solid #DEDEDE;
+            margin-bottom: 35px;
+        }
+
+        .total-per-person {
+            padding-bottom: 35px;
+        }
+
+        .tip-amount,
+        .total-per-person {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 35px;
+        }
+
+        .tip-amount label,
+        .total-per-person label {
+            font-size: 0.875rem;
+            text-align: right;
+        }
+
+        .tip-amount .euro,
+        .total-per-person .euro {
+            font-size: 5rem;
+        }
+
+        .tip-amount sup,
+        .total-per-person sup {
+            font-size: 3rem;
+        }
+
+
+        .euro {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .input-fields {
+            background: #F7F7F7;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            display: flex;
+            padding: 0 35px;
+        }
+
+        .input-fields .bill-amount {
+            border-right: 2px solid #DEDEDE;
+            padding: 65px 45px 45px 20px;
+            width: 70%;
+        }
+
+        .input-fields .number-of-people {
+            padding: 65px 45px 45px;
+            width: 30%;
+        }
+
+        .input-fields .number-of-people .field {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .bill-amount .field {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        input[type="text"] {
+            text-align: center;
+            font-size: 3.875rem;
+            font-family: 'Inter', sans-serif;
+            border: none;
+            background: none;
+            outline: none;
+            margin-right: 10px;
+            width: 100%;
+            border-bottom: 3px dotted #B3B3B3;
+        }
+
+        .bill-amount input[type=text] {
+            background: url('Tools/bill.svg') left 15px no-repeat;
+            padding-left: 40px;
+            width: 100%;
+        }
+
+        .number-of-people input[type=text] {
+            background: url('Tools/people.svg') left 20px no-repeat;
+            padding-left: 40px;
+            text-align: right;
+        }
+
+        .input-fields .label {
+            margin-bottom: 45px;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        .tip-percentages {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 35px;
+            background: #EEEEEE;
+            border-top: 1px solid #DEDEDE;
+            border-bottom: 1px solid #DEDEDE;
+        }
+
+        label {
+            background: #FFFFFF;
+            box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #60C1B6;
+            font-family: 'Roboto Mono', monospace;
+            width: 135px;
+            height: 68px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        input[type=radio] {
+            display: none;
+        }
+
+        input[type=radio]:checked+label {
+            background: #60C1B6;
+            color: white;
+        }
+
+        .button-wrapper {
+            box-sizing: border-box;
+            text-align: right;
+            width: 100%;
+            padding: 30px 35px;
+            background: #F7F7F7;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            background: #F7F7F7;
+        }
+
+        button:not(#close) {
+            box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.5rem;
+            color: white;
+            border: none;
+            margin-left: auto;
+            cursor: pointer;
+        }
+        #calculate{
+            background: #ED7861;
+            padding: 20px 100px;
+        }
+        #reset{
+            background: #B3B3B3;
+            padding: 20px 129px;
+        }
+
+        button:hover:not(#close) {
+            background: #254441;
+        }
+
+        #billError, #peopleError {
+            color: #ff3860;
+            font-size: 11px;
+        }
+    </style>
+</body>
+
+</html>

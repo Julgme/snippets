@@ -73,6 +73,7 @@
         </div>
     </div>
     <script>
+            document.getElementById("reset").style.backgroundColor="#B3B3B3"
 
         function Calculate(){
             let billAmount = document.getElementById("bill-amount").value
@@ -82,9 +83,9 @@
             let validState = true
             let rates = document.getElementsByName('tip');
             let rate_value;
-            document.getElementById("reset").style.backgroundColor="#ED7861"
-            
-            for(var i = 0; i < rates.length; i++){
+            document.getElementById("reset").style.backgroundColor=""
+
+            for(let i = 0; i < rates.length; i++){
                 if(rates[i].checked){
                     rate_value = rates[i].value;
                 }
@@ -275,6 +276,9 @@
         input[type=radio] {
             display: none;
         }
+        label:hover{
+                background:#F7F7F7
+        }
 
         input[type=radio]:checked+label {
             background: #60C1B6;
@@ -295,6 +299,7 @@
         button:not(#close) {
             box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.05);
             border-radius: 16px;
+            background: #ED7861;
             justify-content: center;
             align-items: center;
             font-family: 'Roboto Mono', monospace;
@@ -305,11 +310,9 @@
             cursor: pointer;
         }
         #calculate{
-            background: #ED7861;
             padding: 20px 100px;
         }
         #reset{
-            background: #B3B3B3;
             padding: 20px 129px;
         }
 

@@ -68,7 +68,7 @@
             </div>
         </div>
         <div class="button-wrapper">
-            <button onclick="Reset()" id="reset">Reset</button>
+            <button onclick="Reset()" tabindex = "-1" id="reset">Reset</button>
             <button onclick="Calculate()" id="calculate">Calculate</button>
         </div>
     </div>
@@ -126,7 +126,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Roboto+Mono:wght@700&display=swap');
 
-        body {
+        body{
             background: #F6F6F3;
             padding: 0;
             margin: 0;
@@ -137,26 +137,27 @@
             align-items: center;
             font-family: 'Roboto Mono', monospace;
             color: #333;
-            transform: scale(0.65);
-            transform-origin: 50% 10px;
-      }
 
+      }
+      
         .wrapper {
             background: #FFFFFF;
             box-shadow: 0px 0px 44px rgba(148, 146, 120, 0.23);
             border-radius: 20px;
             width: 765px;
-            padding-top: 55px;
+            transform: scale(0.7);
+            transform-origin: 50% 10px;
+            padding-top: 25px;
         }
 
         .tip-amount {
-            padding-bottom: 35px;
+            padding-bottom: 25px;
             border-bottom: 1px solid #DEDEDE;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         .total-per-person {
-            padding-bottom: 35px;
+            padding-bottom: 25px;
         }
 
         .tip-amount,
@@ -195,17 +196,17 @@
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
             display: flex;
-            padding: 0 35px;
+            padding: 0 25px;
         }
 
         .input-fields .bill-amount {
             border-right: 2px solid #DEDEDE;
-            padding: 65px 45px 45px 20px;
+            padding: 35px 25px 25px 20px;
             width: 70%;
         }
 
         .input-fields .number-of-people {
-            padding: 65px 45px 45px;
+            padding: 35px 25px 25px;
             width: 30%;
         }
 

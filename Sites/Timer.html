@@ -30,9 +30,14 @@
         </div>
       </div>
       <button id="startBtn" onclick="Start()" class="start">start</button>
-      <button onclick="Edit()" class="settings">
-        <img src="Tools/gear.svg" alt="Settings" />
-      </button>
+        <div id="options">
+        <button onclick="Edit()" class="settings">
+          <img src="Tools/gear.svg" alt="Settings" />
+        </button>
+        <button id="reset" onclick="Reset()" class="settings">
+          <img src="Tools/reset.png" height="23" alt="reset" />
+        </button>
+      </div>
     </div>
   </div>
   <script>
@@ -84,6 +89,10 @@
       }, 1000);
     }
 
+    function Reset(){
+            document.location.reload()            
+        }
+
     function Start() {
       if (startStop.innerText == "START") {
         startStop.innerText = "STOP"
@@ -118,6 +127,10 @@
       font-family: "bebas";
       src: url('Tools/bebasneue-book-webfont.woff') format('woff'),
         url('Tools/bebasneue-book-webfont.woff2') format('woff2')
+    }
+    #reset{
+      transform: translateY(-8px); 
+      height:30px  
     }
 
     body {

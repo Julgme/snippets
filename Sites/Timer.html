@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/Snippets/Sites/Tools/favicon.png">
-  <title>Pomodoro Timer</title>
+  <title id="title">Pomodoro Timer</title>
 </head>
 
 <body>
@@ -41,37 +41,43 @@
     let circle = document.getElementById("circle")
     let startStop = document.getElementById("startBtn")
     let audio = new Audio("Tools/Bell.mp3");
+    let title = document.getElementById("title")
+    let heading = " - Pomodoro Timer"
 
     function startTimer() {
       let duration = parseFloat((minutes.value * 60) - -seconds.value)
       let timer = duration
+
       let interval = setInterval(function () {
-       let min = parseInt(timer / 60, 10)
-       let sec = parseInt(timer % 60, 10) -1
+        let min = parseInt(timer / 60, 10)
+        let sec = parseInt(timer % 60, 10) - 1
 
         min = min < 10 ? "0" + min : min
         sec = sec < 10 ? "0" + sec : sec
-        
-        if (timer == 0 || startStop.innerText=="START") {
+
+        if (timer == 0 || startStop.innerText == "START") {
           startStop.innerText = "START"
-          if(timer  ==0){
+          if (timer == 0) {
             seconds.value = "00"
+            document.title = "Timer Over"
           }
           Colour()
           clearInterval(interval);
         }
         else {
           timer--
-          if(sec=="0-1"){
-            let minL = min-1
+          if (sec == "0-1") {
+            let minL = min - 1
             let minF = minL < 10 ? "0" + minL : minL
             minutes.value = minF
             seconds.value = "59"
+            document.title = minF + ":59" + heading
           }
-       else{    
-          minutes.value = min
-          seconds.value = sec 
-        }
+          else {
+            minutes.value = min
+            seconds.value = sec
+            document.title = `${min}:${sec}${heading}`
+          }
           Colour()
         }
 

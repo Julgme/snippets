@@ -22,11 +22,11 @@
     <div class="timer">
       <div class="time">
         <div class="minutes">
-          <input id="minutes" type="text" value=00 disabled />
+          <input id="minutes" type="text" value=01 disabled />
         </div>
         <div class="colon">:</div>
         <div class="seconds">
-          <input id="seconds" type="text" value=10 disabled onchange="Colour()" />
+          <input id="seconds" type="text" value=02 disabled onchange="Colour()" />
         </div>
       </div>
       <button id="startBtn" onclick="Start()" class="start">start</button>
@@ -40,33 +40,43 @@
     let seconds = document.getElementById("seconds")
     let circle = document.getElementById("circle")
     let startStop = document.getElementById("startBtn")
+    let audio = new Audio("Tools/Bell.mp3");
 
     function startTimer() {
       let duration = parseFloat((minutes.value * 60) - -seconds.value)
-      console.log(duration)
-      let timer = duration, min, sec;
-      var interval = setInterval(function () {
-        min = parseInt(timer / 60, 10)
-        sec = parseInt(timer % 60, 10)
+      let timer = duration
+      let interval = setInterval(function () {
+       let min = parseInt(timer / 60, 10)
+       let sec = parseInt(timer % 60, 10) -1
 
         min = min < 10 ? "0" + min : min
         sec = sec < 10 ? "0" + sec : sec
-
-        minutes.value = min
-        seconds.value = sec
-
+        
         if (timer == 0 || startStop.innerText=="START") {
           startStop.innerText = "START"
+          if(timer  ==0){
+            seconds.value = "00"
+          }
           Colour()
           clearInterval(interval);
         }
         else {
           timer--
+          if(sec=="0-1"){
+            let minL = min-1
+            let minF = minL < 10 ? "0" + minL : minL
+            minutes.value = minF
+            seconds.value = "59"
+          }
+       else{    
+          minutes.value = min
+          seconds.value = sec 
+        }
           Colour()
         }
+
       }, 1000);
     }
-
 
     function Start() {
       if (startStop.innerText == "START") {
@@ -87,6 +97,7 @@
     function Colour() {
       if (minutes.value == 00 && seconds.value == 00) {
         circle.classList.add("ending")
+        audio.play();
       }
       else {
         circle.classList.remove("ending")

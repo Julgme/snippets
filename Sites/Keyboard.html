@@ -17,12 +17,16 @@
     <label for="points">POINTS</label>
     <span value="">spacer</span>
     <label for="highScore">HIGH SCORE</label>
+    <span value="">space</span>
+    <label for="timer">TIMER</label>
   </div>
   <div>
     <span value="">iiii</span>
     <input id="points" value="0">
-    <span value="">spaceriiiiiiii</span>
+    <span value="">spaceriix</span>
     <input id="highScore" value="0">
+    <span value="">iiiiiiiii</span>
+    <input id="timer" value="01:00">
   </div>
 </div>
   <div id="keyboard" class="keyboard">
@@ -41,7 +45,7 @@
       <button class="key clicky" data-key="0">0</button>
       <button class="key clicky" data-key="-">-</button>
       <button class="key clicky" data-key="=">=</button>
-      <button class="key utility" data-key="BACKSPACE">DEL</button>
+      <button class="key utility" data-key="BACKSPACE">BkSp</button>
     </div>
     <div class="row">
       <button class="key utility" data-key="TAB">Tab</button>
@@ -92,7 +96,10 @@
   <script>
     let points = document.getElementById("points")
     let hScore = document.getElementById("highScore")
+    let timer = document.getElementById("timer")
     let jiggleSearch, jiggleKey, jiggleBtn, pressed, curPoints = 0
+    let localStorageHighScore = window.localStorage.getItem('HighScore');
+    hScore.value = localStorageHighScore
     
     let rand = Math.floor(Math.random()*47)
     let allClicky = document.querySelectorAll(".clicky")
@@ -103,17 +110,14 @@
         jiggleSearch = document.querySelectorAll(".jiggle")
         jiggleBtn = jiggleSearch[0]
         jiggleKey = jiggleBtn.innerText
-        console.log(jiggleKey)    
     }
     
     document.addEventListener("keypress", function onEvent(event) {
       pressed = (event.key).toUpperCase();
-      console.log(pressed)
       jiggleMatch()
     })
     function jiggleMatch(){
-      console.log(pressed+","+jiggleKey)
-
+      if(pressed !==" "){
       if(pressed==jiggleKey){
         curPoints++
         points.value=curPoints
@@ -123,12 +127,14 @@
         if (hScore.value <= curPoints)
         {
           hScore.value = curPoints
+          window.localStorage.setItem('HighScore', curPoints);
         }
         curPoints=0
         points.value=curPoints
         ColourAlert();
         JiggleCreate()
       }
+    }
     }
     function ColourAlert(){
       let key = document.getElementById("keyboard")
@@ -253,11 +259,11 @@ h1 {
   padding: 10px 15px;
   border-radius: 15px;
   }
-#points,#highScore{
+#points,#highScore,#timer{
   color: #868888; 
   background: #F6F6F6;
   font-weight:bold;
-  width: 35px;
+  width: 55px;
   font-size:20px;
   border:none;
 }

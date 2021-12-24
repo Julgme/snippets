@@ -73,6 +73,8 @@
         </div>
     </div>
     <script>
+        document.body.style.zoom="77%"
+
             document.getElementById("reset").style.backgroundColor="#B3B3B3"
 
         function Calculate(){
@@ -144,9 +146,6 @@
             box-shadow: 0px 0px 44px rgba(148, 146, 120, 0.23);
             border-radius: 20px;
             width: 765px;
-            transform: scale(0.7);
-            transform-origin: 50% 10px;
-            padding-top: 25px;
         }
 
         .tip-amount {
@@ -318,6 +317,10 @@
 
         button:hover:not(#close) {
             background: #254441;
+        }
+        #close{
+            font-size: larger;
+            padding:7px 15px;
         }
 
         #billError, #peopleError {

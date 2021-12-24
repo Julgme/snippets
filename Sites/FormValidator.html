@@ -69,7 +69,8 @@ let success = document.querySelectorAll('.success')
 
 let valName
 function validateName() {
-  valName = (document.forms["regForm"]["name"].value).trim()
+  let valNameLocal = (document.forms["regForm"]["name"].value).trim()
+  valName = valNameLocal.charAt(0).toUpperCase() + valNameLocal.slice(1)
     let errName = error[0]
     let sucName = success[0]
     let regex = /^[a-zA-Z]+ [a-zA-Z]+$/;

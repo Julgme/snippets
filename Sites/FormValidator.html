@@ -60,19 +60,20 @@
       </div>
     </div>
     <div class="field">
-      <input onclick="Submit()" type="submit" name="submit" value="Submit" />
+      <input onclick="Submit()" type="button" name="submit" value="Submit" />
     </div>
   </form>
 <script>
 let error = document.querySelectorAll('.error')
 let success = document.querySelectorAll('.success')
 
+let valName
 function validateName() {
-    let val = (document.forms["regForm"]["name"].value).trim()
+  valName = (document.forms["regForm"]["name"].value).trim()
     let errName = error[0]
     let sucName = success[0]
     let regex = /^[a-zA-Z]+ [a-zA-Z]+$/;
-  if (val.match(regex)!=null) {
+  if (valName.match(regex)!=null) {
     //Success 
     sucName.classList.remove("hidden")
     errName.classList.add("hidden")
@@ -83,6 +84,7 @@ function validateName() {
       errName.classList.remove("hidden")
   }
 }
+
 function validateEmail() {
     let val = document.forms["regForm"]["email"].value;
     let errName = error[1]
@@ -99,6 +101,7 @@ function validateEmail() {
       errName.classList.remove("hidden")
   }
 }
+
 function validatePassword() {
     let val = document.forms["regForm"]["password"].value;
     let errName = error[2]
@@ -116,6 +119,7 @@ function validatePassword() {
       errName.classList.remove("hidden")
   }
 }
+
 function validateConfirmPassword() {
     let valold = document.forms["regForm"]["password"].value;
     let val = document.forms["regForm"]["confirm-password"].value;
@@ -133,12 +137,15 @@ function validateConfirmPassword() {
       errName.classList.remove("hidden")
   }
 }
+
 function Submit(){
     let validSub = document.getElementsByClassName("success hidden")
     if(validSub.length == 0){
-    alert("Thanks for registering bitch")
+      location.href='/snippets/Sites/CreditCard.html'
+      window.localStorage.setItem('fName', valName);
     }
 }
+
 function HideorShow(instance){
     let pathPass = document.getElementsByClassName('password')
     let pathBtn = document.getElementsByClassName('show-hide')
@@ -262,7 +269,7 @@ input[type=password]:focus + label {
     background-size: 32px 32px;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
   background: var(--primary);
   color: white;
   border-radius: 4px;

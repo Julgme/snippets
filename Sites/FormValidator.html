@@ -141,8 +141,11 @@ function validateConfirmPassword() {
 function Submit(){
     let validSub = document.getElementsByClassName("success hidden")
     if(validSub.length == 0){
-      location.href='/snippets/Sites/CreditCard.html'
-      window.localStorage.setItem('fName', valName);
+      location.href='/snippets/Sites/Slider.html'
+      window.localStorage.setItem('Name', valName);
+      let firstName = valName.substring(valName.indexOf(" "),0)
+      console.log(firstName)
+      window.localStorage.setItem('fName', firstName)
     }
 }
 

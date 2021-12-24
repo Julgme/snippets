@@ -106,7 +106,15 @@
     const expMonthVal = document.getElementById('expMonthVal')
     const expYearVal = document.getElementById('expYearVal')
     const cvvVal = document.getElementById('cvvVal')
-    cardHolderVal.value = window.localStorage.getItem('fName')
+
+    //Values values from local storage
+    let amount = window.localStorage.getItem('amount')
+    cardHolderVal.value = window.localStorage.getItem('Name')
+    let firstName = window.localStorage.getItem('fName')
+
+    //Remove values from local storage
+    window.localStorage.removeItem('amount')
+    window.localStorage.removeItem('Name')
 
     function Entry() {
       document.getElementById("cardNumberShadow").innerText = cardNumberVal.value
@@ -150,7 +158,7 @@
 
     document.querySelector("form").addEventListener("submit", function () {
       window.location.href = "/snippets/Sites/FormValidator.html";
-      alert("Thanks for your donation :)")
+      alert(`Thank you ${firstName} for your donation of €${amount}`)
     }, false);
 
   </script>

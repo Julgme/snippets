@@ -14,18 +14,28 @@
   <div class="wrapper">
     <div class="amount">
       €
-      <span id="euro" name="euro" class="euro">500.00</span>
+      <span id="euro" name="euro" class="euro">50.00</span>
     </div>
-    <input type="range" name="priceRange" id="priceRange" min="0" max="1000" step="0.01" oninput="updateSliderValue()">
+    <input type="range" name="priceRange" id="priceRange" min="0" max="100" step="0.01" oninput="updateSliderValue()">
     <br />
-    <button hidden>Buy Now</button>
+    <button onclick="Donate()" >Donate</button>
   </div>
   <script>
+    let sliderFormatted = 50.00
+    
     function updateSliderValue() {
       let slider = document.getElementById("priceRange").value
-      let sliderFormatted = parseFloat(slider).toFixed(2)
+      sliderFormatted = parseFloat(slider).toFixed(2)
       document.getElementById("euro").innerText = sliderFormatted;
+      return sliderFormatted
     }
+    function Donate(){
+      console.log(sliderFormatted)
+      console.log("clicked")
+      window.localStorage.setItem('amount',sliderFormatted)
+      window.location.href = "/snippets/Sites/CreditCard.html";
+    }
+
   </script>
 
   <style>
@@ -127,8 +137,11 @@
     }
 
     button:hover {
-      background: white;
+      background: rgba(234, 52, 111, .2) !important;
       color: black;
+    }
+    button:active{
+      transform: translateY(4px);
     }
   </style>
 </body>

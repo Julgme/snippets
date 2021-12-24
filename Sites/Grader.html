@@ -55,9 +55,13 @@
                 result = "D"
                 colour = "red"
             }
-            else if (gradeNum <= 50) {
-                result = "FAIL"
+            else if (gradeNum >= 50) {
+                result = "E"
                 colour = "red"
+            }
+            else if (gradeNum < 50) {
+                result = "FAIL"
+                colour = "darkred"
             }
             let path = document.getElementById("result")
             path.innerText = result

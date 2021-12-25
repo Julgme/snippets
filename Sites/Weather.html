@@ -5,41 +5,47 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/Snippets/Sites/Tools/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/snippets/Sites/Tools/favicon.png">
   <title>Weather - Malta</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
+  <div id="loading">
+    <img id="loading-image" src="Tools/loadingImage.gif" alt="Loading..." />
+  </div>
   <button id="close" onclick="location.href='/snippets/index.html';"
     style="position:absolute;right:0.2%;top:0.5%;">X</span></button>
   <div class="wrapper">
     <!-- day - cloudy -->
     <div class="day">
-      <div class="day-of-week">Wed</div>
-      <div class="date">8</div>
+      <div class="day-of-week"></div>
+      <div class="date"></div>
 
-      <div class="bar cloudy">
+      <div class="bar">
         <div class="weather">
-          <svg role="img">
-            <use xlink:href="#cloudy" width="264" height="166" viewBox="0 0 264 166"></use>
+          <svg role="img" width="208" height="213" viewBox="0 0 208 213">
+            <use xlink:href="#sunny" ></use>
           </svg>
         </div>
         <div class="temperature">
-          72<span class="degrees">&deg;</span>
+          <span class="degrees">&deg;</span>
+        </div>
+        <div class="feelsLikeLabel">
+          Feels Like
+        </div>
+        <div class="feelsLike">
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            84%
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
           </div>
         </div>
       </div>
@@ -47,30 +53,33 @@
 
     <!-- day - sunny -->
     <div class="day">
-      <div class="day-of-week">Thur</div>
-      <div class="date">9</div>
+      <div class="day-of-week"></div>
+      <div class="date"></div>
 
-      <div class="bar sunny">
+      <div class="bar">
         <div class="weather">
           <svg role="img" width="208" height="213" viewBox="0 0 208 213">
             <use xlink:href="#sunny"></use>
           </svg>
         </div>
         <div class="temperature">
-          65<span class="degrees">&deg;</span>
+          <span class="degrees">&deg;</span>
+        </div>
+        <div class="feelsLikeLabel">
+          Feels Like
+        </div>
+        <div class="feelsLike">
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            84%
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
           </div>
         </div>
       </div>
@@ -78,30 +87,33 @@
 
     <!-- day - stormy -->
     <div class="day">
-      <div class="day-of-week">Fri</div>
-      <div class="date">10</div>
+      <div class="day-of-week"></div>
+      <div class="date"></div>
 
-      <div class="bar stormy">
+      <div class="bar">
         <div class="weather">
           <svg role="img" width="246" height="187" viewBox="0 0 246 187">
             <use xlink:href="#stormy"></use>
           </svg>
         </div>
         <div class="temperature">
-          67<span class="degrees">&deg;</span>
+          <span class="degrees">&deg;</span>
+        </div>
+        <div class="feelsLikeLabel">
+          Feels Like
+        </div>
+        <div class="feelsLike">
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            84%
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
           </div>
         </div>
       </div>
@@ -109,30 +121,33 @@
 
     <!-- day - snowy -->
     <div class="day">
-      <div class="day-of-week">Sat</div>
-      <div class="date">11</div>
+      <div class="day-of-week"></div>
+      <div class="date"></div>
 
-      <div class="bar snowy">
+      <div class="bar">
         <div class="weather">
           <svg role="img" width="230" height="196" viewBox="0 0 230 196">
             <use xlink:href="#snowy"></use>
           </svg>
         </div>
         <div class="temperature">
-          32<span class="degrees">&deg;</span>
+          <span class="degrees">&deg;</span>
+        </div>
+        <div class="feelsLikeLabel">
+          Feels Like
+        </div>
+        <div class="feelsLike">
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
-            </svg>
-            84%
+           </svg>
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
           </div>
         </div>
       </div>
@@ -140,30 +155,34 @@
 
     <!-- day - partly cloudy -->
     <div class="day">
-      <div class="day-of-week">Sun</div>
-      <div class="date">12</div>
+      <div class="day-of-week"></div>
+      <div class="date"></div>
 
-      <div class="bar partly-cloudy">
+      <div class="bar">
         <div class="weather">
           <svg role="img" width="230" height="209" viewBox="0 0 230 209">
             <use xlink:href="#partly-cloudy"></use>
           </svg>
         </div>
         <div class="temperature">
-          57<span class="degrees">&deg;</span>
+          <span class="degrees">&deg;</span>
+        </div>
+        <div class="feelsLikeLabel">
+          Feels Like
+        </div>
+        <div class="feelsLike">
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            84%
+            
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
           </div>
         </div>
       </div>
@@ -171,30 +190,34 @@
 
     <!-- day - rainy -->
     <div class="day">
-      <div class="day-of-week">Mon</div>
-      <div class="date">13</div>
+      <div class="day-of-week"></div>
+      <div class="date"></div>
 
-      <div class="bar rainy">
+      <div class="bar">
         <div class="weather">
           <svg role="img" width="160" height="222" viewBox="0 0 160 222">
             <use xlink:href="#rainy"></use>
           </svg>
         </div>
         <div class="temperature">
-          63<span class="degrees">&deg;</span>
+          <span class="degrees">&deg;</span>
+        </div>
+        <div class="feelsLikeLabel">
+          Feels Like
+        </div>
+        <div class="feelsLike">
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            84%
+            
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
           </div>
         </div>
       </div>
@@ -202,30 +225,33 @@
 
     <!-- day - sunny -->
     <div class="day">
-      <div class="day-of-week">Tue</div>
-      <div class="date">14</div>
+      <div class="day-of-week"></div>
+      <div class="date"></div>
 
-      <div class="bar sunny">
+      <div class="bar">
         <div class="weather">
           <svg role="img" width="208" height="213" viewBox="0 0 208 213">
             <use xlink:href="#sunny"></use>
           </svg>
         </div>
         <div class="temperature">
-          71<span class="degrees">&deg;</span>
+          <span class="degrees">&deg;</span>
+        </div>
+        <div class="feelsLikeLabel">
+          Feels Like
+        </div>
+        <div class="feelsLike">
         </div>
         <div class="content">
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            84%
           </div>
           <div class="low">
             <svg role="img" class="icon">
               <use xlink:href="#low"></use>
             </svg>
-            28&deg;
           </div>
         </div>
       </div>

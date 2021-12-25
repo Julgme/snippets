@@ -87,7 +87,20 @@ body {
   color: var(--temperature);
   font-size: 7rem;
   position: relative;
-  padding-bottom: 60px;
+}
+
+.feelsLike {
+  font-family: 'Oswald', sans-serif;
+  color: var(--temperature);
+  font-size: 1.3rem;
+  position: relative;
+  padding-bottom: 50px;
+}
+.feelsLikeLabel {
+  font-family: 'Oswald', sans-serif;
+  color: var(--temperature);
+  font-size: 1.5rem;
+  position: relative;
 }
 
 .degrees {
@@ -158,4 +171,22 @@ body {
   padding:7px 15px;
 }
 
+#loading {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  opacity: 0.7;
+  background-color: #fff;
+  z-index: 99;
+}
 
+#loading-image {
+  position: absolute;
+  top: 100px;
+  left: 240px;
+  z-index: 100;
+}

@@ -1,7 +1,7 @@
 /******************** Target #97 - Snowman ********************/
 
 <p b> <p h> <p e> <p n> <p s> <p t> <p r> <p w> 
-  <body bgcolor=#AC474B>
+  <body bgcolor=AC474B>
 <style>
   p {
   	position:absolute;
@@ -61,7 +61,49 @@
   }
 </style>
 
-/******************** Target #98 -  ********************/
+/******************** Target #98 - Candle  ********************/
+
+<div></div>
+<div class="r c"></div>
+<div class="m c"></div>
+<div class="g c"></div>
+<div class=y></div>
+
+<body bgcolor=14313E>
+<style>
+  div {
+    position:absolute;
+    top:175;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:80;
+    height:105;
+    background:#BA3E46;
+  }
+  .y{
+    background:#F3AC3C;
+    left:215;
+    top:85;
+    width:30;
+    height:50;
+    border-radius:50px 0 50px 0;
+  }
+  .c{
+    border-radius:50%;
+    height:30;
+  }
+  .r{
+    top:225;
+  }
+  .m{
+    background:#F3695A;
+    top:125;
+  }
+  .g{
+    background:#14313E;
+    top:115;
+    width:60;
+  }
 
 /******************** Target #99 - Giftbox ********************/
 <div class=t></div>

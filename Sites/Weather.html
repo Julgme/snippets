@@ -4450,7 +4450,7 @@
 
     let response, thisDate
 
-    let currentDate = new Date().getDate()
+    let currentDate = new Date().getDate()+"-"+new Date().getHours()
     let localStorageDate = window.localStorage.getItem('date')
 
     if (localStorageDate == null || localStorageDate != currentDate) {
@@ -4467,10 +4467,10 @@
           asyncLocalStorage.setItem('response', JSON.stringify(apiResponse)).then(function () {
             return asyncLocalStorage.getItem('response');
           }).then(function (value) {
-            console.log("in")
+          //  console.log("in")
             runner()
           });
-          console.log("out")
+          //console.log("out")
         })
     }
     else {
@@ -4508,8 +4508,8 @@
         document.querySelectorAll('.low')[day].insertAdjacentText('beforeend', `${min}°`)
 
         //percentage of precipitation
-        let pop = Math.ceil(response.daily[day].pop)
-        document.querySelectorAll('.precipitation')[day].insertAdjacentText('beforeend', `${pop}%`)
+        let precip = (response.daily[day].pop)*100
+        document.querySelectorAll('.precipitation')[day].insertAdjacentText('beforeend', `${precip}%`)
 
         //weather Image
         let weatherId = response.daily[day].weather[0].id

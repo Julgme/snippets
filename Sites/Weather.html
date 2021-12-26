@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="/snippets/Sites/Tools/favicon.png">
   <title>Weather - Malta</title>
-  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
@@ -25,7 +24,7 @@
       <div class="bar">
         <div class="weather">
           <svg role="img" width="208" height="213" viewBox="0 0 208 213">
-            <use xlink:href="#sunny" ></use>
+            <use xlink:href="#sunny"></use>
           </svg>
         </div>
         <div class="temperature">
@@ -142,7 +141,7 @@
           <div class="precipitation">
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
-           </svg>
+            </svg>
           </div>
           <div class="low">
             <svg role="img" class="icon">
@@ -177,7 +176,7 @@
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            
+
           </div>
           <div class="low">
             <svg role="img" class="icon">
@@ -212,7 +211,7 @@
             <svg role="img" class="icon">
               <use xlink:href="#precipitation"></use>
             </svg>
-            
+
           </div>
           <div class="low">
             <svg role="img" class="icon">
@@ -4408,7 +4407,331 @@
       </defs>
     </symbol>
   </svg>
-  <script src="app.js"></script>
+  <script>
+    const daysOfWeekMap = {
+      0: 'SUN',
+      1: 'MON',
+      2: 'TUES',
+      3: 'WED',
+      4: 'THUR',
+      5: 'FRI',
+      6: 'SAT'
+    }
+
+    const weatherState = {
+      2: 'stormy',
+      8: 'cloudy',
+      800: 'sunny',
+      6: 'snowy',
+      3: 'partly-cloudy',
+      5: 'rainy'
+    }
+
+    const asyncLocalStorage = {
+      setItem: async function (key, value) {
+        await null;
+        return localStorage.setItem(key, value);
+      },
+      getItem: async function (key) {
+        await null;
+        return localStorage.getItem(key);
+      }
+    };
+
+    const iconNameToSizeMap = {
+      'cloudy': { width: 264, height: 166 },
+      'sunny': { width: 208, height: 213 },
+      'stormy': { width: 246, height: 187 },
+      'snowy': { width: 230, height: 196 },
+      'partly-cloudy': { width: 230, height: 209 },
+      'rainy': { width: 160, height: 222 },
+    }
+    document.body.style.zoom = "68%"
+
+    let response, thisDate
+
+    let currentDate = new Date().getDate()
+    let localStorageDate = window.localStorage.getItem('date')
+
+    if (localStorageDate == null || localStorageDate != currentDate) {
+      window.localStorage.setItem('date', currentDate)
+
+      let api = 'https://api.openweathermap.org/data/2.5/onecall?lat=35.872630&lon=14.515350&exclude=current,alerts,minutely,hourly&appid=4000d3a52aaea87e77a80f128909a659&units=metric'
+
+      fetch(api)
+        .then(data => {
+          return data.json();
+        })
+        .then(apiResponse => {
+
+          asyncLocalStorage.setItem('response', JSON.stringify(apiResponse)).then(function () {
+            return asyncLocalStorage.getItem('response');
+          }).then(function (value) {
+            console.log("in")
+            runner()
+          });
+          console.log("out")
+        })
+    }
+    else {
+      runner()
+    }
+
+    function runner() {
+      response = JSON.parse(window.localStorage.getItem('response'))
+
+      let day
+
+      for (day = 0; day < 7; day++) {
+        //location
+        let location = response.timezone.split("/").pop()
+        document.title = `${location} Weather Forecast`
+
+        //date
+        let date = new Date(response.daily[day].dt * 1000).getDate()
+        document.querySelectorAll('.date')[day].innerText = date
+
+        //day name
+        let dateName = daysOfWeekMap[new Date(response.daily[day].dt * 1000).getDay()]
+        document.querySelectorAll('.day-of-week')[day].innerText = dateName
+
+        //temperature amount
+        let temperature = response.daily[day].temp.max.toFixed(0)
+        document.querySelectorAll('.temperature')[day].insertAdjacentText('afterbegin', temperature)
+
+        //feels like
+        let feelsLike = response.daily[day].feels_like.day.toFixed(1)
+        document.querySelectorAll('.feelsLike')[day].innerText = `${feelsLike}°`
+
+        //minimum temperature
+        let min = response.daily[day].temp.min.toFixed(0)
+        document.querySelectorAll('.low')[day].insertAdjacentText('beforeend', `${min}°`)
+
+        //percentage of precipitation
+        let pop = Math.ceil(response.daily[day].pop)
+        document.querySelectorAll('.precipitation')[day].insertAdjacentText('beforeend', `${pop}%`)
+
+        //weather Image
+        let weatherId = response.daily[day].weather[0].id
+        let weather
+
+        if (weatherId == '800') {
+          weather = weatherState[weatherId]
+        }
+        else {
+          weather = weatherState[weatherId.toString().substring(0, 1)]
+        }
+        //set background and text colours
+        document.querySelectorAll('.bar')[day].classList.add(weather)
+
+        //set width and height
+        document.querySelectorAll('.weather>svg')[day].width.baseVal.value = iconNameToSizeMap[weather].width
+        document.querySelectorAll('.weather>svg')[day].height.baseVal.value = iconNameToSizeMap[weather].height
+        document.querySelectorAll('.weather>svg')[day].viewBox.baseVal.width = iconNameToSizeMap[weather].width
+        document.querySelectorAll('.weather>svg')[day].viewBox.baseVal.height = iconNameToSizeMap[weather].height
+        document.querySelectorAll('.weather>svg>use')[day].href.baseVal = `#${weather}`
+      }
+      document.querySelectorAll('#loading')[0].remove();
+    }
+  </script>
 </body>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Oswald&display=swap');
+
+  body {
+    background: #E9F5FA;
+    padding: 0;
+    margin: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #weather {
+    position: absolute;
+  }
+
+  .wrapper {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  .day {
+    color: #4DB0D3;
+    font-family: 'Krona One', sans-serif;
+    text-align: center;
+  }
+
+  .day-of-week {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .date {
+    font-size: 4.5rem;
+    ;
+  }
+
+  .cloudy {
+    --background: #4DB0D3;
+    --temperature: #E6DF95;
+    --content: #D3EBF4;
+  }
+
+  .sunny {
+    --background: #E6DF95;
+    --temperature: #4DB0D3;
+    --content: #247490;
+  }
+
+  .stormy {
+    --background: #0E2E3A;
+    --temperature: #E6DF95;
+    --content: #D3EBF4;
+  }
+
+  .snowy {
+    --background: #BCE1EF;
+    --temperature: #0E2E3A;
+    --content: #247490;
+  }
+
+  .partly-cloudy {
+    --background: #4DB0D3;
+    --temperature: #E6DF95;
+    --content: #D3EBF4;
+  }
+
+  .rainy {
+    --background: #2B8BAD;
+    --temperature: #E6DF95;
+    --content: #D3EBF4;
+  }
+
+  .bar {
+    background: var(--background);
+    min-height: 425px;
+    border-radius: 50px;
+    position: relative;
+    width: 164px;
+    padding-top: 252px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1), 11px 4px 34px rgba(32, 77, 92, 0.25);
+  }
+
+  .temperature {
+    font-family: 'Oswald', sans-serif;
+    color: var(--temperature);
+    font-size: 7rem;
+    position: relative;
+  }
+
+  .feelsLike {
+    font-family: 'Oswald', sans-serif;
+    color: var(--temperature);
+    font-size: 1.3rem;
+    position: relative;
+    padding-bottom: 50px;
+  }
+
+  .feelsLikeLabel {
+    font-family: 'Oswald', sans-serif;
+    color: var(--temperature);
+    font-size: 1.5rem;
+    position: relative;
+  }
+
+  .degrees {
+    position: absolute;
+    font-size: 3rem;
+    top: 20px;
+  }
+
+  .content {
+    color: var(--content);
+  }
+
+  #weather,
+  #icon,
+  .weather {
+    position: absolute;
+  }
+
+  .icon {
+    fill: currentColor;
+    height: 32px;
+    width: 32px;
+    display: inline-block;
+    position: relative;
+    top: 10px;
+  }
+
+  .precipitation {
+    margin-bottom: 10px;
+  }
+
+  .low .icon {
+    left: -3px;
+    position: relative;
+  }
+
+  .cloudy .weather {
+    left: -26px;
+    top: 77px;
+  }
+
+  .sunny .weather {
+    left: -21px;
+    top: 20px;
+  }
+
+  .stormy .weather {
+    left: -21px;
+    top: 40px;
+  }
+
+  .snowy .weather {
+    left: -25px;
+    top: 20px;
+  }
+
+  .partly-cloudy .weather {
+    left: -14px;
+    top: 20px;
+  }
+
+  .rainy .weather {
+    left: 31px;
+    top: -13px;
+  }
+
+  #close {
+    font-size: larger;
+    padding: 7px 15px;
+  }
+
+  #loading {
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    opacity: 0.9;
+    background-color: #fff;
+    z-index: 99;
+  }
+
+  #loading-image {
+    position: absolute;
+    top: 100px;
+    left: 240px;
+    z-index: 100;
+  }
+</style>
+
 
 </html>

@@ -4408,8 +4408,8 @@
     </symbol>
   </svg>
 
-  <script src='Tools/config.js'></script>
-<script>
+  <script src="Tools/app.js"></script>  
+  <script>
     const daysOfWeekMap = {
       0: 'SUN',
       1: 'MON',
@@ -4450,12 +4450,12 @@
     }
     document.body.style.zoom = "68%"
 
-    const token = config.WEATHER_TOKEN;
-
     let response, thisDate
 
     let currentDate = new Date().getDate()+"-"+new Date().getHours()
     let localStorageDate = window.localStorage.getItem('date')
+
+    const token = config.WEATHER_KEY;
 
     if (localStorageDate == null || localStorageDate != currentDate) {
       window.localStorage.setItem('date', currentDate)

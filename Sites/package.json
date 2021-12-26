@@ -1,0 +1,15 @@
+{
+  "name": "sites",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Tools/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "node": "^17.3.0"
+  }
+}

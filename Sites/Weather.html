@@ -4407,7 +4407,9 @@
       </defs>
     </symbol>
   </svg>
-  <script>
+
+  <script src='Tools/config.js'></script>
+<script>
     const daysOfWeekMap = {
       0: 'SUN',
       1: 'MON',
@@ -4448,6 +4450,8 @@
     }
     document.body.style.zoom = "68%"
 
+    const token = config.WEATHER_TOKEN;
+
     let response, thisDate
 
     let currentDate = new Date().getDate()+"-"+new Date().getHours()
@@ -4456,7 +4460,7 @@
     if (localStorageDate == null || localStorageDate != currentDate) {
       window.localStorage.setItem('date', currentDate)
 
-      let api = 'https://api.openweathermap.org/data/2.5/onecall?lat=35.872630&lon=14.515350&exclude=current,alerts,minutely,hourly&appid=4000d3a52aaea87e77a80f128909a659&units=metric'
+      let api = `https://api.openweathermap.org/data/2.5/onecall?lat=35.872630&lon=14.515350&exclude=current,alerts,minutely,hourly&appid=${token}&units=metric`
 
       fetch(api)
         .then(data => {
@@ -4533,7 +4537,8 @@
       }
       document.querySelectorAll('#loading')[0].remove();
     }
-  </script>
+
+</script>  
 </body>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Oswald&display=swap');

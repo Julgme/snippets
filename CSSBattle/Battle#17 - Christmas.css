@@ -136,4 +136,100 @@
 </style>
 
 
-/******************** Target #100 -  ********************/
+/******************** Target #100 - CSS Battle ********************/
+<div class="border"></div>
+<div class="strip"></div>
+<div class="middle"></div>
+<div class=cover></div>
+<div class=background>
+    <div class=side></div>
+  	<div class=top></div>
+    <div class=handle></div>
+    <div class=guard></div>
+    <div class=blade></div>
+      </div>
+<div class=h1></div>
+<div class=h2></div>
+
+
+<body bgcolor=#14313E>
+  <style>
+    div{
+      position:absolute;
+      top:50%;
+      transform:translate(-50%,-50%);
+	  background:#FFDF00;
+    }
+    .background{
+      background:none;
+      left:197;
+      width:154;
+      height:200;
+      -webkit-box-reflect:right -148px
+    }
+    .border{
+      left:50%;
+      height:150.5px;
+      width:274;
+	  border-radius:20px;
+    }
+    .middle{
+      background:#14313E;
+      left:50%;
+      height:99.5px;
+      width:224;
+	  border-radius:10px;
+    }
+    .strip{
+      width:294;
+      height:41;
+      left:50%;
+      border-radius:5px;
+    }
+    .cover{
+      background:#14313E;
+      width:195;
+      height:200;
+      left:50%;
+      border-radius:5px;
+    }
+    .top{
+      height:20.5px;
+      width:20.5px;
+      top:31px;
+      left:17;
+    }
+    .handle{	  
+      height:20;
+      width:50;
+      top:141;
+      left:-2;
+      border-radius:8px;
+      transform:rotate(-45deg);
+    }
+    .blade{	  
+      height:150;
+      width:30.5;
+      top:9;
+      left:75;
+      transform:rotate(45deg);
+    }
+    .guard{
+	  height:20;
+      width:80;
+      top:124;
+      left:0;
+      transform:rotate(45deg);
+    }
+    .h1,.h2{
+      background:#14313E;
+      height:10;
+      width:50;
+	  transform:rotate(45deg);
+      top:157;
+      left:165;
+    }
+    .h2{
+	  top:126;
+      left:190;
+    }

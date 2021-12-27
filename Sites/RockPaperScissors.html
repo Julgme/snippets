@@ -9,28 +9,44 @@
 </head>
 
 <body>
+  <div id="scoresInput" class="input">
+    <div>
+      <label for="wins">WINS</label>
+      <label for="ties">DRAWS</label>
+      <label for="losses">LOSSES</label>
+    </div>
+    <div>
+      <span value=""></span>
+      <input disabled id="wins" value="0">
+      <span value="">i</span>
+      <input disabled id="ties" value="0">
+      <span value="">ii</span>
+      <input id="losses" value="0">
+    </div>
+  </div>
+
 <button id="close" onclick="location.href='/snippets/index.html';"
 style="position:absolute;font-size:15px; right:0.2%;top:0.5%;padding:5px 10px">X</span></button>
 <div id=choice class="">
   <div class="wrapper">
-    <h1>Try to beat me</h1>
+    <h1>TRY TO BEAT ME!</h1>
     <ul>
-      <li class="pick-one">
+      <li class="pick-one" onclick="signChosen(0)">
         <button>
-          <img src="Tools/rock.png" alt="Rock" onclick="signChosen(0)"/>
-          rock
+          <img src="Tools/rock.png" alt="Rock"/>
+          Rock
         </button>
       </li>
-      <li class="pick-one">
+      <li class="pick-one" onclick="signChosen(1)">
         <button>
-          <img src="Tools/paper.png" alt="Paper" onclick="signChosen(1)"/>
-          paper
+          <img src="Tools/paper.png" alt="Paper"/>
+          Paper
         </button>
       </li>
-      <li class="pick-one">
+      <li class="pick-one" onclick="signChosen(2)">
         <button>
-          <img src="Tools/scissors.png" alt="Scissors" onclick="signChosen(2)" />
-          scissors
+          <img src="Tools/scissors.png" alt="Scissors"/>
+          Scissors
         </button>
       </li>
     </ul>
@@ -55,17 +71,28 @@ style="position:absolute;font-size:15px; right:0.2%;top:0.5%;padding:5px 10px">X
   </html>
 </div>
   <script>
+
+    setScores()
     document.body.style.zoom = "95%"
     document.getElementById('winner').style.zoom = "85%"
     let compChoice, userChoice, outcome
     computerChoice()
+
+      let curWins = document.getElementById('wins').value
+      let curTies = document.getElementById('ties').value
+      let curLoss = document.getElementById('losses').value
     
     function signChosen(id){
-      userChoice = document.querySelectorAll('.pick-one')[id].innerText
+      userChoice = String(document.querySelectorAll('.pick-one')[id].innerText).toLowerCase()
+      console.log(userChoice)
       document.getElementById('choice').classList.add('hidePart')
       document.getElementById('winner').classList.remove('hidePart')
+      document.getElementById('scoresInput').classList.add('invisible')
+      document.getElementById('close').classList.add('invisible')
+
       findWinner()
       setImages()
+      window.localStorage.setItem('Scores',JSON.stringify([curWins,curTies,curLoss]))
     }
 
     function setImages(){
@@ -100,22 +127,38 @@ style="position:absolute;font-size:15px; right:0.2%;top:0.5%;padding:5px 10px">X
 
     function tie(){
       document.getElementById('tie').classList.remove('invisible')
-      //document.getElementById('winnerCol').classList.add('tie')
+      curTies++
+      document.getElementById('ties').value=curTies
     }
 
     function win(){
       document.getElementById('you-win').classList.remove('invisible')
       document.getElementById('winnerCol').classList.add('you-win')
+      curWins++
+      document.getElementById('wins').value=curWins
     }
 
     function lose(){
       document.getElementById('computer-wins').classList.remove('invisible')
       document.getElementById('winnerCol').classList.add('computer-wins')
+      curLoss++
+      document.getElementById('losses').value=curLoss
+    }
 
+    function setScores(){
+      let loadedScores = JSON.parse(window.localStorage.getItem('Scores'))
+      
+      if(loadedScores!=null){
+      document.getElementById('wins').value = loadedScores[0]
+      document.getElementById('ties').value = loadedScores[1]
+      document.getElementById('losses').value = loadedScores[2]
+    }
     }
 
   </script>
+
 </body>
+
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
@@ -127,6 +170,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 .hidePart{
 display:none;
 }
@@ -225,6 +269,34 @@ li.pick-one img {
   color: white;
 }
 
+.input{
+  scale: 10.5%;
+    position: absolute;
+    font-weight: bolder;
+    top: 1%;
+    justify-content: center;
+    border: none;
+    background: #F6F6F6;
+    padding: 5px 7px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+  #wins,
+  #ties,
+  #losses {
+    color: #868888;
+    background: #F6F6F6;
+    font-weight: bold;
+    width: 25px;
+    font-size: 20px;
+    border: none;
+  }
+
+  span {
+    font-size: smaller;
+    visibility: hidden;  
+    }   
 
 </style>
 </html>

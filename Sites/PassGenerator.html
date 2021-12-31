@@ -14,7 +14,8 @@
 
 <body>
     <button id="close" onclick="location.href='/snippets/index.html';"
-        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <div id=area>
     <h1>Password Generator</h1><br>
     <div class="copyDiv">
         <input id="password" placeholder="Generated Password" size=30 disabled></input>
@@ -32,14 +33,15 @@
         <p><b>Password properties</b></p>
     </div>
     <input type="checkbox" id="numCheck" checked>
-    <label for="numCheck">Numbers</label><br>
+    <label for="numCheck" >Numbers</label><br>
     <input type="checkbox" id="upperCheck" checked>
     <label for="upperCheck">Uppercase</label><br>
     <input type="checkbox" id="symbolCheck" checked>
     <label for="symbolCheck">Symbols</label><br>
-    <input type="checkbox" id="excludeChars" checked>
+    <input type="checkbox" id="excludeChars">
     <label for="excludeChars">Exclude similar characters</label><br><br><br>
     <button onclick="generatePassword()" id="generateButton">Generate</button>
+</div>
 
     <script>
         //Available Characters
@@ -90,14 +92,29 @@
     </script>
     <style>
         body {
+            background-image: url("Tools/BackgroundDarkMountain.png");
             margin-left: 10px;
         }
 
+        #area{
+            position:absolute;
+            top:42%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+
+        label,output,h1,p{
+            color:white;
+        }
+        
+        label{
+            font-weight: normal;
+        }
         input[type=checkbox] {
             transform: scale(1.5);
             margin-left: 10px !important;
             vertical-align: middle;
-            white-space: nowrap
+            white-space: nowrap;
         }
 
         input[type=range] {
@@ -107,6 +124,7 @@
         #password {
             transform: scale(1.5);
             margin-left: 62px !important;
+            background:white;
         }
 
         #copyText {

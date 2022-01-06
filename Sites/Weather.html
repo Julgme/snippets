@@ -4500,7 +4500,7 @@
         document.querySelectorAll('.day-of-week')[day].innerText = dateName
 
         //temperature amount
-        let temperature = response.daily[day].temp.max.toFixed(0)
+        let temperature = parseInt(response.daily[day].temp.max)
         document.querySelectorAll('.temperature')[day].insertAdjacentText('afterbegin', temperature)
 
         //feels like
@@ -4508,11 +4508,11 @@
         document.querySelectorAll('.feelsLike')[day].innerText = `${feelsLike}°`
 
         //minimum temperature
-        let min = response.daily[day].temp.min.toFixed(0)
+        let min = parseInt(response.daily[day].temp.min)
         document.querySelectorAll('.low')[day].insertAdjacentText('beforeend', `${min}°`)
 
         //percentage of precipitation
-        let precip = (response.daily[day].pop)*100
+        let precip = parseInt((response.daily[day].pop)*100)
         document.querySelectorAll('.precipitation')[day].insertAdjacentText('beforeend', `${precip}%`)
 
         //weather Image

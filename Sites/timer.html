@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+  <title id="title">Pomodoro Timer</title>
+</head>
+
+<body>
+  <button id="close" onclick="location.href='/snippets/index.html';"
+    style="position:absolute;right:0.2%;top:0.5%;">X</span></button>
+  <div class="wrapper">
+    <div id="circle" class="ring">
+      <svg width="518" height="518" viewBox="0 0 518 518">
+        <circle stroke-width="9px" x="0" y="y" cx="259" cy="259" r="254" />
+      </svg>
+    </div>
+
+    <div class="timer">
+      <div class="time">
+        <div class="minutes">
+          <input id="minutes" type="text" value=01 disabled />
+        </div>
+        <div class="colon">:</div>
+        <div class="seconds">
+          <input id="seconds" type="text" value=00 disabled onchange="Colour()" />
+        </div>
+      </div>
+      <button id="startBtn" onclick="Start()" class="start">start</button>
+        <div id="options">
+        <button onclick="Edit()" class="settings">
+          <img src="tools/gear.svg" alt="Settings" />
+        </button>
+        <button id="reset" onclick="Reset()" class="settings">
+          <img src="tools/reset.png" height="23" alt="reset" />
+        </button>
+      </div>
+    </div>
+  </div>
+  <script>
+    let minutes = document.getElementById("minutes")
+    let seconds = document.getElementById("seconds")
+    let circle = document.getElementById("circle")
+    let startStop = document.getElementById("startBtn")
+    let audio = new Audio("tools/bell.mp3");
+    let title = document.getElementById("title")
+    let heading = " - Pomodoro Timer"
+
+    function startTimer() {
+      let duration = parseFloat((minutes.value * 60) - -seconds.value)
+      let timer = duration
+
+      let interval = setInterval(function () {
+        let min = parseInt(timer / 60, 10)
+        let sec = parseInt(timer % 60, 10) - 1
+
+        min = min < 10 ? "0" + min : min
+        sec = sec < 10 ? "0" + sec : sec
+
+        if (timer == 0 || startStop.innerText == "START") {
+          startStop.innerText = "START"
+          if (timer == 0) {
+            seconds.value = "00"
+            document.title = "Timer Over"
+          }
+          Colour()
+          clearInterval(interval);
+        }
+        else {
+          timer--
+          if (sec == "0-1") {
+            let minL = min - 1
+            let minF = minL < 10 ? "0" + minL : minL
+            minutes.value = minF
+            seconds.value = "59"
+            document.title = minF + ":59" + heading
+          }
+          else {
+            minutes.value = min
+            seconds.value = sec
+            document.title = `${min}:${sec}${heading}`
+          }
+          Colour()
+        }
+
+      }, 1000);
+    }
+
+    function Reset(){
+            document.location.reload()            
+        }
+
+    function Start() {
+      if (startStop.innerText == "START") {
+        startStop.innerText = "STOP"
+        startTimer()
+        minutes.setAttribute("disabled", "true")
+        seconds.setAttribute("disabled", "true")
+      }
+      else {
+        startStop.innerText = "START"
+      }
+    }
+
+    function Edit() {
+      minutes.removeAttribute("disabled")
+      seconds.removeAttribute("disabled")
+    }
+    function Colour() {
+      if (minutes.value == 00 && seconds.value == 00) {
+        circle.classList.add("ending")
+        audio.play();
+      }
+      else {
+        circle.classList.remove("ending")
+      }
+    }
+  </script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+    @font-face {
+      font-family: "bebas";
+      src: url('tools/bebasneue-book-webfont.woff') format('woff'),
+        url('tools/bebasneue-book-webfont.woff2') format('woff2')
+    }
+    #reset{
+      transform: translateY(-8px); 
+      height:30px  
+    }
+
+    body {
+      align-items: center;
+      background: #2B2A30;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      min-height: 100vh;
+      min-width: 100vw;
+      padding: 0;
+    }
+
+    #close {
+      border: none;
+      outline: none;
+      background-color: whitesmoke;
+      color: black;
+      font-size:30px;
+      padding: 5px 15px;
+      border-radius: 20%;
+      cursor: pointer;
+    }
+
+    /* outer glow */
+    .wrapper {
+      align-items: center;
+      border-radius: 50%;
+      box-shadow: -5px 14px 44px #000000, 5px -16px 50px rgba(255, 255, 255, 0.15);
+      display: flex;
+      height: 518px;
+      justify-content: center;
+      position: relative;
+      width: 518px;
+    }
+
+    .ring {
+      position: absolute;
+      left: 0;
+      stroke: #09A65A;
+      top: 0;
+      z-index: 1;
+    }
+
+    .ring.ending circle {
+      stroke: #900A0A;
+    }
+
+    /* inner circle */
+    .timer {
+      align-items: center;
+      background: radial-gradient(71.4% 71.4% at 51.7% 28.6%, #3A393F 0%, #17171A 100%);
+      border-radius: 50%;
+      box-shadow: inset 0px 0px 114px rgba(0, 0, 0, 0.45);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 500px;
+      justify-content: center;
+      position: relative;
+      width: 500px;
+      z-index: 2;
+    }
+
+    /* actual time */
+    .time {
+      display: flex;
+      font-family: "bebas";
+      font-size: 196px;
+      margin: 30px auto;
+      position: relative;
+      top: 30px;
+    }
+
+    input[type="text"] {
+      border: 0;
+      border-bottom: 1px dashed white;
+      background: none;
+      color: white;
+      font-family: "bebas";
+      font-size: 196px;
+      height: 170px;
+      width: 150px;
+      text-align: center;
+      outline: none;
+    }
+
+    input[type=text]:disabled {
+      border-bottom: none;
+    }
+
+    .start {
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      letter-spacing: 10px;
+      line-height: 20px;
+      background: none;
+      color: white;
+      opacity: .5;
+      border: none;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .start:hover {
+      opacity: 1;
+    }
+
+    .settings {
+      border: none;
+      background: none;
+      cursor: pointer;
+      opacity: 0.3;
+    }
+
+    .settings:hover {
+      opacity: 1;
+    }
+
+    @media only screen and (max-width: 560px) {
+      body{
+        zoom:69%;
+      }
+    }
+  </style>
+</body>
+
+</html>

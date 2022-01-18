@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Counter</title>
+</head>
+
+<body>
+    <button id="close" onclick="location.href='/snippets/index.html';"
+        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <h1>Counter</h1>
+    <div id="btns">
+        <button onclick="addition()">Add</button>
+        <button onclick="subtraction()">Subtract</button>
+    </div>  
+    <button id="rstBtn"onclick="reset()">Reset</button>
+    <span id="value">0</span>
+
+    <script>
+        let path = document.getElementById("value")
+
+        function addition() {
+            let val = path.textContent
+            val++
+            path.innerText = val
+            col()
+        }
+
+        function subtraction() {
+            let val = path.textContent
+            val--
+            path.innerText = val
+            col()
+        }
+
+        function reset() {
+            path.innerText = 0
+            col()
+        }
+
+        function col() {
+            let val = path.textContent
+            if (val > 0) {
+                colour = "green"
+            }
+            else if (val < 0) {
+                colour = "red"
+            }
+            else {
+                colour = "blanchedalmond"
+            }
+            path.style.color = colour
+        }
+    </script>
+    <style>
+        body {
+            background-image: url("tools/background-dark-mountain.png");
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+        #value{
+            color:blanchedalmond;
+            font-size: 1500%;
+        }
+        button:not(#close,#rstBtn){
+            background-image: linear-gradient(to right, #d1643d 0%, #f56e3d  100%);
+            border-radius: 20px;
+            width:100px;
+            font-size: large;
+            padding:7px 12px;
+            margin-bottom:10px;
+            color:black;
+            outline:none;
+            border:none;
+            margin-left: 5px;
+        }
+        button:active:not(#close){
+            transform:translateY(1px)
+        }
+        #rstBtn{     
+            border-radius: 20px;
+            outline:none;
+            border:none;
+            padding:2px,5px;
+            font-size:15px;
+            background-color:gray;
+        }
+
+        h1{
+            text-transform: uppercase;
+            margin-top:50px;
+            margin-bottom:20px;
+            color:burlywood;
+            font-size: 60px;
+        }
+
+        @media only screen and (min-width: 1000px) {
+            body{
+                zoom:120%;
+            }
+            button:hover:not(#close){
+                outline:1px solid orange;            }
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Permutations</title>
+</head>
+
+<body>
+    <button id="close" onclick="location.href='/snippets/index.html';"
+        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <div id="contentWrapper">
+        <h1>Permutation Finder</h1><br>
+        <div id="topFields">
+            <div id=wrd>
+                <label for="amount">Amount</label><br>
+                <input id="amount" type="number" value="4" min=2 max=8></input>
+            </div>
+            <div id=ptn>
+                <label for="permutations">Permutations</label><br>
+                <input id="permutations" value=24 type="number" disabled></input><br>
+            </div>
+        </div>
+        <p><b>Enter Words</b></p>
+        <div id="part1">
+            <input id="word1" class="words" placeholder="Word 1"></input>
+            <input id="word2" class="words" placeholder="Word 2"></input>
+            <input id="word3" class="words" placeholder="Word 3"></input>
+            <input id="word4" class="words" placeholder="Word 4"></input>
+        </div>
+        <div id="part2">
+            <input id="word5" class="words" placeholder="Word 5"></input>
+            <input id="word6" class="words" placeholder="Word 6"></input>
+            <input id="word7" class="words" placeholder="Word 7"></input>
+            <input id="word8" class="words" placeholder="Word 8"></input>
+        </div>
+        <div id="clickButtons">
+            <button id="Generate" onclick="Result()">Generate</button>
+            <button id="Reset" onclick="Reset()">Reset</button>
+        </div>
+        <textarea id="answer" placeholder="Permutations will be shown here"></textarea>
+    </div>
+    <script>
+        let amount = document.getElementById("amount")
+        let permutations = document.getElementById("permutations")
+        let answer = document.getElementById("answer")
+        let result = [], array = []
+        answer.disabled=true 
+
+        const words = Array.from(document.getElementsByClassName('words'))
+
+        function disabler() {
+            for (let i = 0; i < 8; i++) {
+                if (i <= amount.value - 1) {
+                    words[i].disabled = false;
+                }
+                else {
+                    words[i].disabled = true
+                }
+            }
+        };
+
+        function permutation(arr, currentSize) {
+            if (currentSize == 1) { // recursion base-case (end)
+                result.push(arr.join(""));
+                return;
+            }
+            for (let i = 0; i < currentSize; i++) {
+                permutation(arr, currentSize - 1);
+                if (currentSize % 2 == 1) {
+                    let temp = arr[0];
+                    arr[0] = arr[currentSize - 1];
+                    arr[currentSize - 1] = temp;
+                } else {
+                    let temp = arr[i];
+                    arr[i] = arr[currentSize - 1];
+                    arr[currentSize - 1] = temp;
+                }
+            }
+        }
+
+        amount.addEventListener("change", function fillOut() {
+            let g = amount.value
+            function factorial(n) {
+                if (n < 0) return;
+                if (n < 2) return 1;
+                return n * factorial(n - 1);
+            }
+            permutations.value = factorial(g)
+            disabler()
+        });
+
+        function Result() {
+            arrayPre = [(words[0].value).trim(), (words[1].value).trim(), (words[2].value).trim(), (words[3].value).trim(), (words[4].value).trim(), (words[5].value).trim(), (words[6].value).trim(), (words[7].value).trim()];
+            result = []
+            array = arrayPre.slice(0, amount.value)
+            let emptyCheck = array.indexOf("")
+
+            if (emptyCheck != -1 && emptyCheck <= amount.value - 1) {
+                answer.value = "Fill out all enabled fields"
+                answer.style.color = "orange"
+            }
+            else {
+                permutation(array, amount.value);
+                console.log(result);
+                let splitResult = result.join("\n");
+                answer.style.color = "black"
+                answer.value = splitResult
+            }
+        }
+        function Reset() {
+            document.location.reload()
+        }
+        disabler()
+
+    </script>
+    <style>
+        body {
+            background-image: url("tools/background-dark-mountain.png");
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        #contentWrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1,
+        label,
+        p {
+            color: orange;
+        }
+
+        h1 {
+            font-weight: bolder;
+        }
+
+        textarea {
+            width: 485px;
+            height: 150px;
+            overflow: auto;
+            resize: none;
+            padding-left: 10px;
+            cursor: auto;
+        }
+
+        #amount {
+            width: 55px;
+        }
+
+        #permutations {
+            width: 65px;
+            color: rgb(185, 133, 37)
+        }
+
+        button:not(#close) {
+            width: 150px;
+            background: orange;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            outline: #3e0249;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        button:not(#close):active {
+            transform: translateY(2px);
+        }
+
+        input,
+        #answer {
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 10px;
+            outline: none;
+            padding-left: 10px;
+        }
+        #answer:disabled{
+            background:white;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: grey;
+            opacity: 50%;
+        }
+
+        input:focus {
+            outline: 1.5px solid orange;
+        }
+
+        .words{
+            width:120px
+        }
+
+        #topFields {
+            display: grid;
+            transform: translateX(-40%);
+            grid-template-columns: 100px 1px;
+            margin-bottom: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 14px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            border-radius: 10px;
+            background-color: orange;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgb(245, 202, 122);
+        }
+
+        ::-webkit-scrollbar-thumb:active {
+            background-color: rgb(247, 176, 45);
+        }
+
+        @media only screen and (max-width: 600px) {
+            textarea {
+            width: 300px;
+        }
+        .words{
+            width:75px
+        }
+        }
+    </style>
+</body>
+
+</html>

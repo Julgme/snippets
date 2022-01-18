@@ -4,14 +4,13 @@
   "description": "Simple Web Scraper",
   "main": "scraper.js",
   "scripts": {
-     "guardian": "node -e \"require('./scraper').theGuardian()\"",
-     "cb": "node -e \"require('./scraper').cb()\"",
-     "earBiscuits": "node -e \"require('./scraper').earBiscuits()\"",
-     "hotDog": "node -e \"require('./scraper').hotDog()\"",
-     "hotDog2": "node -e \"require('./scraper').hotDog2()\"",
-
-    "scrape" :  "nodemon scraper.js"  
-},
+    "guardian": "node -e \"require('./scraper').theGuardian()\"",
+    "cb": "node -e \"require('./scraper').cb()\"",
+    "earBiscuits": "node -e \"require('./scraper').earBiscuits()\"",
+    "hotDog": "node -e \"require('./scraper').hotDog()\"",
+    "hotDog2": "node -e \"require('./scraper').hotDog2()\"",
+    "scrape": "nodemon scraper.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Julgme/web-scraper.git"
@@ -25,6 +24,7 @@
   "dependencies": {
     "axios": "^0.23.0",
     "cheerio": "^1.0.0-rc.10",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "npm-install-global": "^1.0.0"
   }
 }

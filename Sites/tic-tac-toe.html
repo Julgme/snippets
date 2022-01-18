@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+    <title>Tic Tac Toe</title>
+</head>
+
+<body>
+    <button id="close" onclick="location.href='/snippets/index.html';"
+        style="position:absolute;right:0.2%;top:0.5%;">X</span></button>
+    <div class="container">
+        <h1 id="winnerText">Let's play!</h1>
+        <div id="buttonContainer">
+            <button id="restartBtn" onclick="Restart()">Play Again</button>
+            <button id="playModeBtn" onclick="changeMode()">vs Computer</button>
+        </div>
+        <select id="difficulty">
+            <option value="Dumb">Dumb</option>
+            <option value="Easy">Easy</option>
+            <option value="Normal" selected>Normal</option>
+            <option value="Hard">Hard</option>
+        </select>
+        <div id="board">
+            <div class="box" id='0' refno="b0"></div>
+            <div class="box" id='1' refno="b1"></div>
+            <div class="box" id='2' refno="b2"></div>
+            <div class="box" id='3' refno="b3"></div>
+            <div class="box" id='4' refno="b4"></div>
+            <div class="box" id='5' refno="b5"></div>
+            <div class="box" id='6' refno="b6"></div>
+            <div class="box" id='7' refno="b7"></div>
+            <div class="box" id='8' refno="b8"></div>
+        </div>
+    </div>
+    <script>
+        const difficulty = document.getElementById('difficulty')
+        const gameMode = document.getElementById('playModeBtn')
+        const title = document.getElementById('winnerText')
+        const boxes = Array.from(document.getElementsByClassName('box'))
+        const spaces = [null, null, null, null, null, null, null, null, null]
+        const X_char = "X"
+        const O_char = "O"
+        let currentPlayer, empty, rand, randBox, gameWon = false
+                   
+        const boardEvents = () => {
+            boxes.forEach(box => {
+                box.addEventListener('click', boxClicked)
+            });
+        }
+
+        const boxClicked = (element) => {
+            gameMode.disabled = true
+            gameMode.style.background="gray"
+            difficulty.disabled = true;
+
+            let boxId = element.target.id
+            let tieCheck = spaces.indexOf(null)
+            if (tieCheck == -1 && gameWon == false) {
+                title.innerText = 'Tie'
+            }
+            else {
+                if (spaces[boxId] == null) {
+                    spaces[boxId] = currentPlayer
+                    element.target.innerText = currentPlayer
+                    findWins()
+                    if (gameWon == true) {
+                        title.innerText = `${currentPlayer} Wins`
+                        for (let i = 0; i <= 8; i++) {
+                            if (spaces[i] == null) {
+                                spaces[i] = ""
+                            }
+                        }
+                    }
+                    else {
+                        if (gameMode.innerText == "vs Computer") {
+                            currentPlayer = currentPlayer == O_char ? X_char : O_char
+                            computerAI();
+                        }
+                        else {
+                            currentPlayer = currentPlayer == O_char ? X_char : O_char
+                        }
+
+                        let tieCheck2 = spaces.indexOf(null)
+                        if (tieCheck2 == -1) {
+                            title.innerText = 'Tie'
+                        }
+                        else {
+                            title.innerText = `${currentPlayer} to play`
+                        }
+                    }
+                }
+            }
+        }
+        function changeMode() {
+            let mode
+            if(gameMode.innerText == "2 Player Mode"){
+                mode = "vs Computer"
+                document.getElementById('difficulty').classList.remove('hidden')
+            }
+            else{
+                mode = "2 Player Mode"
+                document.getElementById('difficulty').classList.add('hidden')
+            }
+            gameMode.innerText = mode
+        }
+
+        function getAllIndexes(arr, val) {
+            var indexes = [], i;
+            for (i = 0; i < arr.length; i++)
+                if (arr[i] === val)
+                    indexes.push(i);
+            return indexes;
+        }
+
+
+        function logic() {
+            if (difficulty.value == "Dumb") {
+                empty = getAllIndexes(spaces, null)
+                console.log("ignored rules")
+                rand = Math.floor(Math.random() * empty.length)
+                randBox = empty[rand]
+            }
+
+            else if (difficulty.value == "Easy") {
+
+//Offensive Top Left Common
+                if (boxes[0].innerText == X_char && boxes[1].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[0].innerText == X_char && boxes[2].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[0].innerText == X_char && boxes[3].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[0].innerText == X_char && boxes[6].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[0].innerText == X_char && boxes[4].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[0].innerText == X_char && boxes[8].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Top Centre Common
+                else if (boxes[1].innerText == X_char && boxes[0].innerText == X_char && boxes[2].innerText == '') { randBox = 2}
+                else if (boxes[1].innerText == X_char && boxes[2].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[1].innerText == X_char && boxes[4].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[1].innerText == X_char && boxes[7].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Top Right Common
+                else if (boxes[2].innerText == X_char && boxes[1].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[2].innerText == X_char && boxes[0].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[2].innerText == X_char && boxes[5].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[2].innerText == X_char && boxes[8].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[2].innerText == X_char && boxes[4].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[2].innerText == X_char && boxes[6].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Middle Left Common
+                else if (boxes[3].innerText == X_char && boxes[0].innerText == X_char && boxes[6].innerText == '') { randBox = 6}
+                else if (boxes[3].innerText == X_char && boxes[6].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[3].innerText == X_char && boxes[4].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[3].innerText == X_char && boxes[5].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Middle Centre Common    
+                else if (boxes[4].innerText == X_char && boxes[1].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[4].innerText == X_char && boxes[7].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[4].innerText == X_char && boxes[3].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[4].innerText == X_char && boxes[5].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[4].innerText == X_char && boxes[6].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[4].innerText == X_char && boxes[2].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[4].innerText == X_char && boxes[0].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[4].innerText == X_char && boxes[8].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                //Offensive Middle Right Common
+                else if (boxes[5].innerText == X_char && boxes[2].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[5].innerText == X_char && boxes[8].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[5].innerText == X_char && boxes[3].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[5].innerText == X_char && boxes[4].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                //Offensive Bottom left Common
+                else if (boxes[6].innerText == X_char && boxes[3].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[6].innerText == X_char && boxes[0].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[6].innerText == X_char && boxes[7].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[6].innerText == X_char && boxes[8].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[6].innerText == X_char && boxes[4].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[6].innerText == X_char && boxes[2].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Bottom Centre Common
+                else if (boxes[7].innerText == X_char && boxes[1].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[7].innerText == X_char && boxes[4].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[7].innerText == X_char && boxes[6].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[7].innerText == X_char && boxes[8].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                //Offensive Bottom Right Common
+                else if (boxes[8].innerText == X_char && boxes[5].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[8].innerText == X_char && boxes[2].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[8].innerText == X_char && boxes[7].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[8].innerText == X_char && boxes[6].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[8].innerText == X_char && boxes[0].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[8].innerText == X_char && boxes[4].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+
+                else {
+                    empty = getAllIndexes(spaces, null)
+                    console.log("ignored rules")
+                    rand = Math.floor(Math.random() * empty.length)
+                    randBox = empty[rand]
+                }
+            }
+
+            else if (difficulty.value == "Normal") {
+                //Offensive Top Left Common
+                if (boxes[0].innerText == X_char && boxes[1].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[0].innerText == X_char && boxes[2].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[0].innerText == X_char && boxes[3].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[0].innerText == X_char && boxes[6].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                //Offensive Top Right Common
+                else if (boxes[2].innerText == X_char && boxes[1].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[2].innerText == X_char && boxes[0].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[2].innerText == X_char && boxes[5].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[2].innerText == X_char && boxes[8].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                //Offensive Middle Common    
+                else if (boxes[4].innerText == X_char && boxes[1].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[4].innerText == X_char && boxes[7].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[4].innerText == X_char && boxes[3].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[4].innerText == X_char && boxes[5].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[4].innerText == X_char && boxes[6].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[4].innerText == X_char && boxes[2].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[4].innerText == X_char && boxes[0].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[4].innerText == X_char && boxes[8].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+
+                //Offensive Bottom left Common
+                else if (boxes[6].innerText == X_char && boxes[3].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[6].innerText == X_char && boxes[0].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[6].innerText == X_char && boxes[7].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[6].innerText == X_char && boxes[8].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                //Offensive Bottom Right Common
+                else if (boxes[8].innerText == X_char && boxes[5].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[8].innerText == X_char && boxes[2].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[8].innerText == X_char && boxes[7].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[8].innerText == X_char && boxes[6].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+
+                //Defensive Top Left Common
+                else if (boxes[0].innerText == O_char && boxes[1].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[0].innerText == O_char && boxes[2].innerText == O_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[0].innerText == O_char && boxes[3].innerText == O_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[0].innerText == O_char && boxes[6].innerText == O_char && boxes[3].innerText == '') { randBox = 3 }
+                //Defensive Top Right Common
+                else if (boxes[2].innerText == O_char && boxes[1].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[2].innerText == O_char && boxes[0].innerText == O_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[2].innerText == O_char && boxes[5].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[2].innerText == O_char && boxes[8].innerText == O_char && boxes[5].innerText == '') { randBox = 5 }
+                //Defensive Middle One Common
+                else if (boxes[4].innerText == O_char && boxes[1].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[4].innerText == O_char && boxes[7].innerText == O_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[4].innerText == O_char && boxes[3].innerText == O_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[4].innerText == O_char && boxes[5].innerText == O_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[4].innerText == O_char && boxes[6].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[4].innerText == O_char && boxes[2].innerText == O_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[4].innerText == O_char && boxes[0].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[4].innerText == O_char && boxes[8].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                //Defensive Bottom left Common
+                else if (boxes[6].innerText == O_char && boxes[3].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[6].innerText == O_char && boxes[0].innerText == O_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[6].innerText == O_char && boxes[7].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[6].innerText == O_char && boxes[8].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+                //Defensive Bottom Right Common
+                else if (boxes[8].innerText == O_char && boxes[5].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[8].innerText == O_char && boxes[2].innerText == O_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[8].innerText == O_char && boxes[7].innerText == O_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[8].innerText == O_char && boxes[6].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+
+                else {
+                    empty = getAllIndexes(spaces, null)
+                    console.log("ignored rules")
+                    rand = Math.floor(Math.random() * empty.length)
+                    randBox = empty[rand]
+                }
+            }
+            else if (difficulty.value == "Hard") {
+                //Offensive Top Left Common
+                if (boxes[0].innerText == X_char && boxes[1].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[0].innerText == X_char && boxes[2].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[0].innerText == X_char && boxes[3].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[0].innerText == X_char && boxes[6].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[0].innerText == X_char && boxes[4].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[0].innerText == X_char && boxes[8].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Top Centre Common
+                else if (boxes[1].innerText == X_char && boxes[0].innerText == X_char && boxes[2].innerText == '') { randBox = 2}
+                else if (boxes[1].innerText == X_char && boxes[2].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[1].innerText == X_char && boxes[4].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[1].innerText == X_char && boxes[7].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Top Right Common
+                else if (boxes[2].innerText == X_char && boxes[1].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[2].innerText == X_char && boxes[0].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[2].innerText == X_char && boxes[5].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[2].innerText == X_char && boxes[8].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[2].innerText == X_char && boxes[4].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[2].innerText == X_char && boxes[6].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Middle Left Common
+                else if (boxes[3].innerText == X_char && boxes[0].innerText == X_char && boxes[6].innerText == '') { randBox = 6}
+                else if (boxes[3].innerText == X_char && boxes[6].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[3].innerText == X_char && boxes[4].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[3].innerText == X_char && boxes[5].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Middle Centre Common    
+                else if (boxes[4].innerText == X_char && boxes[1].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[4].innerText == X_char && boxes[7].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[4].innerText == X_char && boxes[3].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[4].innerText == X_char && boxes[5].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[4].innerText == X_char && boxes[6].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[4].innerText == X_char && boxes[2].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[4].innerText == X_char && boxes[0].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[4].innerText == X_char && boxes[8].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                //Offensive Middle Right Common
+                else if (boxes[5].innerText == X_char && boxes[2].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[5].innerText == X_char && boxes[8].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[5].innerText == X_char && boxes[3].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[5].innerText == X_char && boxes[4].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                //Offensive Bottom left Common
+                else if (boxes[6].innerText == X_char && boxes[3].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[6].innerText == X_char && boxes[0].innerText == X_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[6].innerText == X_char && boxes[7].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[6].innerText == X_char && boxes[8].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[6].innerText == X_char && boxes[4].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[6].innerText == X_char && boxes[2].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                //Offensive Bottom Centre Common
+                else if (boxes[7].innerText == X_char && boxes[1].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[7].innerText == X_char && boxes[4].innerText == X_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[7].innerText == X_char && boxes[6].innerText == X_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[7].innerText == X_char && boxes[8].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                //Offensive Bottom Right Common
+                else if (boxes[8].innerText == X_char && boxes[5].innerText == X_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[8].innerText == X_char && boxes[2].innerText == X_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[8].innerText == X_char && boxes[7].innerText == X_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[8].innerText == X_char && boxes[6].innerText == X_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[8].innerText == X_char && boxes[0].innerText == X_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[8].innerText == X_char && boxes[4].innerText == X_char && boxes[0].innerText == '') { randBox = 0 }
+
+                //Defensive Top Left Common
+                else if (boxes[0].innerText == O_char && boxes[1].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[0].innerText == O_char && boxes[2].innerText == O_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[0].innerText == O_char && boxes[3].innerText == O_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[0].innerText == O_char && boxes[6].innerText == O_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[0].innerText == O_char && boxes[4].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[0].innerText == O_char && boxes[8].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                //Defensive Top Centre Common
+                else if (boxes[1].innerText == O_char && boxes[0].innerText == O_char && boxes[2].innerText == '') { randBox = 2}
+                else if (boxes[1].innerText == O_char && boxes[2].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[1].innerText == O_char && boxes[4].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[1].innerText == O_char && boxes[7].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                //Defensive Top Right Common
+                else if (boxes[2].innerText == O_char && boxes[1].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[2].innerText == O_char && boxes[0].innerText == O_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[2].innerText == O_char && boxes[5].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[2].innerText == O_char && boxes[8].innerText == O_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[2].innerText == O_char && boxes[4].innerText == O_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[2].innerText == O_char && boxes[6].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                //Defensive Middle Left Common
+                else if (boxes[3].innerText == O_char && boxes[0].innerText == O_char && boxes[6].innerText == '') { randBox = 6}
+                else if (boxes[3].innerText == O_char && boxes[6].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[3].innerText == O_char && boxes[4].innerText == O_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[3].innerText == O_char && boxes[5].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                //Defensive Middle Centre Common
+                else if (boxes[4].innerText == O_char && boxes[1].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[4].innerText == O_char && boxes[7].innerText == O_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[4].innerText == O_char && boxes[3].innerText == O_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[4].innerText == O_char && boxes[5].innerText == O_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[4].innerText == O_char && boxes[6].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[4].innerText == O_char && boxes[2].innerText == O_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[4].innerText == O_char && boxes[0].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[4].innerText == O_char && boxes[8].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                //Defensive Middle Right Common
+                else if (boxes[5].innerText == O_char && boxes[2].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[5].innerText == O_char && boxes[8].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[5].innerText == O_char && boxes[3].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[5].innerText == O_char && boxes[4].innerText == O_char && boxes[3].innerText == '') { randBox = 3 }
+                //Defensive Bottom left Common
+                else if (boxes[6].innerText == O_char && boxes[3].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+                else if (boxes[6].innerText == O_char && boxes[0].innerText == O_char && boxes[3].innerText == '') { randBox = 3 }
+                else if (boxes[6].innerText == O_char && boxes[7].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[6].innerText == O_char && boxes[8].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[6].innerText == O_char && boxes[4].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[6].innerText == O_char && boxes[2].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                //Defensive Bottom Centre Common
+                else if (boxes[7].innerText == O_char && boxes[1].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[7].innerText == O_char && boxes[4].innerText == O_char && boxes[1].innerText == '') { randBox = 1 }
+                else if (boxes[7].innerText == O_char && boxes[6].innerText == O_char && boxes[8].innerText == '') { randBox = 8 }
+                else if (boxes[7].innerText == O_char && boxes[8].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+                //Defensive Bottom Right Common
+                else if (boxes[8].innerText == O_char && boxes[5].innerText == O_char && boxes[2].innerText == '') { randBox = 2 }
+                else if (boxes[8].innerText == O_char && boxes[2].innerText == O_char && boxes[5].innerText == '') { randBox = 5 }
+                else if (boxes[8].innerText == O_char && boxes[7].innerText == O_char && boxes[6].innerText == '') { randBox = 6 }
+                else if (boxes[8].innerText == O_char && boxes[6].innerText == O_char && boxes[7].innerText == '') { randBox = 7 }
+                else if (boxes[8].innerText == O_char && boxes[0].innerText == O_char && boxes[4].innerText == '') { randBox = 4 }
+                else if (boxes[8].innerText == O_char && boxes[4].innerText == O_char && boxes[0].innerText == '') { randBox = 0 }
+
+                else {
+                    empty = getAllIndexes(spaces, null)
+                    console.log("ignored rules")
+                    rand = Math.floor(Math.random() * empty.length)
+                    randBox = empty[rand]
+                }
+            
+            }
+        }
+
+        function computerAI() {
+            logic()
+            spaces[randBox] = X_char
+            setTimeout(function () {
+                boxes[randBox].innerText = X_char
+
+                findWins()
+                if (gameWon == true) {
+                    title.innerText = `${currentPlayer} Wins`
+                    for (let i = 0; i <= 8; i++) {
+                        if (spaces[i] == null) {
+                            spaces[i] = ""
+                        }
+                    }
+                }
+                else {
+                    currentPlayer = O_char
+                    title.innerText = `${currentPlayer} to play`
+                }
+            }, (300));
+        }
+
+        function Restart() {
+            spaces.forEach((space, index) => {
+                spaces[index] = null;
+            })
+            boxes.forEach(box => {
+                box.innerText = ''
+                box.style.color = "whitesmoke"
+            })
+            gameWon = false
+            title.innerText = "Let's Play"
+            currentPlayer = O_char
+            gameMode.disabled = false
+            gameMode.style.background="#3e0249"
+            difficulty.disabled = false;        }
+
+        function findWins() {
+            let winColor = "green"
+            //Horizontals
+            if ((spaces[0] == currentPlayer) && (spaces[1] == currentPlayer) && (spaces[2] == currentPlayer)) {
+                boxes[0].style.color = winColor
+                boxes[1].style.color = winColor
+                boxes[2].style.color = winColor
+                gameWon = true
+            }
+            if ((spaces[3] == currentPlayer) && (spaces[4] == currentPlayer) && (spaces[5] == currentPlayer)) {
+                boxes[3].style.color = winColor
+                boxes[4].style.color = winColor
+                boxes[5].style.color = winColor
+                gameWon = true
+            }
+            if ((spaces[6] == currentPlayer) && (spaces[7] == currentPlayer) && (spaces[8] == currentPlayer)) {
+                boxes[6].style.color = winColor
+                boxes[7].style.color = winColor
+                boxes[8].style.color = winColor
+                gameWon = true
+            }
+            //Verticals
+            if ((spaces[0] == currentPlayer) && (spaces[3] == currentPlayer) && (spaces[6] == currentPlayer)) {
+                boxes[0].style.color = winColor
+                boxes[3].style.color = winColor
+                boxes[6].style.color = winColor
+                gameWon = true
+            }
+            if ((spaces[1] == currentPlayer) && (spaces[4] == currentPlayer) && (spaces[7] == currentPlayer)) {
+                boxes[1].style.color = winColor
+                boxes[4].style.color = winColor
+                boxes[7].style.color = winColor
+                gameWon = true
+            }
+            if ((spaces[2] == currentPlayer) && (spaces[5] == currentPlayer) && (spaces[8] == currentPlayer)) {
+                boxes[2].style.color = winColor
+                boxes[5].style.color = winColor
+                boxes[8].style.color = winColor
+                gameWon = true
+            }
+            //Diagonals
+            if ((spaces[0] == currentPlayer) && (spaces[4] == currentPlayer) && (spaces[8] == currentPlayer)) {
+                boxes[0].style.color = winColor
+                boxes[4].style.color = winColor
+                boxes[8].style.color = winColor
+                gameWon = true
+            }
+            if ((spaces[2] == currentPlayer) && (spaces[4] == currentPlayer) && (spaces[6] == currentPlayer)) {
+                boxes[2].style.color = winColor
+                boxes[4].style.color = winColor
+                boxes[6].style.color = winColor
+                gameWon = true
+            }
+        }
+        Restart()
+        boardEvents()
+    </script>
+</body>
+<style>
+    body {
+        background-image: url("tools/background-dark-mountain.png");
+        margin: 0;
+        padding: 0;
+        color: #3e0249;
+        font-family: sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    h1 {
+        color: whitesmoke;
+        font-size: 34px;
+    }
+
+    #difficulty {
+        margin-bottom: 10px;
+    }
+
+    button:not(#close) {
+        width: 150px;
+        background: #3e0249;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        font-size: 18px;
+        transition: 200ms transform;
+        cursor: pointer;
+        outline: #3e0249;
+        margin-bottom: 20px;
+    }
+
+    .hidden{
+        visibility: hidden;
+    }
+    #close {
+        font-size: 15px;
+    }
+
+    button:hover:not(#close) {
+        transform: translateY(1px);
+        border: none;
+    }
+
+    button:active:not(#close) {
+        border: none;
+        outline: #3e0249;
+        border: none;
+        transform: translateY(3px);
+    }
+
+    .container {
+        height: 100vh;
+        padding: 40px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #board {
+        padding-top: 20px;
+        width: 375px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .box {
+        height: 125px;
+        width: 125px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: whitesmoke;
+        font-size: 100px;
+        cursor: default;
+    }
+
+    [refno=b3],
+    [refno=b4],
+    [refno=b5] {
+        border-top: solid 5px #3e0249;
+        border-bottom: solid 5px #3e0249;
+    }
+
+    [refno=b1],
+    [refno=b4],
+    [refno=b7] {
+        border-right: solid 5px #3e0249;
+        border-left: solid 5px #3e0249;
+    }
+</style>
+
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Hangman</title>
+</head>
+
+<body>
+    <label class="switch">
+        <input onclick="localeReload()" id="LangSlider"type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    <button id="close" onclick="location.href='/snippets/index.html';"
+        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <div class="wrapper">
+        <h1>Hangman</h1><br>
+        <p data-i18n-key="secondTitle" id="SecondTitle">Guess the word below. You have 10 lives </p>
+    </div>
+    <div class="wrapper">
+        <div id="buttons">
+        </div>
+        <p id="categoryName"></p>
+        <div id="hold">
+        </div>
+        <p id="lives"></p>
+        <div class="container">
+            <button data-i18n-key="reset"id="reset">Play again</button>
+        </div>
+    </div>
+    <script>
+        let locale,langSlid
+        let btnDiv = document.getElementById('buttons')
+        
+        function localeCheck(){
+            console.log(locale)
+            locale = localStorage.getItem("locale");
+            locale =="EN"? LangSlider.checked = false : LangSlider.checked = true;
+            locale =="EN"? btnDiv.style.maxWidth="600px": btnDiv.style.maxWidth='650px';
+        }
+
+        function localeReload() {
+            langSlid = document.getElementById('LangSlider').checked
+            langSlid==true ? localStorage.setItem("locale", "MT") : localStorage.setItem("locale", "EN");
+            localeCheck()
+            location.reload()
+        }
+        localeCheck()
+        
+        const translations = {
+            "EN": {
+                "secondTitle": "Guess the word below. You have 10 lives",
+                "reset": "Play Again",
+            },
+            "MT": {
+                "secondTitle": "Aqta il-kelma. Għandek 10 ħajjiet",
+                "reset": "Erġa Ilgħab",
+            },
+        };
+        document.addEventListener("DOMContentLoaded", () => {
+            document
+                // Find all elements that have the key attribute
+                .querySelectorAll("[data-i18n-key]")
+                .forEach(translateElement);
+        });
+
+        function translateElement(element) {
+            const key = element.getAttribute("data-i18n-key");
+            const translation = translations[locale][key];
+            element.innerText = translation;
+        }
+        
+        window.onload = function () {
+
+            let ENAlphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+                'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+                'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            let MTAlphabet = ['A', 'B', 'Ċ', 'D', 'E', 'F', 'Ġ', 'G', 'H', 'Ħ',
+                'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+                'T', 'U', 'V', 'W', 'X', 'Z','Ż'];
+
+            let alphabet = eval(locale+"Alphabet")
+            let categories;
+            let chosenCategory;
+            let word, guess, lives, counter, space;
+            let guesses = [];
+
+            // Get elements
+            let showLives = document.getElementById("lives");
+            let showCatagory = document.getElementById("scatagory");
+
+            // create alphabet ul
+            let buttons = function () {
+                myButtons = document.getElementById('buttons');
+                letters = document.createElement('ul');
+
+                for (let i = 0; i < alphabet.length; i++) {
+                    letters.id = 'alphabet';
+                    list = document.createElement('li');
+                    list.id = 'letter';
+                    list.innerHTML = alphabet[i];
+                    check();
+                    myButtons.appendChild(letters);
+                    letters.appendChild(list);
+                }
+            }
+
+            // Select Catagory
+            var selectCat = function () {
+                const ENCatgs = ["Animals","Films","Countries"];
+                const MTCatgs = ["Frott u Ħaxix","Annimali"];
+                let ENCatText = "Category is:"
+                let MTCatText = "Il-Kategorija hija:"
+                if (chosenCategory === categories[0]) {
+                    categoryName.innerHTML = `${eval(locale+"CatText")} ${eval(locale+"Catgs[0]")}`;
+                } else if (chosenCategory === categories[1]) {
+                    categoryName.innerHTML = `${eval(locale+"CatText")} ${eval(locale+"Catgs[1]")}`
+                } else if (chosenCategory === categories[2]) {
+                    categoryName.innerHTML = `${eval(locale+"CatText")} ${eval(locale+"Catgs[2]")}`
+                }
+            }
+
+
+            // Create ul
+            function result() {
+                wordHolder = document.getElementById('hold');
+                correct = document.createElement('ul');
+
+                for (var i = 0; i < word.length; i++) {
+                    correct.setAttribute('id', 'my-word');
+                    guess = document.createElement('li');
+                    guess.setAttribute('class', 'guess');
+                    if (word[i] === " ") {
+                        guess.innerHTML = " ";
+                        space = space + 1;
+                    } else {
+                        guess.innerHTML = "_";
+                    }
+
+                    guesses.push(guess);
+                    wordHolder.appendChild(correct);
+                    correct.appendChild(guess);
+                }
+            }
+
+            // Show lives
+            function comments() {
+                let livesText
+                if(locale == "MT"){
+                    if (lives == 1) {
+                        showLives.innerHTML = `Fadallek biss ħajja wahda. Attent!`; 
+                    }
+                    else {
+                        showLives.innerHTML = `Fadallek ${lives} ħajjiet`; 
+                    }
+                }
+                else{
+                    if (lives == 1) {
+                        livesText = "life"
+                    }
+                    else {
+                        livesText = "lives"
+                    }
+                    showLives.innerHTML = "You have " + lives + " " + livesText + " remaining.";
+                }
+                if (lives < 1) {                    
+                    let MTLostText = `Ma qtajtx. Il-kelma kienet: ${word.toUpperCase()}`;
+                    let ENLostText = `Game Over. The word was: ${word.toUpperCase()}`;
+                    showLives.innerHTML = eval(locale+"LostText")
+                }
+                for (var i = 0; i < guesses.length; i++) {
+                    if (counter + space === guesses.length) {
+                        let MTWonText = "Proset! Qtajt il-kelma"
+                        let ENWonText = "Congratulations! You Win!"
+                        showLives.innerHTML = eval(locale+"WonText");         
+                    }
+                }
+            }
+
+            // OnClick Function
+            function check() {
+                list.onclick = function () {
+                    if (counter + space !== guesses.length && lives != 0) {
+                        var guess = (this.innerHTML);
+                        this.setAttribute("class", "active");
+                        this.onclick = null;
+                        for (var i = 0; i < word.length; i++) {
+                            if (word[i] === guess) {
+                                guesses[i].innerHTML = guess;
+                                counter += 1;
+                            }
+                        }
+                        var j = (word.indexOf(guess));
+                        if (j === -1) {
+                            lives -= 1;
+                            comments();
+                        } else {
+                            comments();
+                        }
+                    }
+                }
+            }
+
+            // Play
+            function play() {
+                ENCategories = [
+                    ["Albatross","Alligator","Alpaca","Ant","Anteater","Antelope","Ape","Armadillo","Donkey","Baboon","Badger","Barracuda","Bear","Beaver","Bison","Boar","Buffalo","Butterfly","Camel","Caterpillar","Cattle","Cheetah","Chicken","Chimpanzee","Chinchilla","Coyote","Crab","Crane","Crocodile","Crow","Deer","Dinosaur","Dolphin","Dove","Dragonfly","Eagle","Elephant","Falcon","Ferret","Fish","Frog","Flamingo","Gazelle","Gerbil","Giraffe","Goat","Goldfinch","Goldfish","Goose","Gorilla","Grasshopper","Hamster","Hedgehog","Hippopotamus","Hornet","Horse","Human","Hummingbird","Jaguar","Jellyfish","Kangaroo","Kingfisher","Koala","Leopard","Lion","Llama","Lobster","Magpie","Monkey","Moose","Mosquito","Mouse","Octopus","Ostrich","Otter","Owl","Oyster","Panther","Parrot","Partridge","Pelican","Penguin","Pheasant","Pigeon","Pony","Quail","Rabbit","Raccoon","Rail","Reindeer","Rhinoceros","Salamander","Salmon","Sardine","Scorpion","Seahorse","Shark","Sheep","Shrew","Skunk","Snail","Snake","Sparrow","Spider","Squid","Squirrel","Stingray","Stork","Swallow","Tiger","Toad","Trout","Turkey","Turtle","Viper","Vulture","Wallaby","Walrus","Wasp","Weasel","Whale","Wildcat","Wolf","Wolverine","Zebra"],
+                    ["alien", "gladiator", "finding-nemo","Harry-Potter","Die-Hard","jaws","City-of-God","Memento","The-Untouchables","Stardust","Apocalypto","Taxi-Driver","Looper","Corpse-Bride","The-Third-Man","The-Beach","Scarface","Sid-and-Nancy","Black-Swan","Inception","The-Deer-Hunter","Chasing-Amy","Django-Unchained","Silence-of-the-Lambs","American-Beauty","Snatch","Midnight-Express","Pulp-Fiction","Rear-Window","Shutter-Island","Reservoir-Dogs","The-Shining","Midnight-in-Paris","Les-Miserables","L.A.-Confidential","Moneyball","The-Hangover","The-Great-Beauty","Gran-Torino","Mary-and-Max","Flight","The-Truman-Show","The-Artist","Forrest-Gump","Slumdog-Millionaire","Lost-in-Translation","Match-Point","Psycho","North-by-Northwest","Despicable-Me","Downfall","Madagascar","God-Bless-America","The-Social-Network","The-Pianist","Alive","Casablanca","Casino-Royale","Crash","Oldboy","Wolf-of-Wall-Street","Hellboy","Sunset-Boulevard","Oblivion","V-for-Vendetta","Gattaca","Alice-in-Wonderland","Gandhi","Pacific-Rim","The-Quiet-American","Cloud-Atlas","The-Impossible","Before-Sunrise","The-Last-Samurai","Chinatown","Calvary","Before-Sunset","Spirited-Away","Indochine","Boyhood","Interstellar","Big-Nothing","Das-Boot","Shrek-2","Sin-City","Nebraska","Shrek","Original-Sin","Before-Midnight","Troy","The-Hobbit","The-Great-Gatsby","Ice-Age","Lord-of-the-Rings","Shogun","Spotlight","Vertigo","Whiplash","Hotel-Rwanda","The-Martian","The-Hateful-Eight","The-Big-Short"],
+                    ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antarctica","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Botswana","Bouvet-Island","Brazil","Brunei","Bulgaria","Burkina-Faso","Burundi","Cambodia","Cameroon","Canada","Cape-Verde","Cayman-Islands","Chad","Chile","China","Christmas-Island","Colombia","Comoros","Congo","Costa-Rica","Croatia","Cuba","Cyprus","Czech-Republic","Denmark","Ecuador","Egypt","El-Salvador","Eritrea","Estonia","Ethiopia","Faroe-Islands","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guadeloupe","Guam","Guatemala","Guernsey","Guinea","Guyana","Haiti","Honduras","Hong-Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle-of-Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Latvia","Lebanon","Lesotho","Liberia","Liechtenstein","Lithuania","Luxembourg","Macao","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Martinique","Mauritania","Mauritius","Mayotte","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New-Caledonia","New-Zealand","Nigeria","Norway","Oman","Pakistan","Palau","Panama","Papua-New-Guinea","Paraguay","Peru","Philippines","Pitcairn","Poland","Portugal","Puerto-Rico","Qatar","Reunion","Romania","Russia","Rwanda","Samoa","San-Marino","Saudi-Arabia","Senegal","Serbia","Seychelles","Singapore","Slovakia","Slovenia","Somalia","South-Africa","Spain","Sri-Lanka","Sudan","Swaziland","Sweden","Switzerland","Taiwan","Tajikistan","Tanzania","Thailand","Togo","Tonga","Trinidad-and-Tobago","Tunisia","Turkey","Turkmenistan","Uganda","Ukraine","United-Arab-Emirates","United-Kingdom","United-States","Uruguay","Uzbekistan","Vanuatu","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"]
+                ];
+                MTCategories = [
+                    ["Lewża","Tuffieħa","Berquqa","Tuta","Ċirasa","Qastan","Tamla","Tina","Għenba","Ġellewża","Lumija","Naspla","Ġewża","Larinġa","Ħawħa","Lanġasa","Pistaċċa","Għajnbaqra","Rummiena","Lampuna","Frawla","Mandolina","Dulliegħa","Qaqoċċ","Asparagu","Brunġiel","Avokado","Fulu","Pitravi","Kaboċċa","Zunnarija","Karrotta","Pastarda","Karfus","Indivja","Qamħirrun","Qarabagħli","Ħjara","Tewm","Kurrat","Għazz","Ħassa","Faqqiegħ","Basla","Tursin","Piżelli","Patata","Qaraħmar","Rafanella","Ross","Insalata","Spinaċi","Tadama","Ġidra"],
+                    ["Nemla","Ors","Naħla","Għasfur","Barri","Farfett","Ġemel","Qattus","Baqra","Kukkudrill","Ċerva","Kelb","Delfin","Ħmar","Ħamiema","Papra","Iljufant","Ħuta","Dubbiena","Volpi","Żrinġ","Ġiraffa","Mogħża","Seqer","Qanfud","Tiġieġa","Ippopotamu","Żiemel","Ħaruf","Ljun","Gremxula","Xadin","Nemusa","Ġurdien","Bagħal","Gendus","Pagun","Faġan","Ħanżir","Ħamiem","Fenek","Far","Rinoċeronte","Serduq","Bumerin","Nagħġa","Serp","Brimba","Tigra","Żrinġ","Fekruna","Żunżan","Balena","Lupu","Żebra"]
+                ];
+
+                categories=eval(locale+"Categories");
+                chosenCategory = categories[Math.floor(Math.random() * categories.length)];
+                word = chosenCategory[Math.floor(Math.random() * chosenCategory.length)].toUpperCase();
+                word = word.replace(/-/g, " ")
+                localStorage.setItem("curWord", word);
+                buttons();
+
+                guesses = [];
+                lives = 10;
+                counter = 0;
+                space = 0;
+                result();
+                comments();
+                selectCat();
+            }
+            play()
+
+            // Reset
+            document.getElementById('reset').onclick = function () {
+                correct.parentNode.removeChild(correct);
+                letters.parentNode.removeChild(letters);
+                play();
+            }
+        }
+    </script>
+</body>
+<style>
+    body {
+        background-image: url("tools/background-dark-mountain.png");
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    h1 {
+        color: #FF8008;
+    }
+
+    body {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        color: #fff;
+        height: 100%;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .wrappper {
+        width: 100%;
+        margin: 0 auto;
+        /*Used to put div exactly in the middle. Centered.*/
+    }
+
+    .wrappper:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        text-transform: uppercase;
+        margin: 5px 0;
+    }
+
+    h1 {
+        font-size: 2.6em;
+    }
+
+    p,
+    h2 {
+        font-size: 1.6em;
+    }
+
+    h2,
+    p:not(#SecondTitle) {
+        color: #FFC837;
+    }
+
+    #buttons {
+        display: block;
+        margin: 0 auto;
+    }
+
+    #alphabet {
+        margin: 15px auto;
+        padding: 0;
+        max-width: 900px;
+    }
+
+    #alphabet:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    #alphabet li {
+        float: left;
+        margin: 0 10px 10px 0;
+        list-style: none;
+        width: 35px;
+        height: 30px;
+        padding-top: 3px;
+        background: #FF8008;
+        color: black;
+        cursor: pointer;
+        border-radius: 5px;
+        border: solid 1px #FFC837;
+    }
+
+    #my-word {
+        margin: 0;
+        display: block;
+        padding: 0;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    #my-word li {
+        position: relative;
+        list-style: none;
+        margin: 0;
+        display: inline-block;
+        padding: 0 10px;
+        font-size: 1.6em;
+    }
+
+    .active {
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        transition: all 0.3s ease-in-out;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    #lives {
+        font-size: 1.6em;
+        text-align: center;
+        display: block;
+    }
+
+    #close {
+        color: grey;
+    }
+
+    button:not(#close) {
+        background-image: linear-gradient(to right, #FF8008 0%, #FFC837 51%, #FF8008 100%)
+    }
+
+    button:not(#close) {
+        margin: 10px;
+        width: 180px;
+        padding: 18px 10px;
+        text-align: center;
+        text-transform: uppercase;
+        background-size: 200% auto;
+        transition: 0.5s;
+        color: white;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+    }
+
+    button:hover:not(#close) {
+        background-position: right center;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    button:active:not(#close) {
+        transition: 0s;
+        transform: translateY(1px);
+    }
+
+.switch {
+  position: absolute;
+  right:5px;
+  bottom:5px;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #FF8008;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #FF8008;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+    @media (max-width: 767px) {
+        #alphabet {
+            padding: 0 0 0 15px;
+        }
+        #buttons{
+            zoom: 1.14;
+        }
+    }
+
+    @media (min-width: 767px) {
+        #alphabet li:hover {
+            background: #FFC837;
+            border: solid 1px #FF8008;
+            color: #fff;
+        }
+    }
+
+    @media (max-width: 480px) {
+        #alphabet {
+            padding: 0 0 0 25px;
+        }
+        #buttons{
+            zoom: 1.14;
+        }
+    }
+</style>
+
+</html>

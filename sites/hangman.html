@@ -38,8 +38,13 @@
         let locale,langSlid
         let btnDiv = document.getElementById('buttons')
         
+        if(localStorage.getItem("locale")==null || localStorage.getItem("locale")=="")
+        {
+            localStorage.setItem("locale","EN")
+            location.reload()
+        }
+
         function localeCheck(){
-            console.log(locale)
             locale = localStorage.getItem("locale");
             locale =="EN"? LangSlider.checked = false : LangSlider.checked = true;
             locale =="EN"? btnDiv.style.maxWidth="600px": btnDiv.style.maxWidth='650px';
@@ -51,6 +56,7 @@
             localeCheck()
             location.reload()
         }
+
         localeCheck()
         
         const translations = {
@@ -86,9 +92,7 @@
                 'T', 'U', 'V', 'W', 'X', 'Z','Ż'];
 
             let alphabet = eval(locale+"Alphabet")
-            let categories;
-            let chosenCategory;
-            let word, guess, lives, counter, space;
+            let categories,chosenCategory, word, guess, lives, counter, space;
             let guesses = [];
 
             // Get elements

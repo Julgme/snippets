@@ -21,7 +21,7 @@
         style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
     <div class="wrapper">
         <h1>Hangman</h1><br>
-        <p data-i18n-key="secondTitle" id="SecondTitle">Guess the word below. You have 10 lives </p>
+        <p data-i18n-key="secondTitle" id="SecondTitle">Guess the word below</p>
     </div>
     <div class="wrapper">
         <div id="buttons">
@@ -61,11 +61,11 @@
         
         const translations = {
             "EN": {
-                "secondTitle": "Guess the word below. You have 10 lives",
+                "secondTitle": "Guess the word below",
                 "reset": "Play Again",
             },
             "MT": {
-                "secondTitle": "Aqta il-kelma. Għandek 10 ħajjiet",
+                "secondTitle": "Aqta il-kelma",
                 "reset": "Erġa Ilgħab",
             },
         };
@@ -171,7 +171,7 @@
                     else {
                         livesText = "lives"
                     }
-                    showLives.innerHTML = "You have " + lives + " " + livesText + " remaining.";
+                    showLives.innerHTML = "You have " + lives + " " + livesText + " remaining";
                 }
                 if (lives < 1) {                    
                     let MTLostText = `Ma qtajtx. Il-kelma kienet: ${word.toUpperCase()}`;
@@ -400,11 +400,11 @@
 
 .switch {
   position: absolute;
-  right:5px;
-  bottom:5px;
+  top:5px;
+  left:5px;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 30px;
+  height: 17px;
 }
 
 .switch input { 
@@ -427,10 +427,10 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
   background-color: white;
   transition: .4s;
 }
@@ -449,7 +449,7 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 17px;
 }
 
 .slider.round:before {

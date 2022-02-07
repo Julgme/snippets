@@ -21,7 +21,7 @@
         style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
     <div class="wrapper">
         <h1>Hangman</h1><br>
-        <p data-i18n-key="secondTitle" id="SecondTitle">Guess the word below</p>
+        <p data-i18n-key="secondTitle" id="secondTitle">Guess the word below</p>
     </div>
     <div class="wrapper">
         <div id="buttons">
@@ -33,10 +33,22 @@
         <div class="container">
             <button data-i18n-key="reset"id="reset">Play again</button>
         </div>
+        <div id="footer">
+        <div class="grid-container">
+            <div class="grid-item statisticLabel">Wins</div>
+            <div class="grid-item statisticLabel">Losses</div>
+            <div class="grid-item statisticLabel">Time</div>  
+            <div id="gamesWon" class="grid-item statisticValue">0</div>
+            <div id="gamesLost" class="grid-item statisticValue">0</div>
+            <div id="gameTime" class="grid-item statisticValue">00:00</div>  
+        </div>
     </div>
     <script>
         let locale,langSlid
         let btnDiv = document.getElementById('buttons')
+        let gamesWon = document.getElementById('gamesWon')    
+        let gamesLost = document.getElementById('gamesLost')
+        let gameTime = document.getElementById('gameTime')    
         
         if(localStorage.getItem("locale")==null || localStorage.getItem("locale")=="")
         {
@@ -92,8 +104,9 @@
                 'T', 'U', 'V', 'W', 'X', 'Z','Ż'];
 
             let alphabet = eval(locale+"Alphabet")
-            let categories,chosenCategory, word, guess, lives, counter, space;
+            let categories, chosenCategory, word, guess, lives, counter, space, interval;
             let guesses = [];
+            let initialClick = true
 
             // Get elements
             let showLives = document.getElementById("lives");
@@ -118,7 +131,7 @@
             // Select Catagory
             var selectCat = function () {
                 const ENCatgs = ["Animals","Films","Countries"];
-                const MTCatgs = ["Frott u Ħaxix","Annimali"];
+                const MTCatgs = ["Frott u Ħaxix","Annimali","Ikel"];
                 let ENCatText = "Category is:"
                 let MTCatText = "Il-Kategorija hija:"
                 if (chosenCategory === categories[0]) {
@@ -129,7 +142,6 @@
                     categoryName.innerHTML = `${eval(locale+"CatText")} ${eval(locale+"Catgs[2]")}`
                 }
             }
-
 
             // Create ul
             function result() {
@@ -171,18 +183,24 @@
                     else {
                         livesText = "lives"
                     }
-                    showLives.innerHTML = "You have " + lives + " " + livesText + " remaining";
+                    showLives.innerHTML = "You have " + lives + " " + livesText;
                 }
                 if (lives < 1) {                    
                     let MTLostText = `Ma qtajtx. Il-kelma kienet: ${word.toUpperCase()}`;
                     let ENLostText = `Game Over. The word was: ${word.toUpperCase()}`;
                     showLives.innerHTML = eval(locale+"LostText")
+                    gamesLost.innerHTML = (parseInt(gamesLost.innerHTML) + 1)
+                    clearInterval(interval)
+                }
+                if (counter + space === guesses.length) {
+                    gamesWon.innerHTML = (parseInt(gamesWon.innerHTML) + 1)
+                    clearInterval(interval)
                 }
                 for (var i = 0; i < guesses.length; i++) {
                     if (counter + space === guesses.length) {
                         let MTWonText = "Proset! Qtajt il-kelma"
                         let ENWonText = "Congratulations! You Win!"
-                        showLives.innerHTML = eval(locale+"WonText");         
+                        showLives.innerHTML = eval(locale+"WonText");   
                     }
                 }
             }
@@ -190,6 +208,10 @@
             // OnClick Function
             function check() {
                 list.onclick = function () {
+                    if(initialClick == true){
+                        startTimer()
+                        initialClick = false
+                    }
                     if (counter + space !== guesses.length && lives != 0) {
                         var guess = (this.innerHTML);
                         this.setAttribute("class", "active");
@@ -220,7 +242,8 @@
                 ];
                 MTCategories = [
                     ["Lewża","Tuffieħa","Berquqa","Tuta","Ċirasa","Qastan","Tamla","Tina","Għenba","Ġellewża","Lumija","Naspla","Ġewża","Larinġa","Ħawħa","Lanġasa","Pistaċċa","Għajnbaqra","Rummiena","Lampuna","Frawla","Mandolina","Dulliegħa","Qaqoċċ","Asparagu","Brunġiel","Avokado","Fulu","Pitravi","Kaboċċa","Zunnarija","Karrotta","Pastarda","Karfus","Indivja","Qamħirrun","Qarabagħli","Ħjara","Tewm","Kurrat","Għazz","Ħassa","Faqqiegħ","Basla","Tursin","Piżelli","Patata","Qaraħmar","Rafanella","Ross","Insalata","Spinaċi","Tadama","Ġidra"],
-                    ["Nemla","Ors","Naħla","Għasfur","Barri","Farfett","Ġemel","Qattus","Baqra","Kukkudrill","Ċerva","Kelb","Delfin","Ħmar","Ħamiema","Papra","Iljufant","Ħuta","Dubbiena","Volpi","Żrinġ","Ġiraffa","Mogħża","Seqer","Qanfud","Tiġieġa","Ippopotamu","Żiemel","Ħaruf","Ljun","Gremxula","Xadin","Nemusa","Ġurdien","Bagħal","Gendus","Pagun","Faġan","Ħanżir","Ħamiem","Fenek","Far","Rinoċeronte","Serduq","Bumerin","Nagħġa","Serp","Brimba","Tigra","Żrinġ","Fekruna","Żunżan","Balena","Lupu","Żebra"]
+                    ["Nemla","Ors","Naħla","Għasfur","Barri","Farfett","Ġemel","Qattus","Baqra","Kukkudrill","Ċerva","Kelb","Delfin","Ħmar","Ħamiema","Papra","Iljufant","Ħuta","Dubbiena","Volpi","Żrinġ","Ġiraffa","Mogħża","Seqer","Qanfud","Tiġieġa","Ippopotamu","Żiemel","Ħaruf","Ljun","Gremxula","Xadin","Nemusa","Ġurdien","Bagħal","Gendus","Pagun","Faġan","Ħanżir","Ħamiem","Fenek","Far","Rinoċeronte","Serduq","Bumerin","Nagħġa","Serp","Brimba","Tigra","Żrinġ","Fekruna","Żunżan","Balena","Lupu","Żebra"],
+                    ["Żebbuġ-Mimli","Fażola","Ful-bit-tewm","Bigilla","Galletti","Bebbux","Kusksu","Brodu","Minestra","Kusksu","Soppa-tal-armla","Aljotta","Kawlata","Imqarrun","Timpana","Ravjul","Ross-il-forn","Froġa-tat-tarja","Meat","Stuffat-tal-fenek","Fenek-moqli","Braġjoli","Laħam-taż-żiemel","Zalzett-tal-Malti","Mazzit","Kalamari","Lampuka","Stuffat-tal-qarnit","Qarnit-bit-tewm","Klamari-mimlija","Pixxispad","Ġbejna","Froġa","Balbuljata","Qargħabagħli-Mimli","Qarabagħli-mimli","Brunġiel-mimli","Bżar-mimli","Patata-l-Forn","Kapunata","Aljoli","Qaqoċċ-Mimli","Pastizzi","Qassatat","Torta-tal-irkotta","Sfineġ","Torti-tar-ross","Ħobża-tal-Malti","Ftira","Ħobż-biż-żejt","Ftira-Għawdxija","Qagħaq-tal-Appostli","Qagħaq-tal-ħmira","Imqaret","Kannoli-tal-irkotta","Ravjul-moqli","Torti-tat-tamal","Torti-tal-marmorat","Ħelwa-tat-Tork","Pudina-tal-ħobż","Prinjolata","Kwareżimal","Ftira-tar-Randan","Karamelli-tal-ħarrub","Figolla","Ħobża-ta-San-Martin","Qagħaq-tal-għasel","Għadam-tal-mejtin","Zeppoli","Ġulepp-tal-ħarrub","Imbuljuta","Kinnie","Bajtar-tax-xewk"]
                 ];
 
                 categories=eval(locale+"Categories");
@@ -244,9 +267,24 @@
             document.getElementById('reset').onclick = function () {
                 correct.parentNode.removeChild(correct);
                 letters.parentNode.removeChild(letters);
+                gameTime.innerText = "00:00"
+                clearInterval(interval)
+                initialClick = true
                 play();
             }
-        }
+        
+    function startTimer() {
+    let timer = 1;
+    interval = setInterval(function () {
+        let min = parseInt(timer / 60, 10)
+        let sec = parseInt(timer % 60, 10)
+        min = min < 10 ? "0" + min : min
+        sec = sec < 10 ? "0" + sec : sec
+        timer ++;
+        gameTime.innerText = `${min}:${sec}` 
+      }, 1000);
+    }
+}
     </script>
 </body>
 <style>
@@ -288,7 +326,6 @@
     h1 {     
         color: #FF8008;
         font-size: 2.5em;
-        margin-bottom: -10px;
     }
 
     p,
@@ -297,7 +334,7 @@
     }
 
     h2,
-    p:not(#SecondTitle) {
+    p:not(#secondTitle) {
         color: #FFC837;
     }
 
@@ -397,7 +434,7 @@
 
 .switch {
   position: absolute;
-  top:5px;
+  top:10px;
   left:5px;
   display: inline-block;
   width: 30px;
@@ -453,6 +490,34 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-rows: 20px 30px;
+  grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+  text-align: center;
+}
+
+.statisticLabel{
+    border-top: 1px solid #FFC837;
+    font-size: 13px;
+    font-weight: bold;
+    color:#FF8008;
+}
+
+.statisticValue{
+    font-size: 20px;
+}
+
+#footer{
+position:fixed;
+width:101%;
+bottom:0;
+margin-left:-10px;
+}
+
     @media (max-width: 767px) {
         #alphabet {
             padding: 0 0 0 15px;
@@ -474,8 +539,15 @@ input:checked + .slider:before {
         #alphabet {
             padding: 0 0 0 25px;
         }
-        #buttons{
-            zoom: 1.14;
+        #secondTitle{
+            display:none;
+        }
+        h1 {     
+        font-size: 2.5em;
+        margin-bottom: -20px;
+        }
+        #categoryName{
+            margin-top: -10px
         }
     }
 </style>

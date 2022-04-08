@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Coloured Spheres</title>
+</head>
+
+<body>
+    <button id="close" onclick=window.history.go(-1)
+        style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
+    <div class="container">
+        <h1>Spheres</h1>
+        <div id="buttonContainer">
+            <button class=btn-grad id="restartBtn" onclick="Restart()">Clear</button>
+            <button class=btn-grad id="randomiseAll" onclick="Randomise()">Randomise</button>
+        </div>
+        <br>
+        <div id="board">
+            <div class="box" id='0' refno="b0"></div>
+            <div class="box" id='1' refno="b1"></div>
+            <div class="box" id='2' refno="b2"></div>
+            <div class="box" id='3' refno="b3"></div>
+            <div class="box" id='4' refno="b4"></div>
+            <div class="box" id='5' refno="b5"></div>
+            <div class="box" id='6' refno="b6"></div>
+            <div class="box" id='7' refno="b7"></div>
+            <div class="box" id='8' refno="b8"></div>
+        </div>
+    </div>
+</body>
+<script>
+    const boxes = Array.from(document.getElementsByClassName('box'))
+
+    const boardEvents = () => {
+        boxes.forEach(box => {
+            box.addEventListener('click', boxClicked)
+            box.innerHTML="?"
+            box.style.border = "0.5px solid #083990"
+        });
+    }
+
+    const boxClicked = (element) => {
+        element.target.style.border = "none"
+        element.target.innerHTML = ""
+        
+        let r=Math.floor(Math.random() * 256);
+        let g=Math.floor(Math.random() * 256);
+        let b=Math.floor(Math.random() * 256);
+        let randomColour = `rgb(${r}, ${g}, ${b})`;
+        
+        element.target.style.background = "radial-gradient(circle at 100px 100px,"+randomColour+", #000)"
+        console.log(`Sphere ${element.target.id} - ${randomColour}`)
+    }
+
+    Restart = () => {
+        boxes.forEach(box => {
+            box.style.border = "0.5px solid #083990"
+            box.style.background = "transparent"
+            box.innerHTML="?"
+            console.clear()
+        })
+    }
+
+    Randomise = () => {
+        boxes.forEach(box => {
+            let r=Math.floor(Math.random() * 256);
+            let g=Math.floor(Math.random() * 256);
+            let b=Math.floor(Math.random() * 256);
+            let randomColour = `rgb(${r}, ${g}, ${b})`;
+            box.style.background = "radial-gradient(circle at 100px 100px,"+randomColour+", #000)"
+            box.style.border = "none"
+            box.innerHTML=""
+            console.log(`Sphere ${box.id} - ${randomColour}`)
+        })
+    }
+
+    boardEvents()
+</script>
+<style>
+    h1 {
+        color: #1CB5E0;
+        margin-bottom:15px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    body {
+        background-image: url("tools/background-dark-mountain.png");
+        font-family: sans-serif;
+    }
+
+    .container {
+        height: 100vh;
+        padding: 40px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    #board {
+        width: 375px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .box {
+        height: 125px;
+        width: 125px;
+        font-size: 100px;
+        cursor: pointer;
+        color:#1CB5E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+         .btn-grad {
+            background-image: linear-gradient(to right, #000046 0%, #1CB5E0  51%, #000046  100%);
+            margin-left: 10px;
+            padding: 15px 20px;
+            width:125px;
+            text-align: center;
+            text-transform: uppercase;
+            background-size: 200% auto;
+            color: whitesmoke;            
+            border-radius: 10px;
+            border:none;
+
+          }
+          .btn-grad:active{
+            transform: translateY(5px);
+            transition: none;
+          }
+
+          @media only screen and (min-width: 600px) {
+          .btn-grad:hover {
+            transition: 0.5s;
+            background-position: right center;
+            text-decoration: none;
+          }
+        }
+        @media only screen and (max-width: 599px) {
+            h1{
+              margin-top: -100px;
+          }
+
+          #buttonContainer{
+            margin-bottom: 50px;
+ 
+          }
+        }
+
+         
+</style>
+</html>

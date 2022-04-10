@@ -29,39 +29,39 @@
             <div class="box signs" id='Clear' refno="b1" onclick="Clear()">
                 <img id="backspaceImage" src="/snippets/sites/tools/backspace.svg">
             </div>
-            <div class="box signs" id='2' refno="b2" onclick="Sqrt()">
+            <div class="box signs" id='SQRT' refno="b2" onclick="Sqrt()">
                 <img id="sqrtImage" src="/snippets/sites/tools/square-root-sign.svg">
             </div>
-            <div class="box signs" id='3' refno="b3" onclick="Divide()">
+            <div class="box signs" id='Div' refno="b3" onclick="Divide()">
                 <img id="divideImage" src="/snippets/sites/tools/divide-sign.svg">
             </div>
-            <div class="box dig" id='4' refno="b4">7</div>
-            <div class="box dig" id='5' refno="b5">8</div>
-            <div class="box dig" id='6' refno="b6">9</div>
-            <div class="box signs" id='7' refno="b7" onclick="Multiply()">x</div>
-            <div class="box dig" id='8' refno="b8">4</div>
-            <div class="box dig" id='9' refno="b9">5</div>
-            <div class="box dig" id='10' refno="b10">6</div>
-            <div class="box signs inc" id='11' refno="b11" onclick="Subtract()">
+            <div class="box dig" id='k7' refno="b4">7</div>
+            <div class="box dig" id='k8' refno="b5">8</div>
+            <div class="box dig" id='k9' refno="b6">9</div>
+            <div class="box signs" id='Mult' refno="b7" onclick="Multiply()">x</div>
+            <div class="box dig" id='k4' refno="b8">4</div>
+            <div class="box dig" id='k5' refno="b9">5</div>
+            <div class="box dig" id='k6' refno="b10">6</div>
+            <div class="box signs inc" id='Subt' refno="b11" onclick="Subtract()">
                 <img id="minusSignImage" src="/snippets/sites/tools/minus-sign.svg">
             </div>
-            <div class="box dig" id='12' refno="b12">1</div>
-            <div class="box dig" id='13' refno="b13">2</div>
-            <div class="box dig" id='14' refno="b14">3</div>
-            <div class="box signs" id='15' refno="b15" onclick="Add()">+</div>
+            <div class="box dig" id='k1' refno="b12">1</div>
+            <div class="box dig" id='k2' refno="b13">2</div>
+            <div class="box dig" id='k3' refno="b14">3</div>
+            <div class="box signs" id='Add' refno="b15" onclick="Add()">+</div>
             <div class="box oth" id='Invert' refno="b16" onclick="Invert()">+/-</div>
-            <div class="box dig" id='17' refno="b17">0</div>
-            <div class="box oth" id='18' refno="b18" onclick="Dot()">.</div>
-            <div class="box equals inc" id='19' refno="b19" onclick="Equal()">=</div>
+            <div class="box dig" id='k0' refno="b17">0</div>
+            <div class="box oth" id='Dot' refno="b18" onclick="Dot()">.</div>
+            <div class="box equals inc" id='Equal' refno="b19" onclick="Equal()">=</div>
         </div>
     </div>
 </body>
 <script>
+
     let minorBar = document.getElementById('minorBar');
     let majorBar = document.getElementById('majorBar');
-    let nextDigitClears = false, EqualDigitClears = false, pointy, sign, result, pressed,numClick, newNum = false
+    let nextDigitClears = false, EqualDigitClears = false, pointy, sign, result, pressed, numClick, newNum = false
 
-    const boxes = Array.from(document.getElementsByClassName('box'))
     const digits = Array.from(document.getElementsByClassName('dig'))
 
 
@@ -72,31 +72,44 @@
         });
     }
 
+    function Debug(){
+        console.log("NDC: "+nextDigitClears)
+        console.log("EDC: "+EqualDigitClears)
+        console.log("Pointy: "+pointy)
+    }
     const digitAdded = (number) => {
-        if(newNum == true){
-            numClick = pressed
-            newNum = false
-        }
-        else{
-            numClick = number.target.innerHTML
-            newNum=false
-        }
-
-        pointy = majorBar.innerHTML == "0."
-        if (EqualDigitClears == true) {
-            minorBar.innerHTML = ""
-        }
-
-        if ((majorBar.innerHTML).length < 11) {
-            if ((majorBar.innerHTML == "" || majorBar.innerHTML == 0 || nextDigitClears == true || EqualDigitClears == true) && pointy == false) {
-                majorBar.innerHTML = numClick
-                nextDigitClears = false
-                EqualDigitClears = false
+        if (pressed != " ") {
+            if (newNum == true) {
+                numClick = pressed
+                newNum = false
             }
             else {
-                let tempBar = majorBar.innerHTML
-                let combined =              
-                majorBar.innerHTML = tempBar+numClick   
+                numClick = number.target.innerHTML
+                newNum = false
+            }
+
+            pointy = majorBar.innerHTML == "0."
+            if (EqualDigitClears == true) {
+                minorBar.innerHTML = ""
+            }
+
+            if ((majorBar.innerHTML).length < 11) {
+                if ((majorBar.innerHTML == "" || majorBar.innerHTML == 0 || nextDigitClears == true || EqualDigitClears == true) && pointy == false) {
+                    majorBar.innerHTML = numClick
+                    nextDigitClears = false
+                    EqualDigitClears = false
+                }
+                else {
+                    let tempBar = majorBar.innerHTML
+                    nextDigitClears = false
+                    EqualDigitClears = false
+                    majorBar.innerHTML = tempBar + numClick
+                }
+            }
+
+            else if ((majorBar.innerHTML).length == 11 && (nextDigitClears == true || EqualDigitClears == true)) {
+                majorBar.innerHTML = numClick
+                nextDigitClears = false
             }
         }
     }
@@ -106,8 +119,19 @@
             let numClick = "."
 
             if ((majorBar.innerHTML).includes(".") == false) {
+                if(nextDigitClears == true || EqualDigitClears == true){
+                    majorBar.innerHTML = 0+"."
+                    minorBar.innerHTML=""
+                }
+                else{
                 let tempBar = majorBar.innerHTML
                 majorBar.innerHTML = tempBar + numClick
+                }
+            }
+            else{
+                if(nextDigitClears == true || EqualDigitClears == true){
+                    majorBar.innerHTML = 0+"."
+                }
             }
         }
     }
@@ -156,11 +180,8 @@
     }
 
     function Add() {
-        console.log(minorBar.innerHTML)
-        console.log((minorBar.innerHTML).endsWith("-"))
-        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
-        {}
-        else{
+        if (((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷')) && nextDigitClears == true) { }
+        else {
             Equal()
         }
         minorBar.innerHTML = majorBar.innerHTML + " +"
@@ -170,33 +191,30 @@
     }
 
     function Subtract() {
-        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
-        {}
-        else{
+        if (((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷')) && nextDigitClears == true) { }
+        else {
             Equal()
-        }        minorBar.innerHTML = majorBar.innerHTML + " -"
+        } minorBar.innerHTML = majorBar.innerHTML + " -"
         nextDigitClears = true
         EqualDigitClears = false
         sign = "Subtract"
     }
 
     function Multiply() {
-        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
-        {}
-        else{
+        if (((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷')) && nextDigitClears == true) { }
+        else {
             Equal()
-        }        minorBar.innerHTML = majorBar.innerHTML + " x"
+        } minorBar.innerHTML = majorBar.innerHTML + " x"
         nextDigitClears = true
         EqualDigitClears = false
         sign = "Multiply"
     }
 
     function Divide() {
-        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
-        {}
-        else{
+        if (((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷')) && nextDigitClears == true) { }
+        else {
             Equal()
-        }        minorBar.innerHTML = majorBar.innerHTML + " ÷"
+        } minorBar.innerHTML = majorBar.innerHTML + " ÷"
         nextDigitClears = true
         EqualDigitClears = false
         sign = "Divide"
@@ -207,7 +225,7 @@
             if (minorBar.innerHTML != "") {
                 let val1 = minorBar.innerHTML.slice(0, -2)
                 let val2 = majorBar.innerHTML
-                minorBar.innerHTML = minorBar.innerHTML +" " + majorBar.innerHTML + " ="
+                minorBar.innerHTML = minorBar.innerHTML + " " + majorBar.innerHTML + " ="
                 if (sign == "ADD") {
                     result = val1 - -val2
                     EqualDigitClears = true
@@ -229,38 +247,54 @@
             }
         }
     }
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    const ColChange = async (id) => {
+        document.getElementById(id).classList.add('flashit');
+        await delay(100);
+        document.getElementById(id).classList.remove('flashit');
+    }
+
     document.addEventListener("keydown", function onEvent(event) {
         pressed = event.key
 
-    if (pressed >=0 && pressed <=9){
-        newNum = true   
-        digitAdded();
-    }
-    else if(pressed=="."){
-        Dot();
-    }
-    else if(pressed=="+"){
-        Add()
-    }
-    else if(pressed=="-"){
-        Subtract()
-    }
-    else if(pressed=="/"){
-        Divide()
-    }
-    else if(pressed=="*"){
-        Multiply()
-    }
-    else if(pressed=="=" || pressed=="Enter"){
-        Equal()
-    }
-    else if(pressed=="Delete"){
-        AllClear()
-    }
-    else if(pressed=="Backspace"){
-        Clear()
-    }
-})
+        if (pressed >= 0 && pressed <= 9 && pressed != " ") {
+            newNum = true
+            digitAdded();
+            ColChange(`k${pressed}`)
+        }
+        else if (pressed == ".") {
+            Dot();
+            ColChange('Dot')
+        }
+        else if (pressed == "+") {
+            Add()
+            ColChange('Add')
+        }
+        else if (pressed == "-") {
+            Subtract()
+            ColChange('Subt')
+        }
+        else if (pressed == "/") {
+            Divide()
+            ColChange('Div')
+        }
+        else if (pressed == "*") {
+            Multiply()
+            ColChange('Mult')
+        }
+        else if (pressed == "=" || pressed == "Enter") {
+            Equal()
+            ColChange('Equal')
+        }
+        else if (pressed == "Delete" || pressed == "Escape") {
+            AllClear()
+            ColChange('AC')
+        }
+        else if (pressed == "Backspace") {
+            Clear()
+            ColChange('Clear')
+        }
+    })
     boardEvents()
 </script>
 <style>
@@ -311,10 +345,11 @@
         border: 1px solid;
         border-radius: 15px;
         font-size: 30px;
-        box-shadow: 1px 1px;
+        box-shadow: 1px 1.5px black;
     }
 
-    .box:active {
+    .box:active,
+    .flashit {
         filter: brightness(75%);
     }
 

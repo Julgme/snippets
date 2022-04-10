@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Calculator</title>
+</head>
+
+<body>
+    <button id="close" onclick=window.history.go(-1) style="position:absolute;right:0.2%;top:0.5%;"><span
+            class="glyphicon glyphicon-remove"></span></button>
+    <div class="container">
+        <h1>Calculator</h1>
+        <div id="header">
+            <div id="tm">Julian</div>
+        </div>
+        <div id="formulas">
+            <div id="minorBar"></div>
+            <div id="majorBar">0</div>
+        </div>
+        <div id="board">
+            <div class="box signs" id='AC' refno="b0" onclick="AllClear()">AC</div>
+            <div class="box signs" id='Clear' refno="b1" onclick="Clear()">
+                <img id="backspaceImage" src="/Snippets/sites/tools/backspace.svg">
+            </div>
+            <div class="box signs" id='2' refno="b2" onclick="Sqrt()">
+                <img id="sqrtImage" src="/Snippets/sites/tools/square-root-sign.svg">
+            </div>
+            <div class="box signs" id='3' refno="b3" onclick="Divide()">
+                <img id="divideImage" src="/Snippets/sites/tools/divide-sign.svg">
+            </div>
+            <div class="box dig" id='4' refno="b4">7</div>
+            <div class="box dig" id='5' refno="b5">8</div>
+            <div class="box dig" id='6' refno="b6">9</div>
+            <div class="box signs" id='7' refno="b7" onclick="Multiply()">x</div>
+            <div class="box dig" id='8' refno="b8">4</div>
+            <div class="box dig" id='9' refno="b9">5</div>
+            <div class="box dig" id='10' refno="b10">6</div>
+            <div class="box signs inc" id='11' refno="b11" onclick="Subtract()">
+                <img id="minusSignImage" src="/Snippets/sites/tools/minus-sign.svg">
+            </div>
+            <div class="box dig" id='12' refno="b12">1</div>
+            <div class="box dig" id='13' refno="b13">2</div>
+            <div class="box dig" id='14' refno="b14">3</div>
+            <div class="box signs" id='15' refno="b15" onclick="Add()">+</div>
+            <div class="box oth" id='Invert' refno="b16" onclick="Invert()">+/-</div>
+            <div class="box dig" id='17' refno="b17">0</div>
+            <div class="box oth" id='18' refno="b18" onclick="Dot()">.</div>
+            <div class="box equals inc" id='19' refno="b19" onclick="Equal()">=</div>
+        </div>
+    </div>
+</body>
+<script>
+    let minorBar = document.getElementById('minorBar');
+    let majorBar = document.getElementById('majorBar');
+    let nextDigitClears = false, EqualDigitClears = false, pointy, sign, result, pressed,numClick, newNum = false
+
+    const boxes = Array.from(document.getElementsByClassName('box'))
+    const digits = Array.from(document.getElementsByClassName('dig'))
+
+
+    const boardEvents = () => {
+
+        digits.forEach(dig => {
+            dig.addEventListener('click', digitAdded)
+        });
+    }
+
+    const digitAdded = (number) => {
+        if(newNum == true){
+            numClick = pressed
+            newNum = false
+        }
+        else{
+            numClick = number.target.innerHTML
+            newNum=false
+        }
+
+        pointy = majorBar.innerHTML == "0."
+        if (EqualDigitClears == true) {
+            minorBar.innerHTML = ""
+        }
+
+        if ((majorBar.innerHTML).length < 11) {
+            if ((majorBar.innerHTML == "" || majorBar.innerHTML == 0 || nextDigitClears == true || EqualDigitClears == true) && pointy == false) {
+                majorBar.innerHTML = numClick
+                nextDigitClears = false
+                EqualDigitClears = false
+            }
+            else {
+                let tempBar = majorBar.innerHTML
+                let combined =              
+                majorBar.innerHTML = tempBar+numClick   
+            }
+        }
+    }
+
+    function Dot() {
+        if ((majorBar.innerHTML).length < 11) {
+            let numClick = "."
+
+            if ((majorBar.innerHTML).includes(".") == false) {
+                let tempBar = majorBar.innerHTML
+                majorBar.innerHTML = tempBar + numClick
+            }
+        }
+    }
+
+    function divideFirst() {
+        if (minorBar.innerHTML == "0 ÷") {
+            nextDigitClears = true
+        }
+    }
+
+    function Sqrt() {
+        let val = majorBar.innerHTML
+        minorBar.innerHTML = val + " √"
+        val = Math.sqrt(val)
+        let sqrt = (Math.round(val * 10000000000) / 10000000000);
+        majorBar.innerHTML = sqrt;
+        nextDigitClears = true
+    }
+
+    function AllClear() {
+        minorBar.innerHTML = "";
+        majorBar.innerHTML = 0;
+    }
+    function Clear() {
+        let val = majorBar.innerHTML
+        val = val.slice(0, -1);
+        if ((majorBar.innerHTML).length == 1 || ((majorBar.innerHTML).length == 2 && (majorBar.innerHTML).includes("-"))) {
+            majorBar.innerHTML = 0;
+        }
+        else {
+            majorBar.innerHTML = val;
+        }
+        if (nextDigitClears == true || EqualDigitClears == true) {
+            minorBar.innerHTML = ""
+        }
+    }
+
+    function Invert() {
+        let val = parseFloat(majorBar.innerHTML)
+        val = val * (-1);
+        majorBar.innerHTML = val
+
+        if (nextDigitClears == true) {
+            minorBar.innerHTML = ""
+        }
+    }
+
+    function Add() {
+        console.log(minorBar.innerHTML)
+        console.log((minorBar.innerHTML).endsWith("-"))
+        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
+        {}
+        else{
+            Equal()
+        }
+        minorBar.innerHTML = majorBar.innerHTML + " +"
+        nextDigitClears = true
+        EqualDigitClears = false
+        sign = "ADD"
+    }
+
+    function Subtract() {
+        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
+        {}
+        else{
+            Equal()
+        }        minorBar.innerHTML = majorBar.innerHTML + " -"
+        nextDigitClears = true
+        EqualDigitClears = false
+        sign = "Subtract"
+    }
+
+    function Multiply() {
+        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
+        {}
+        else{
+            Equal()
+        }        minorBar.innerHTML = majorBar.innerHTML + " x"
+        nextDigitClears = true
+        EqualDigitClears = false
+        sign = "Multiply"
+    }
+
+    function Divide() {
+        if((minorBar.innerHTML).endsWith('+') || (minorBar.innerHTML).endsWith('-') || (minorBar.innerHTML).endsWith('x') || (minorBar.innerHTML).endsWith('÷'))
+        {}
+        else{
+            Equal()
+        }        minorBar.innerHTML = majorBar.innerHTML + " ÷"
+        nextDigitClears = true
+        EqualDigitClears = false
+        sign = "Divide"
+    }
+
+    function Equal() {
+        if ((minorBar.innerHTML).includes("=") == false) {
+            if (minorBar.innerHTML != "") {
+                let val1 = minorBar.innerHTML.slice(0, -2)
+                let val2 = majorBar.innerHTML
+                minorBar.innerHTML = minorBar.innerHTML +" " + majorBar.innerHTML + " ="
+                if (sign == "ADD") {
+                    result = val1 - -val2
+                    EqualDigitClears = true
+                }
+                else if (sign == "Subtract") {
+                    result = val1 - val2
+                    EqualDigitClears = true
+                }
+                else if (sign == "Multiply") {
+                    result = val1 * val2
+                    EqualDigitClears = true
+                }
+                else if (sign == "Divide") {
+                    result = val1 / val2
+                    EqualDigitClears = true
+                }
+                let answer = (Math.round(result * 10000000000) / 10000000000)
+                majorBar.innerHTML = answer
+            }
+        }
+    }
+    document.addEventListener("keydown", function onEvent(event) {
+        pressed = event.key
+
+    if (pressed >=0 && pressed <=9){
+        newNum = true   
+        digitAdded();
+    }
+    else if(pressed=="."){
+        Dot();
+    }
+    else if(pressed=="+"){
+        Add()
+    }
+    else if(pressed=="-"){
+        Subtract()
+    }
+    else if(pressed=="/"){
+        Divide()
+    }
+    else if(pressed=="*"){
+        Multiply()
+    }
+    else if(pressed=="=" || pressed=="Enter"){
+        Equal()
+    }
+    else if(pressed=="Delete"){
+        AllClear()
+    }
+    else if(pressed=="Backspace"){
+        Clear()
+    }
+})
+    boardEvents()
+</script>
+<style>
+    h1 {
+        color: #1CB5E0;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    body {
+        background-image: url("tools/background-dark-mountain.png");
+        font-family: sans-serif;
+    }
+
+    .container {
+        height: 100vh;
+        padding: 40px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    #board {
+        width: 265px;
+        display: flex;
+        flex-wrap: wrap;
+        background-color: grey;
+        border-radius: 0 0 15px 15px;
+    }
+
+    .box {
+        height: 50px;
+        margin-left: 5px;
+        margin-bottom: 5px;
+        width: 60px;
+        font-size: 100px;
+        cursor: pointer;
+        color: #1CB5E0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid;
+        border-radius: 15px;
+        font-size: 30px;
+        box-shadow: 1px 1px;
+    }
+
+    .box:active {
+        filter: brightness(75%);
+    }
+
+    .equals {
+        background-color: red;
+        color: black;
+    }
+
+    .signs {
+        background-color: #ff9a31;
+        color: black;
+    }
+
+    .dig,
+    .oth {
+        background-color: #2f3130;
+        color: grey;
+    }
+
+    #formulas {
+        background-color: darkgrey;
+        width: 265px;
+        height: 150px;
+    }
+
+    #header {
+        background-color: grey;
+        width: 265px;
+        height: 40px;
+        border-radius: 15px 15px 0 0;
+    }
+
+    #tm {
+        color: black;
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: 10px;
+        padding-top: 5px;
+        font-family: Brush Script MT, Brush Script Std, cursive;
+    }
+
+    [refno="b0"],
+    [refno="b1"],
+    [refno="b2"],
+    [refno="b3"] {
+        margin-top: 5px;
+    }
+
+    #minorBar {
+        margin-top: 10px;
+        height: 30px;
+        color: grey;
+        text-align: right;
+        font-size: 20px;
+        padding-right: 5px;
+    }
+
+    #majorBar {
+        margin-top: 10px;
+        color: black;
+        height: 50px;
+        text-align: right;
+        font-size: 40px;
+        padding-right: 5px;
+    }
+
+    #minusSignImage {
+        height: 20px;
+        width: 90px
+    }
+
+    #sqrtImage {
+        height: 32px;
+    }
+
+    #divideImage {
+        height: 28px;
+    }
+
+    #backspaceImage {
+        height: 45px;
+    }
+
+    .inc {
+        font-size: 42px;
+    }
+
+    @media only screen and (max-width: 599px) {
+        .container {
+            zoom: 140%;
+            margin-top: 240px;
+            max-height: 1vh;
+        }
+
+        h1 {
+            margin-bottom: 50px;
+        }
+    }
+</style>
+
+</html>

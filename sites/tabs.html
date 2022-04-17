@@ -15,43 +15,90 @@
 <body>
     <button id="close" onclick="location.href='/snippets/index.html';"
         style="position:absolute;right:0.2%;top:0.5%;"><span class="glyphicon glyphicon-remove"></span></button>
-    <h2>Click a tab to view the image</h2>
-    <button id="b_Home" class="btn highlight" onclick="showPanel('Home')" href="Home"><span
-            class="glyphicon glyphicon-home"></span></button>
-    <button id="b_panelA" class="btn" onclick="showPanel('panelA')" href="#A">Tab A</button>
-    <button id="b_panelB" class="btn" onclick="showPanel('panelB')" href="#B">Tab B</button>
-    <button id="b_panelC" class="btn" onclick="showPanel('panelC')" href="#C">Tab C</button> <br>
-    <a href="extra"><br></a>
-    <div id="Home" class="panel"><img class="img-rounded"
-            src="https://media.istockphoto.com/photos/question-mark-picture-id1060573244?k=20&m=1060573244&s=612x612&w=0&h=Xk_DdOodJj3VDAZfouo2364s5SFZXUW02v3sOyXlNVE="
-            alt="Home"></div>
-    <div id="panelA" class="panel hide"><b>Christmas Tree</b> <br> <img class="img-rounded"
-            src="https://www.history.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTY4OTA4MzI0ODc4NjkwMDAw/christmas-tree-gettyimages-1072744106.jpg"
-            alt="Christmas Tree"></div>
-    <div id="panelB" class="panel hide"><b>SURPRISE</b> <br><img class="img-rounded"
-            src="https://pngfreeimg.com/wp-content/uploads/2021/03/Banana-1024x1024.png" alt="Banana"></div>
-    <div id="panelC" class="panel hide"><b>Geralt of Rivia</b> <br> <img class="img-rounded"
-            src="tools/witcher-image.jpg" alt="Geralt of Rivea"></div>
-
+    <div class="container">
+        <h2>Click to view the image</h2>
+        <div>
+            <button id="b_Home" class="btn highlight" onclick="showPanel('Home')" href="Home"><span
+                    class="glyphicon glyphicon-home"></span></button>
+            <button id="b_panelA" class="btn" onclick="showPanel('panelA')" href="#A">Tab A</button>
+            <button id="b_panelB" class="btn" onclick="showPanel('panelB')" href="#B">Tab B</button>
+            <button id="b_panelC" class="btn" onclick="showPanel('panelC')" href="#C">Tab C</button>
+        </div>
+        <div id="contentTitle">Click tab to View Image</div>
+        <div id="Home" class="panel"><img class="img-rounded"
+                src="https://media.istockphoto.com/photos/question-mark-picture-id1060573244?k=20&m=1060573244&s=612x612&w=0&h=Xk_DdOodJj3VDAZfouo2364s5SFZXUW02v3sOyXlNVE="
+                alt="Home"></div>
+        <div id="panelA" class="panel hide"> <img id="panelAI" class="img-rounded"></div>
+        <div id="panelB" class="panel hide"><img id="panelBI" class="img-rounded"></div>
+        <div id="panelC" class="panel hide"><img id="panelCI" class="img-rounded"></div>
+        <div id="footer">
+            <div class="grid-container">
+                <div class="grid-item statisticLabel">Guesses</div>
+                <div class="grid-item statisticLabel">Surprises</div>
+                <div id="gamesWon" class="grid-item statisticValue">0</div>
+                <div id="gamesLost" class="grid-item statisticValue">0</div>
+            </div>
+        </div>
+    </div>
 
     <script>
+        let randomNum, prevNum = 13, prevPrev = 14, guesses = 0, wrong = 0
+        const titles = ["Christmas", "Geralt of Rivia", "Fellaini", "Sadness and Sorrow", "Milan", "Easter", "Banquet","Child Surprise"]
+        const images = ["tools/christmas.jpg", "tools/witcher-image.jpg", "tools/fellaini.jpg", "tools/naruto.jpg", "tools/milan.png", "tools/easter.jpg", "tools/foods.jpg","tools/ciri.jpg"]
+        const allPanels = document.querySelectorAll(".panel")
+        const allBtns = document.querySelectorAll(".btn")
+        let gamesWonVal = document.getElementById("gamesWon")
+        let gamesLostVal = document.getElementById("gamesLost")
+
         function showPanel(panel) {
-            const allPanels = document.querySelectorAll(".panel")
-            const allBtns = document.querySelectorAll(".btn")
 
             for (i = 0; i < allPanels.length; i++) {
                 allPanels[i].classList.add("hide")
                 allBtns[i].classList.remove("highlight")
             }
+
             document.getElementById(panel).classList.remove("hide");
             document.getElementById("b_" + panel).classList.add("highlight");
 
+            do {
+                randomNum = Math.floor((Math.random() * titles.length));
+            } while (prevNum == randomNum || prevNum == prevPrev);
+
+            prevPrev = prevNum
+            prevNum = randomNum
+
+            if (panel != "Home") {
+                document.getElementById("contentTitle").style.visibility = "visible"
+                document.getElementById("contentTitle").innerHTML = titles[randomNum]
+                document.getElementById(panel + "I").src = images[randomNum]
+                Choose()
+            }
+            else {
+                document.getElementById("contentTitle").style.visibility = "hidden"
+                Reset()
+            }
+            gamesLostVal.innerHTML = wrong
+            gamesWonVal.innerHTML = guesses
+        }
+        function Reset() {
+            guesses = 0;
+            wrong = 0;
+        }
+
+        function Choose() {
+            if (titles[randomNum] == "Child Surprise") {
+                guesses++
+                wrong++
+            }
+            else {
+                guesses++
+            }
         }
     </script>
     <style>
         h2 {
             color: teal;
-            margin-bottom: 40px;
+            margin-bottom: 15px;
         }
 
         button:not(#close) {
@@ -74,12 +121,12 @@
         }
 
         .highlight {
-            background-color: orange;
+            background-color: teal;
+            color:whitesmoke !important;
         }
 
         img {
             margin-top: 20px;
-            height: 400px;
         }
 
         .panel {
@@ -87,10 +134,62 @@
             background-color: transparent;
         }
 
+        #contentTitle {
+            color: whitesmoke;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .container {
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #footer {
+            position: fixed;
+            width: 101%;
+            bottom: 0;
+            margin-left: -10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-rows: 20px 30px;
+            grid-template-columns: auto auto;
+        }
+
+        .statisticLabel {
+            border-top: 1px solid teal;
+            font-size: 13px;
+            font-weight: bold;
+            color: teal;
+        }
+
+        .statisticValue {
+            font-size: 20px;
+            color: whitesmoke;
+        }
+        .grid-item {
+            text-align: center;
+        }
+
         @media only screen and (max-width: 600px) {
 
             img {
-                width: 95vw;
+                width: 90vw;
+            }
+
+            .container {
+                padding-top: 40px;
+            }
+            h2{
+                padding-bottom: 40px;
+            }
+            #contentTitle{
+                margin-top: 40px;
+                margin-bottom:10px
             }
 
         }
@@ -99,6 +198,10 @@
 
             body {
                 zoom: 90%
+            }
+
+            img {
+                height: 70vh;
             }
 
         }

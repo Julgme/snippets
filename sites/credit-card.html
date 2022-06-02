@@ -70,17 +70,8 @@
                 <option value="12">12</option>
               </select>
 
-              <select name="expiration-date-year" id="expYearVal" required>
-                <option>YYYY</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-                <option value="2028">2028</option>
-                <option value="2029">2029</option>
-                <option value="2030">2030</option>
+              <select name="expiration-date-year" id="expYearVal" required> 
+                <option value="YYYY">YYYY</option>
               </select>
             </div>
           </div>
@@ -114,6 +105,18 @@
     //Remove values from local storage
     window.localStorage.removeItem('amount')
     window.localStorage.removeItem('Name')
+
+    //Dynamic year dropdown list 
+    var select = document.getElementById("expYearVal"); 
+    const curYear = new Date().getFullYear()
+    const curMonth = new Date().getMonth() +1
+
+    for(let i = 0; i <=7; i++) {
+        let el = document.createElement("option");
+        el.text = curYear + i;
+        el.value = curYear + i;
+        select.add(el);
+      }
 
     function Entry() {
       document.getElementById("cardNumberShadow").innerText = cardNumberVal.value
@@ -155,10 +158,16 @@
       cardType.classList.remove("flip")
     }
 
-    document.querySelector("form").addEventListener("submit", function () {
+    document.querySelector("form").addEventListener("submit", function (e) {
+      let valid = ((expMonthVal.value === "MM" || expYearVal.value === "YYYY")||(expMonthVal.value < curMonth && expYearVal.value <= curYear)) ? false : true;
+      if (!valid){
+        e.preventDefault();
+        alert("Expiration date should be in the future");
+      }
+      else{
       window.location.href = "/snippets/sites/form-validator.html";
       alert(`Thank you ${firstName} for your donation of €${amount}`)
-    }, false);
+    }}, false);
 
     document.body.style.zoom="73%"
   </script>

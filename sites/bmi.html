@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator</title>
+</head>
+
+<body>
+  <button id="close" onclick=window.history.go(-1);
+    style="position:absolute;right:0.2%;top:0.5%;">X</span></button>
+  <h1 id="title">BMI CALCULATOR</h1>
+  <div class="header">
+    <div class="measurements">
+      <button onclick="Units(event.target)" id="metric">Metric</button>
+      <button onclick="Units(event.target)" id="imperial">Imperial</button>
+    </div>
+  </div>
+  <div id="wrapper" class="wrapper">
+    <div class="metricModal" id="metricModal">
+      <div>
+        <label for="height_M">Height</label>
+        <input id="height_M" type="number" maxlength="3" min="1" max="999" placeholder="cm"><br>
+      </div>
+      <div>
+        <label for="weight_M">Weight</label>
+        <input id="weight_M" type="number" maxlength="3" min="1" max="999" placeholder="kg">
+      </div>
+
+    </div>
+    <div class="imperialModal" id="imperialModal">
+      <div>
+        <label for="height_I">Height</label>
+        <input id="height_I" type="number" maxlength="2" min="0" max="99" placeholder="ft">
+        <input id="height_I2" type="number" maxlength="2" min="0" max="12" placeholder="in">
+      </div>
+      <div>
+        <label for="weight_I">Weight</label>
+        <input id="weight_I" type="number" maxlength="3" min="1" max="999" placeholder="lb"><br>
+      </div>
+    </div>
+    <br />
+    <button id="calculate">Calculate</button>
+    <div>
+      <input id="result" type="text" disabled>
+    </div>
+    <script>
+      document.getElementById("metric").style.background = "orange";
+      document.getElementById("imperialModal").style.display = "none";
+      let bmi, condition, isMetric = true;
+
+      function Units(e) {
+        if (e.id == "metric") {
+          document.getElementById("wrapper").style.boxShadow = "inset 0 0 5px 3px orange";
+          document.getElementById("title").style.color = "orange";
+          document.getElementById("metric").style.background = "orange";
+          document.getElementById("imperial").style.background = "#262529";
+          document.getElementById("metricModal").style.display = "block";
+          document.getElementById("imperialModal").style.display = "none";
+          document.getElementById("result").value = "";
+          isMetric = true;
+        }
+        else if (e.id == "imperial") {
+          document.getElementById("wrapper").style.boxShadow = "inset 0 0 5px 3px purple";
+          document.getElementById("metric").style.background = "#262529";
+          document.getElementById("title").style.color = "purple";
+          document.getElementById("imperial").style.background = "purple";
+          document.getElementById("metricModal").style.display = "none";
+          document.getElementById("imperialModal").style.display = "block";
+          document.getElementById("result").value = "";
+          isMetric = false;
+        }
+      }
+
+      document.getElementById("calculate").addEventListener("click", function (event) {
+        {
+          let impWeight = document.getElementById("weight_I").value;
+          let impFeet = document.getElementById("height_I").value;
+          let impInches = document.getElementById("height_I2").value;
+          let metWeight = document.getElementById("weight_M").value;
+          let metHeight = document.getElementById("height_M").value;
+          let resultBMI = document.getElementById("result");
+          
+          if (isMetric) {
+            bmi = ((metWeight / (metHeight * metHeight)) * 10000).toFixed(2);
+          }
+          else {
+            let inches = (impFeet * 12) - -  impInches;
+            bmi = (((impWeight * 703) / (inches * inches))).toFixed(2);
+          }
+          if(bmi < 18.5){
+            condition = "Underweight";
+          }
+          else if(bmi < 25){
+            condition = "Normal";
+          }
+          else if(bmi < 30){
+            condition = "Overweight";
+          }
+          else if(bmi < 40){
+            condition = "Obese";
+          }
+          else if(bmi >= 40){
+            condition = "Morbidly Obese";
+          }
+          if(isMetric && (metWeight == "" || metWeight<0 || metHeight == ""|| metHeight<0)){
+              resultBMI.value = "Please enter valid details"
+            }
+            else if(!isMetric && (impWeight == "" || impWeight < 0 || impFeet == "" || impFeet < 0 || impInches < 0|| impInches > 12)){
+              resultBMI.value = "Please enter valid details"
+            }
+            else{
+          resultBMI.value = `${bmi} - ${condition}`;
+            }
+        }
+      });
+    </script>
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+      body {
+        background-image: url("tools/background-dark-mountain.png");
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 100vw;
+        min-height: 100vh;
+        font-family: 'Source Sans Pro', sans-serif;
+        margin-top: -50px;
+      }
+
+      h1 {
+        color: orange
+      }
+
+      #imperial,
+      #metric {
+        border-radius: 15px 15px 0 0 !important;
+        width: 223px
+      }
+
+      #imperial:hover,
+      #imperial:active {
+        background: purple !important;
+        border-radius: 15px 15px 0 0;
+      }
+
+      #metric:hover,
+      #metric:active {
+        background: orange !important;
+        border-radius: 15px 15px 0 0;
+      }
+
+      .wrapper {
+        background: #262529;
+        box-shadow: 0px 0px 250px #000000;
+        border-radius: 0 0 15px 15px;
+        padding: 40px 0;
+        text-align: center;
+        width: 450px;
+        box-shadow: inset 0 0 5px 3px orange;
+      }
+
+      .header {
+        background: transparent;
+        box-shadow: 0px 0px 250px #000000;
+        border-radius: 15px 15px 0 0;
+        text-align: center;
+        width: 450px;
+      }
+
+      #wrapper {
+        font-size: 25px;
+      }
+
+      #weight_M,
+      #height_M,
+      #weight_I,
+      #height_I,
+      #height_I2 {
+        font-size: 30px;
+        border-radius: 10px;
+        width: 80px;
+        outline: none;
+        border: none;
+        padding-left: 10px;
+      }
+
+      #height_M,
+      #height_I,
+      #height_I2 {
+        margin-bottom: 10px;
+        margin-left: 2px
+      }
+
+      #weight_I {
+        width: 180px
+      }
+
+      button:not(#close),
+      #calculate {
+        font-family: 'Source Sans Pro', sans-serif;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        padding: 20px 40px;
+        background: #333139;
+        border-radius: 100px;
+        letter-spacing: 1px;
+        cursor: pointer;
+      }
+
+      #close {
+        border: none;
+        color: white;
+        background: #333139;
+        padding: 10px 15px;
+        border-radius: 20%;
+        cursor: pointer;
+      }
+
+      #calculate:active {
+        transform: translateY(4px);
+      }
+
+      label {
+        color: whitesmoke
+      }
+
+      #result {
+        font-size: 30px;
+        border-radius: 10px;
+        background: transparent;
+        outline: none;
+        border: none;
+        width: 400px;
+        margin-top: 10px;
+        color: whitesmoke;
+        text-align: center;
+      }
+
+      @media only screen and (max-width: 800px) {
+
+        .wrapper,
+        .header {
+          zoom: 85%
+        }
+
+        *:focus {
+          -webkit-tap-highlight-color: transparent;
+          outline: none;
+          -ms-touch-action: manipulation;
+          touch-action: manipulation;
+        }
+      }
+
+      @media only screen and (min-width: 801px) {
+        #calculate:hover {
+          background: rgba(234, 52, 111, .2) !important;
+        }
+      }
+    </style>
+</body>
+
+</html>

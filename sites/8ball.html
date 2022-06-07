@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+  <label class="switch">
+    <input id=mode type="checkbox">
+    <span class="slider round"></span>
+  </label>
+  <button id="close" onclick=window.history.go(-1); style="position:absolute;right:0.2%;top:0.5%;">X</span></button>
+  <h1 id="title"></h1>
+  <p id="subTitle"></p>
+
+
+  <div id="wrapper" class="wrapper">
+    <div id="ball">
+      <div class="window"></div>
+      <div id=number class="number" disabled>
+        <span id="spanBall"></span>
+      </div>
+    </div>
+    <div id=answer class="answer"></div>
+    <div id="ballBig" onclick="question()"></div>
+  </div>
+
+      <script>
+        let ballNumber=7, override = true, prevNum=7, prevPrev=8, normalPrev=0, angryPrev = 1, normalPrevPrev=2, angryPrevPrev =3, questionAsked = false
+        let randomNormal, randomAngry, mode = document.getElementById('mode');
+        let answer = document.getElementById('answer')
+        const normalAns = ["It is<br>certain", "It is<br>decidedly<br>so", "<br><br>Without<br>a<br>doubt", "Yes<br>definitely", "You<br>may<br>rely on it", "As I<br>see it,<br>yes", "Most<br>likely", "<br><br>Outlook<br>looks<br>good", "Yes", "Signs<br>point to<br>yes", "<br>Reply<br>hazy<br>try again", "Ask<br>again<br>later", "<br>Better<br>not tell<br>you now", "<br>Cannot<br>predict<br>now", "Think<br>and<br>ask again", "Don't<br>count<br>on it", "My<br>reply<br>is no", "My<br>sources<br>say no", "<br>Outlook<br>not so<br>good", "Very<br>doubtful"]
+        const angryAns = ["I don't<br>fuckin'<br>know<br><br>","Għamel<br>liż-żobb<br>trid","Whyyy ?<br><br>","Try<br>again<br>Later","Yes.","Yes<br>Bitch","Fuck<br>You","Fuck<br>Nahh !!","Fuck<br>Yeah !!","Thank<br>You,<br>Next","Be<br>our<br>Guest","!! NEVER !!<br>⚠️<br><br>","Really ??!<br><br><br>","Who<br>Cares<br>","Bye<br>Bitch<br>Bye","Figure it out<br>yourself<br>bitch<br><br>","Google<br>it<br>Zibel !","Error<br>404<br>😵","Think<br>Twice","Fuck<br>it<br>","Maybe<br>"]
+        const ballCols = ["one", "two", "three", "four", "five", "six", "seven", "eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","eight","eight","eight","eight"]
+        const ballNums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,8,8,8,8]
+        const titleCols = ["#fcc301","#1e3453","#ba0018","#3a2349","#f76031","#1e472e","#542d2f","grey","#fcc301","#1e3453","#ba0018","#3a2349","#f76031","#1e472e","#542d2f","grey","grey","grey","grey"]
+        random()
+
+        function random() {
+          if (!override){
+          do {
+            ballNumber = Math.floor((Math.random() * 19));
+            } while (prevNum == ballNumber || prevNum == prevPrev);
+
+            prevPrev = prevNum
+            prevNum = ballNumber
+          }
+          override = false
+          document.getElementById('ball').className=''
+          document.title = `Magic ${ballNums[ballNumber]} Ball`
+          document.getElementById('title').style.color = titleCols[ballNumber]
+          document.getElementById('title').innerHTML = `Magic ${ballNums[ballNumber]} Ball`
+          document.getElementById('subTitle').innerHTML = `Ask a Yes or No question and click Magic ${ballNums[ballNumber]} Ball`
+          document.getElementById('spanBall').innerHTML = ballNums[ballNumber]
+          document.getElementById('ball').classList.add(`${ballCols[ballNumber]}Ball`)
+        }
+
+        function question() {
+          if (questionAsked) {
+            document.getElementById("number").style.visibility="visible"
+            answer.style.display = "none"
+            questionAsked = false
+            random()
+          }
+          else {
+            document.getElementById("number").style.visibility = "hidden"
+            answer.style.display = "flex"
+            if (mode.checked == true) {
+              answer.classList.remove("up")
+              answer.classList.add("down")
+
+                  do {
+                    randomAngry = Math.floor(Math.random() * angryAns.length)
+                } while (angryPrev == randomAngry || angryPrev == angryPrevPrev);
+
+                angryPrevPrev = angryPrev
+                angryPrev = randomAngry
+              
+              answer.innerHTML = angryAns[randomAngry]
+            } else {
+              answer.classList.remove("down")
+              answer.classList.add("up")
+
+              do {
+                    randomNormal = Math.floor(Math.random() * normalAns.length)
+                } while (normalPrev == randomNormal || normalPrev == normalPrevPrev);
+
+                normalPrevPrev = normalPrev
+                normalPrev = randomNormal
+              
+              answer.innerHTML = normalAns[randomNormal]            
+            }
+            questionAsked = true
+          }
+        }
+
+        document.addEventListener("keydown", function onEvent(event) {
+        pressed = event.key
+          if(pressed == "Enter"||pressed == " ") {
+            question()
+          }
+          else if(pressed >= 1 && pressed <= 9){
+            override = true
+            ballNumber = pressed -1
+            random()
+          }
+          else if (pressed == "R" || pressed == "r") {
+            random()
+          }
+          else if(pressed == "q" || pressed == "Q") {
+            document.getElementById('ball').className=''
+            document.getElementById('ball').classList.add("rainbowBall")
+          }
+      });
+
+        document.getElementById("mode").addEventListener("click", function (event) {
+          document.getElementById("number").style.visibility = "visible"
+          answer.style.display = "none"
+          questionAsked = false
+        })
+
+      </script>
+
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+        body {
+          background-image: url("tools/background-dark-mountain.png");
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-width: 100vw;
+          min-height: 100vh;
+          font-family: 'Source Sans Pro', sans-serif;
+          margin-top: -30px
+        }
+
+        #wrapper {
+          position: relative;
+          margin: 5vmin auto;
+          width: 90vmin;
+        }
+
+        #ball {
+          position: relative;
+          border-radius: 50%;
+          width: 90vmin;
+          height: 90vmin;
+          overflow: hidden;
+        }
+        #ballBig {
+          cursor: pointer;
+          position:absolute;
+          border-radius:50%;
+          width: 90vmin;
+          height: 90vmin;
+          background:transparent;
+          transform:translateY(-90vmin)
+        }
+        .rainbowBall{
+          background: linear-gradient(90deg,red, orange, yellow, green, blue, indigo, violet, red);
+        }
+
+        .oneBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #ffe458, #fcc301);
+        }
+
+        .twoBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #05558e, #1e3453);
+        }
+
+        .threeBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #f50733, #ba0018);
+        }
+
+        .fourBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #7d5f9d, #3a2349);
+        }
+
+        .fiveBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #fe9459, #f76031);
+        }
+
+        .sixBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #294d35, #1e472e);
+        }
+
+        .sevenBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #673e49, #542d2f);
+        }
+
+        .eightBall {
+          background: radial-gradient(circle at 30vmin 30vmin, #444, #000);
+        }
+
+        .nineBall {
+          background: linear-gradient(#e1dddc, 0%, #e1dddc, 12%, #ffe458, 12%, #fcc301 88%, #e1dddc 88%, #e1dddc 0);
+        }
+
+        .tenBall {
+          background: linear-gradient(#e1dddc, 0%, #e1dddc, 12%, #05558e, 12%, #1e3453 88%, #e1dddc 88%, #e1dddc 0);
+        }
+
+        .elevenBall {
+          background: linear-gradient(#e1dddc, 0%, #e1dddc, 12%, #f50733, 12%, #ba0018 88%, #e1dddc 88%, #e1dddc 0);
+        }
+
+        .twelveBall {
+          background: linear-gradient(#e1dddc, 0%, #e1dddc, 12%, #7d5f9d, 12%, #3a2349 88%, #e1dddc 88%, #e1dddc 0);
+        }
+
+        .thirteenBall {
+          background: linear-gradient(#e1dddc, 0%, #e1dddc, 12%, #fe9459, 12%, #f76031 88%, #e1dddc 88%, #e1dddc 0);
+        }
+
+        .fourteenBall {
+          background: linear-gradient(#e1dddc, 0%, #e1dddc, 12%, #294d35, 12%, #1e472e 88%, #e1dddc 88%, #e1dddc 0);
+        }
+      
+        .fifteenBall {
+          background: linear-gradient(#e1dddc, 0%, #e1dddc, 12%, #673e49, 12%, #542d2f 88%, #e1dddc 88%, #e1dddc 0);
+        }
+
+        /* Answers */
+        .answer {
+          position: absolute;
+          justify-content: center;
+          align-items: center;
+          left: 33.5vmin;
+          top: 34.6vmin;
+          width: 23vmin;
+          height: 21vmin;
+          color: white;
+          text-align: center;
+          font-family: sans-serif;
+          font-variant: small-caps;
+          font-size: 2.4vmin;
+          line-height: 2.4vmin;
+          animation: floating 6s linear infinite;
+          display: none;
+        }
+
+        /* Triangle */
+        .answer::before {
+          content: "";
+          z-index: -1;
+          position: absolute;
+          left: 0;
+          border-left: 11vmin solid transparent;
+          border-right: 11vmin solid transparent;
+          border-radius: 0.5vmin;
+          width: 0.5vmin;
+          height: 0;
+        }
+
+        .answer.up::before {
+          top: 0.5vmin;
+          border-bottom: 18vmin solid #1c23e8;
+        }
+
+        .answer.down::before {
+          bottom: 0.5vmin;
+          border-top: 18vmin solid red;
+        }
+
+        /* Window to see the answer */
+        .window {
+          position: absolute;
+          left: 22.5vmin;
+          top: 22.5vmin;
+          width: 45vmin;
+          height: 45vmin;
+          border-radius: 50%;
+          background: radial-gradient(#002, #001 18vmin, rgb(37, 37, 37) 18vmin, #000 18.5vmin, #000 22vmin, rgb(37, 37, 37) 22vmin, #000 22.5vmin);
+        }
+
+        /* Number 8 */
+        #number {
+          position: absolute;
+          left: 22.5vmin;
+          top: 22.5vmin;
+          width: 45vmin;
+          height: 45vmin;
+          border-radius: 50%;
+          background: #fff;
+          font-size: 27vmin;
+          font-family: sans-serif;
+          text-align: center;
+          line-height: 45vmin;
+        }
+
+        /* Triangle gently floating around */
+        @keyframes floating {
+          from {
+            transform: rotateZ(0) rotateY(15deg) translateZ(6.8vmin) rotateZ(0);
+          }
+
+          to {
+            transform: rotateZ(1turn) rotateY(15deg) translateZ(6.8vmin) rotateZ(-1turn);
+          }
+        }
+
+        /* Roatating overlay */
+        @keyframes rotating {
+          to {
+            transform: rotate(1turn);
+          }
+        }
+
+        #close {
+          border: none;
+          color: white;
+          background: #333139;
+          padding: 10px 15px;
+          border-radius: 20%;
+          cursor: pointer;
+        }
+
+        h1 {
+          margin-top: 40px;
+        }
+
+        *::selection {
+          background: transparent;
+        }
+
+        p {
+          margin-top: -10px;
+          color: whitesmoke
+        }
+
+        /* The switch - the box around the slider */
+        .switch {
+          position: absolute;
+          top: 10px;
+          left: 5px;
+          display: inline-block;
+          width: 30px;
+          height: 17px;
+
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+          display: none;
+        }
+
+        /* The slider */
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: blue;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 13px;
+          width: 13px;
+          left: 2px;
+          bottom: 2px;
+          background-color: white;
+          -webkit-transition: .4s;
+          transition: .4s;
+        }
+
+        input:checked+.slider {
+          background-color: red;
+        }
+
+        input:focus+.slider {
+          box-shadow: 0 0 1px red;
+        }
+
+        input:checked+.slider:before {
+          transform: translateX(13px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+          border-radius: 68px;
+        }
+
+        .slider.round:before {
+          border-radius: 50%;
+        }
+
+        @media only screen and (min-width: 800px) {
+          .wrapper {
+            zoom: 75%
+          }
+        }
+      </style>
+</body>
+
+</html>

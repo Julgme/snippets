@@ -35,8 +35,13 @@
 
     function load() {
       let loadDataEvent = window.localStorage.getItem('saveData')
+      console.log(loadDataEvent)
+      if (loadDataEvent===null){
+        window.localStorage.setItem('saveData','[[],[]]')
+        location.reload()
+      }
 
-      if (loadDataEvent != "") {
+      else if (loadDataEvent != "") {
         let loadedData = JSON.parse(window.localStorage.getItem('saveData'))
         array1 = loadedData[0]
         array2 = loadedData[1]

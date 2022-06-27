@@ -1,0 +1,183 @@
+/******************** Target #109 - Curtain ********************/
+
+<p>
+<body bgcolor=191919>
+<style>
+  p {
+    color:#F6E59C;
+	border-radius:50%;
+    width:40;
+    height:40;
+    margin:20 12;
+    background:#F6E59C;
+	box-shadow:60px 0,120px 0,180px 0,0 60px,0 120px,0 180px, 60px 60px,120px 60px,60px 120px
+  }
+</style>
+
+
+/******************** Target #110 - Sunrays ********************/
+
+<div id=a></div>
+<div id=b></div>
+<div id=c></div>
+<div id=d></div>
+<div id=e></div>
+<div id=f></div>
+
+<body bgcolor=D25B70>
+<style>
+  div {
+    color:#F2E09F;
+    position:absolute;
+    width: 100;
+    border-radius: 9px;
+    height: 10;
+    background: #F2E09F;
+    top:195px;
+    left:80px;
+  }
+  #a{
+   box-shadow: 140px 0 0;
+  }
+  #b,#e{
+    top:160;
+    left:90;
+    height:10;
+    transform: rotate(30deg);
+  }
+  #c,#f{
+    top:134;
+    left:115;
+    height:10;
+    transform: rotate(60deg);
+  }
+  #d{
+    top:125;
+    left:150;
+    width:99;
+    height:10.5px;
+    transform: rotate(90deg);
+  }
+  #e{
+    left:210;
+    transform: rotate(-30deg);
+  }
+  #f{
+    left:185;
+    transform: rotate(-60deg);
+  }
+</style>
+
+/******************** Target #111 - Rain Drops ********************/
+
+<div d></div>
+<div r>
+<body bgcolor=F3AC3C>
+<style>
+  div{
+	background:#254241;
+    color:#254241;
+    width:80;
+    height:80;
+    position:absolute;
+    left:80;
+    top:110;
+	box-shadow:85q -74q, 85q 74q;
+  }
+  [r]{
+    border-radius:50%
+  }
+  [d]{
+    height:40;
+    width:40;
+    top:130;
+    left:128;
+    transform:rotate(45deg);
+    box-shadow:8px -66px, 66px -8px;
+  }
+
+/******************** Target #112 - Chevron ********************/
+
+<div b></div>
+<div m></div>
+<div t></div>
+
+<body bgcolor=6592CF>
+<style>
+  div{
+    position:absolute;
+        color:transparent;
+      	width:0;
+  	height:0;
+
+  }
+  
+[t],[m],[b] {
+    top:50;
+  	left:74;
+  	border-right:125px solid;
+  	border-left:127px solid;
+    border-top:100px solid #293D7E;   
+}
+  [m]{
+    top:100;
+  }
+    [b]{
+    top:150;
+  }
+  [t]::after,[m]::after,[b]::after{
+    content:"";
+    position:absolute;
+    top:-103;
+  	left:-90;
+  	border-right:90px solid;
+  	border-left:89px solid;
+    border-top:73px solid #6592CF;   
+  }
+
+/******************** Target #113 - Black Light ********************/
+
+<div></div>
+<body bgcolor=5776F6>
+<style>
+  div {
+   	position:absolute;
+    left:0;
+    top:100;
+	border-right: 400px solid #191919;
+	border-top: 25px solid transparent;
+	border-bottom: 25px solid transparent;
+	height:50
+}
+  }
+</style>
+
+/******************** Target #114 - Negative Box ********************/
+
+<div t></div>
+<div b>
+<body bgcolor=172D2C>
+<style>
+  div {
+    position:absolute;
+  }
+  [t]{
+    top:20;
+    left:200;
+    color:transparent;
+	border-top: 65px solid;
+	border-left: 180px solid #E9AF53;
+	border-bottom: 65px solid;
+  }
+  [b]{
+    background:#E9AF53;
+    width:180;
+    height:130;
+    top:117.5;
+    left:20;
+	transform: skew(0deg, 20deg);
+  }
+
+/******************** Target #115 - ********************/
+
+/******************** Target #116 - ********************/

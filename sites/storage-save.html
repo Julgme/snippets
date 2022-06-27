@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/x-icon" href="/snippets/sites/tools/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Storage Saver</title>
+</head>
+
+<body>
+  <button id="close" onclick=window.history.go(-1); style="position:absolute;right:0.2%;top:0.5%;">X</span></button>
+  <h1 id="title">STORAGE SAVER</h1>
+  <div id="wrapper" class="wrapper">
+    <div id="dataTable"></div>
+
+    <div id="buttons" class="buttons">
+      <button id="save" onclick="save()">Add Line</button>
+      <button id="delete" onclick="splice()">Delete Marked</button>
+    </div>
+  </div>
+
+  </div>
+  <script>
+    let array1 = [], array2 = []
+    var length
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    load()
+    let boxID = document.getElementById('box0')
+    let boxA = document.getElementById('na')
+    let boxB = document.getElementById('desc')
+    let boxC = document.getElementById('boxC')
+
+    function load() {
+      let loadDataEvent = window.localStorage.getItem('saveData')
+
+      if (loadDataEvent != "") {
+        let loadedData = JSON.parse(window.localStorage.getItem('saveData'))
+        array1 = loadedData[0]
+        array2 = loadedData[1]
+        length = loadedData[0].length
+        tableCreate()
+      }
+    }
+
+function save(){
+        if (boxA.value != null && boxA.value != "" && boxB.value != null && boxB.value != "") {
+          //Add data to arrays
+          array1.push(boxA.value)
+          array2.push(boxB.value)
+
+          //Clear out fields
+          boxA.value = null
+          boxB.value = null
+
+          window.localStorage.setItem('saveData', JSON.stringify([array1, array2]))
+          location.reload();
+        }
+        else if (boxA.value == null || boxA.value == ""){
+          boxA.style.borderBottom = "2px dotted red";
+        }
+        else if (boxB.value == null || boxB.value == ""){
+          boxB.style.borderBottom = "2px dotted red";
+        }
+      }
+    
+          function splice(){
+           let arr = [] 
+           let delBtns = document.getElementsByClassName('delBtn')
+           
+            for (let i=delBtns.length-1;i>=0;i--){
+              arr.push(delBtns[i].checked)
+              if(delBtns[i].checked){
+                array1.splice(i,1)
+                array2.splice(i,1)
+                window.localStorage.setItem('saveData', JSON.stringify([array1, array2]))
+              }
+            }
+            location.reload()
+          }
+
+
+
+    function tableCreate() {
+      {
+        // Adding the entire table to the body tag
+        document.getElementById('dataTable').appendChild(table)
+        table.setAttribute('id','table')
+        table.appendChild(thead);
+
+        //Clear previous table load
+        thead.innerHTML = null
+
+        //Add Headers
+        let row_1 = document.createElement('tr');
+        let heading_0 = document.createElement('th');
+        heading_0.innerHTML = 'ID Num';
+        let heading_1 = document.createElement('th');
+        heading_1.innerHTML = "Name";
+        let heading_2 = document.createElement('th');
+        heading_2.innerHTML = "Description";
+        let heading_3 = document.createElement('th');
+        heading_3.innerHTML = "Delete";
+
+        row_1.appendChild(heading_0);
+        row_1.appendChild(heading_1);
+        row_1.appendChild(heading_2);
+        row_1.appendChild(heading_3)
+        thead.appendChild(row_1);
+
+        //Start Body
+        for (let i = 0; i < length; i++) {
+          let rowBody = document.createElement('tr');
+          let idNumber = document.createElement('td');
+          idNumber.innerHTML = i + 1;
+          let data1 = document.createElement('td');
+          data1.innerHTML = array1[i];
+          let data2 = document.createElement('td');
+          data2.innerHTML = array2[i];
+          let box = document.createElement('INPUT')
+          idNumber.setAttribute("id", `idNumber`)
+          data1.setAttribute("id", `name`)
+          data2.setAttribute("id", `description`)
+
+          box.setAttribute("type", "checkbox")
+          box.setAttribute("id", i)
+          box.setAttribute("class", "delBtn");
+
+          rowBody.appendChild(idNumber);
+          rowBody.appendChild(data1);
+          rowBody.appendChild(data2);
+          rowBody.appendChild(box);
+          thead.appendChild(rowBody);
+        }
+      }
+
+      //Add user entry line
+      let row_3 = document.createElement('tr');
+      let entry_0 = document.createElement('td');
+      entry_0.innerHTML = length + 1;
+      let entry_1 = document.createElement('td');
+      entry_1.innerHTML = "<input type='text' id='na' autoFocus='true'/>"
+      let entry_2 = document.createElement('td');
+      entry_2.innerHTML = "<input type='text' id='desc'/>"
+      let entry_3 = document.createElement('td');
+      entry_3.innerHTML = "";
+
+      row_3.appendChild(entry_0);
+      row_3.appendChild(entry_1);
+      row_3.appendChild(entry_2);
+      row_3.appendChild(entry_3);
+      thead.appendChild(row_3);
+    };
+
+    document.addEventListener("keydown", function onEvent(event) {
+        pressed = event.key
+          if(pressed == "Enter") {
+            save()
+          }
+        })
+
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap');
+
+    body {
+      background-image: url("tools/background-dark-mountain.png");
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 100vw;
+      max-width: 100vw;
+      min-height: 100vh;
+      max-height: 100vh;
+      font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    h1 {
+      color: orange
+    }
+
+    table {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: whitesmoke;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    th,
+    td,
+    tr {
+      padding: 5px 10px;
+      border: 1px solid grey;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    th {
+      color: orange;
+    }
+
+    .delBtn {
+      margin-top: 10px;
+    }
+
+    #na,
+    #desc {
+      background: transparent;
+      padding: 5px 10px;
+      outline: none;
+      border: none;
+      color: whitesmoke;
+      text-align: center;
+      width: 100%;
+      margin-left: -10px;
+    }
+
+    button:not(#close) {
+        background-image: linear-gradient(to right, #FF8008 0%, #FFC837 51%, #FF8008 100%)
+    }
+
+    button:not(#close) {
+        margin: 10px;
+        width: 140px;
+        padding: 9px 5px;
+        text-align: center;
+        text-transform: uppercase;
+        background-size: 200% auto;
+        transition: 0.5s;
+        color: white;
+        border-radius: 10px;
+        outline: none;
+        border: none;
+        cursor:pointer;
+    }
+
+    button:hover:not(#close) {
+        background-position: right center;
+        color: #fff;
+        text-decoration: none;
+    }
+    #buttons{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  #close{
+    cursor:pointer;
+  }
+
+    @media only screen and (max-width: 600px) {
+      #wrapper{
+        max-width:97vw
+      }
+    }
+
+  </style>
+</body>
+
+</html>
